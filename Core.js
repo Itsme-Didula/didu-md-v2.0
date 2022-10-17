@@ -1477,7 +1477,7 @@ case 'support': case 'supportgc':
 
 case 'repo': case 'botrepo':
     
-    reply(`*My Source Code:* https://github.com/Kai0071/A17-Bot`)
+    reply(`*My Source Code:* https://github.com/Kai0071/A17`)
     break
 
 case 'nsfwmenu':
@@ -4765,7 +4765,7 @@ qr, say, translate, fliptext, toletter
 
 
  『  *${global.BotName}*  』
-    Developed by: *Kai*
+    Developed By: *Kai*
 
  🌹 To use any of these commands type 
  " *${prefix}<Command name>* ".

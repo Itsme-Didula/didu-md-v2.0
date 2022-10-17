@@ -14,7 +14,7 @@ global.BotName = "A17"
 global.packname = "A17 bot"
 global.author = "By: Kai"
 global.OwnerName = "Kai"
-global.BotSourceCode = "https://github.com/Kai0071/A17-Bot"
+global.BotSourceCode = "https://github.com/Kai0071/A17"
 global.SupportGroupLink = "https://chat.whatsapp.com/EsNqFrGKxGXFrdwgRaQl9q"
 global.sessionName = "session"
 

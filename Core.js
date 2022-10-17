@@ -213,9 +213,6 @@ const isQuotedAudio = m.mtype === 'extendedTextMessage' && content.includes('aud
 const mongoose = require("mongoose");
 
 
-/*
-
-/////////// -  DM chatbot (Delete this part to turn off DM Chat Bot) - //////////////////
 
 if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`http://api.brainshop.ai/get?bid=168758&key=Ci7eNhtxpxxDB5FQ&uid=[uid]&msg=[${budy}]`)
@@ -223,9 +220,7 @@ if (!isCmd && !m.isGroup){
     m.reply(txt)
     }
 
-//////////////////////////////////////////////////////////////////////////////////////
 
-*/
 _sewa.expiredCheck(A17, sewa)
 
 const reply = (teks) => {

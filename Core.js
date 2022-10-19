@@ -4698,7 +4698,7 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
       
- const helpmenu = 'Hemlo *${pushname}* Dear...!! ,
+const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 
 I am *A17*, a Bot Developed by *Kai*.
 

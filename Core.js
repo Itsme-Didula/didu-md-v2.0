@@ -4698,21 +4698,23 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
       
- const helpmenu = 'Hemlo ${pushname} Dear...!! ,
+ const helpmenu = 'Hemlo *${pushname}* Dear...!! ,
 
 I am *A17*, a Bot Developed by *Kai*.
 
 
-💫 My prefix is :  ${prefix}
-💫 Owner name : ${global.OwnerName}
-💫 Bot speed  : ${latensie.toFixed(4)} ms
-💫 Bot runtime : ${runtime(process.uptime())}
+╭──═[ BOT INFO ]═───⋆
 
+💫 My prefix is :  ${prefix} 
+💫 Bot usr name : ${pushname} ✨
+💫 Owner name : ${global.OwnerName} ✨ 
+💫 Bot speed  : ${latensie.toFixed(4)} ms ✨
+💫 Bot runtime : ${runtime(process.uptime())} 
+
+│╰───────────────···
 
 
 Here's the list of my Commands.
-
-
  
  *━━〈 ⚙️ Core ⚙️ 〉━━*
 

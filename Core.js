@@ -213,9 +213,7 @@ const isQuotedAudio = m.mtype === 'extendedTextMessage' && content.includes('aud
 const mongoose = require("mongoose");
 
 
-/*
 
-/////////// -  DM chatbot (Delete this part to turn off DM Chat Bot) - //////////////////
 
 if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`http://api.brainshop.ai/get?bid=168758&key=Ci7eNhtxpxxDB5FQ&uid=[uid]&msg=[${budy}]`)
@@ -224,9 +222,7 @@ if (!isCmd && !m.isGroup){
     }    
     
     
-//////////////////////////////////////////////////////////////////////////////////////
-*/
-
+	
 _sewa.expiredCheck(A17, sewa)
 
 const reply = (teks) => {
@@ -4702,15 +4698,17 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
       
- const helpmenu = `Hemlo *${pushname}* Dear...!! ,
+ const helpmenu = 'Hemlo ${pushname} Dear...!! ,
 
-I am *A17*, a bot developed by *Kai*.
+I am *A17*, a Bot Developed by *Kai*.
 
-💫 My prefix is:  ${prefix}
+
+💫 My prefix is :  ${prefix}
+💫 Owner name : ${global.OwnerName}
 💫 Bot speed  : ${latensie.toFixed(4)} ms
 💫 Bot runtime : ${runtime(process.uptime())}
-💫 Owner name : ${global.OwnerName}
-💫 Owner num. : http://wa.me//${global.OwnerNumber}
+
+
 
 Here's the list of my Commands.
 

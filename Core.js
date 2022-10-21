@@ -4708,7 +4708,6 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 │╰────────────────···▸
 │╭────────────────···▸
 ┴│▸
-⬡│▸  *${ucapan()} %name!*
 ⬡│▸ *Date :* %week %weton, %date
 ⬡│▸  *Time :* %time
 ┬│▸

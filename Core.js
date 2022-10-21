@@ -4677,7 +4677,7 @@ for (let yoi of anu) {
 await sleep(1500)
 let btn = [{
 quickReplyButton: {
-displayText: '✨Menu✨',
+displayText: '🌟Menu🌟',
 id: '-menu'
 }  
 }, {
@@ -4700,150 +4700,188 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
       
 const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 
-I am *A17*, a Bot Developed by *Kai*.
-
-
-╭──═[ BOT INFO ]═───⋆
-
-💫 My prefix is :  ${prefix} 
-💫 Bot usr name : ${pushname} ✨
-💫 Owner name : ${global.OwnerName} ✨ 
-💫 Bot speed  : ${latensie.toFixed(4)} ms ✨
-💫 Bot runtime : ${runtime(process.uptime())} 
-
-│╰───────────────···
-
-
-Here's the list of my Commands.
- 
- *━━〈 ⚙️ Core ⚙️ 〉━━*
-
-speak, A17, stalk
-profile, help, delete
-deleteall, listgc, listpc
-welcome, support
-repo, script 
- 
- *━━〈 ❤️‍🔥 Owner ❤️‍🔥 〉━━*
-
-self, public, ban,
-bangroup, bye, join
-bye, block, 
-unblock, broadcast 
-
- *━━〈 ⭕ Group ⭕ 〉━━*
- 
-promote, demote, revoke,
-add, remove, tagall,
-hidetag, groupsetting, 
-grouplink, setgcpp,
-setname, setdesc,
-group, nsfw 
-
- *━━〈 ❗ Anti Link ❗ 〉━━*
- 
-antilinkgc, antilinktg
-antilinktt, antilinkytch
-antilinkytvid, antilinkig
-antilinkfb, antilinktwit
-antilinkall, antiwame
-
- *━━〈 🔍 Search 🔎 〉━━*
-
-play, ytmp3, ytmp4
-yts, lyrics, google
-gimage, pinterest
-image, movie, wallpaper
-searchgc, happymod
-wikimedia, ringtone,
-anime, animestory
-manga, ringtone  
-
- *━━〈 🛠️ Convert 🛠️ 〉━━*
-
-sticker, toimg, tovideo
-togif, steal, stickermeme
-emojimix, tourl, tomp3, toaudio
-
- *━━〈 🎼 Audio 🎼 〉━━*
-
-bass, tempo, blown,
-deep, earrape, fast,
-fat, nightcore, reverse,
-robot, slow, squirrel
-
- *━━〈 📍 Reactions 📍 〉━━*
-
-bonk, cry, bully,
-cuddle, hug, kiss,
-lick, pat, smug,
-yeet, blush, smile,
-wave, highfive, handhold,
-nom, glomp, bite,
-slap, kill, happy,
-wink, poke, dance, cringe
-
- *━━〈 🌌 Downloader 🌌 〉━━*
-
-play, ytmp3, ytmp4,
-ytvideo, mediafire, instagram,
-igtv, facebook, fbmp3,
-twitter, twittermp3,
-tiktok, tiktokaudio
-tiktoknowm, mediafire  
-
- *━━〈 🈴 Weeb 🈴 〉━━*
-
-crosplay, waifu, loli,
-neko, ppcouple, feed,
-foxgirl, feed, meow,
-tickle, wallpaper, coffee,
-animenom, waifu3, neko2,
-feed, meow, tickle, migumin
-awoo, animewallpaper2
-anime, manga
-
- *━━〈 ♨️ Informative ♨️ 〉━━*
-
-animequote, quote
-covid, earthquake, wiki
-
- *━━〈 🎗 Others 🎗 〉━━*
-
-stickermeme, quotes, darkjoke 
-
- *━━〈 🎐 Fun 🎐 〉━━*
-
-reaction, truth, dare
-couple, soulmate, handsomecheck
-beautifulcheck, awesomecheck
-greatcheck, gaycheck, cutecheck
-lesbiancheck, hornycheck,
-prettycheck, lovelycheck,
-uglycheck, charactercheck
-
- *━━〈 🪁 Essentials 🪁 〉━━*
-
-qr, say, translate, fliptext, toletter
-
- *━━〈 ⚠️ NSFW ⚠️ 〉━━*
-
-🍁 Type " *${prefix}nsfw* " then enable NSFW (Admin only!) 
-
-🍁 Then type " *${prefix}nsfwmenu* " to get full list of NSFW commands.
-
-
-
-
- 『  *${global.BotName}*  』
-    Developed By: *Kai*
-
- 🌹 To use any of these commands type 
- " *${prefix}<Command name>* ".
- 
- 🌹 To get Support Group link type " *${prefix}support* ".
-
- 🌹 Type " *${prefix}help* " to get full command list.`
+│───────────────────────│
+┠⬡│▸ I am *A17*, a Bot Developed by *Kai*.
+│───────────────────────│
+│╭────────────────···▸
+┠─────═[ *TODAY* ]═────
+│╰────────────────···▸
+│╭────────────────···▸
+┴│▸
+⬡│▸  *${ucapan()} %name!*
+⬡│▸ *Date :* %week %weton, %date
+⬡│▸  *Time :* %time
+┬│▸
+│╰────────────────···▸
+┠───═[ *BOT INFO* ]═──▸
+│╭────────────────···▸
+┴│▸ 
+⬡│▸ *Bot usr name :* ${pushname} 
+⬡│▸ *My prefix is :*  ${prefix}
+⬡│▸ *Owner name :* ${global.OwnerName} 
+⬡│▸ *Bot speed :* ${latensie.toFixed(4)} ms 
+⬡│▸ *Bot runtime :* ${runtime(process.uptime())} 
+⬡│▸ *Platform :* Unbuntu linux
+⬡│▸ *Battery: * ${conn.battery != undefined ? `${conn.battery.value}% ${conn.battery.live ? '🔌 ' : ''}` : 'unknown'}
+┬│▸
+│╰────────────────···▸
+┠⬡│▸ Here's the list of my Commands.
+│╭────────────────···▸
+│╰────────────────···▸
+┠─━━〈 ⚙️ *Core* ⚙️ 〉━━
+│╭────────────────···▸
+┴│▸ 
+⬡│▸ speak, A17, stalk
+⬡│▸ profile, delete
+⬡│▸ deleteall, listgc, listpc
+⬡│▸ welcome, support
+⬡│▸ repo, script, help
+┬│▸
+╰────────────────···▸
+┠━━〈 ❤️‍🔥 *Owner* ❤️‍🔥 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ self, public,join,
+⬡│▸ bangroup, ban, block, 
+⬡│▸ unblock, broadcast, bye
+┬│▸
+╰────────────────···▸
+┠━━〈 ⭕ *Group* ⭕ 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ add, remove, tagall
+⬡│▸ promote, demote, revoke
+⬡│▸ hidetag, groupsetting 
+⬡│▸ grouplink, setgcpp
+⬡│▸ setname, setdesc
+⬡│▸ group, nsfw, snfwmenu
+┬│▸
+╰────────────────···▸
+┠━━〈 ❗ *Anti Link ❗* 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ antilinkgc, antilinktg
+⬡│▸ antilinktt, antilinkytch
+⬡│▸ antilinkytvid, antilinkig
+⬡│▸ antilinkfb, antilinktwit
+⬡│▸ antilinkall, antiwame
+┬│▸
+╰────────────────···▸
+┠━━〈 🔍 *Search* 🔎 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ play, ytmp3, ytmp4 
+⬡│▸ yts, lyrics, movie
+⬡│▸ google, gimage, pinterest
+⬡│▸ image, wallpaper
+⬡│▸ searchgc, happymod
+⬡│▸ wikimedia, ringtone
+⬡│▸ anime, animestory
+⬡│▸ manga, ringtone
+┬│▸
+╰────────────────···▸
+┠━━〈 🛠️ *Convert* 🛠️ 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ sticker, toimg, tovideo
+⬡│▸ togif, steal, stickermeme
+⬡│▸ emojimix, tourl, tomp3, toaudio
+┬│▸
+╰────────────────···▸
+┠━━〈 🎼 *Audio* 🎼 〉━━
+│╭───────────────···▸
+┴│▸ 
+⬡│▸ bass, tempo, blown,
+⬡│▸ robot, slow, squirrel
+⬡│▸ deep, earrape, fast,
+⬡│▸ fat, nightcore, reverse,
+┬│▸
+╰────────────────···▸
+┠━━〈 📍 *Reactions* 📍 〉━━
+│╭───────────────···▸
+┴│▸  
+⬡│▸ cuddle, hug, kiss, 
+⬡│▸ bonk, cry, bully,
+⬡│▸ slap, kill, happy,
+⬡│▸ lick, pat, smug,
+⬡│▸ nom, glomp, bite,
+⬡│▸ yeet, blush, smile,
+⬡│▸ wave, highfive, handhold,
+⬡│▸ wink, poke, dance, cringe
+┬│▸
+╰────────────────···▸
+┠━━〈 🌌 *Downloader* 🌌 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ ytvideo, mediafire, instagram,
+⬡│▸ igtv, facebook, fbmp3,
+⬡│▸ twitter, twittermp3,
+⬡│▸ tiktok, tiktokaudio
+⬡│▸ tiktoknowm, mediafire  
+┬│▸
+╰────────────────···▸
+┠━━〈 🎐 *Fun* 🎐 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ reaction, truth, dare
+⬡│▸ couple, soulmate, handsomecheck
+⬡│▸ beautifulcheck, awesomecheck
+⬡│▸ greatcheck, gaycheck, cutecheck
+⬡│▸ uglycheck, charactercheck
+⬡│▸ lesbiancheck, hornycheck,
+⬡│▸ prettycheck, lovelycheck,
+┬│▸
+╰────────────────···▸
+┠━━〈 🈴 *Weeb* 🈴 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ crosplay, waifu, loli,
+⬡│▸ tickle, wallpaper, coffee,
+⬡│▸ neko, ppcouple, feed,
+⬡│▸ foxgirl, feed, meow,
+⬡│▸ animenom, waifu3, neko2,
+⬡│▸ feed, meow, tickle, migumin
+⬡│▸ awoo, animewallpaper2
+⬡│▸ anime, manga
+┬│▸
+╰────────────────···▸
+┠━━〈 ♨️ *Informative* ♨️ 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ animequote, quote
+⬡│▸ covid, earthquake, wiki
+┬│▸
+╰────────────────···▸
+━━〈 🪁 *Essentials* 🪁 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ qr, say, translate, 
+⬡│▸ fliptext, toletter
+┬│▸
+╰────────────────···▸
+┠━━〈 🎗 *Others* 🎗 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ stickermeme, quotes, darkjoke
+┬│▸
+╰────────────────···▸
+┠━━〈 ⚠️ *NSFW* ⚠️ 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ 🍁 Type " *${prefix}nsfw* " then enable NSFW (Admin only!) 
+⬡│▸
+⬡│▸ 🍁 Then type " *${prefix}nsfwmenu* " to get full list of NSFW commands.
+⬡│▸
+⬡│▸
+⬡│▸ 『  *${global.BotName}*  』
+⬡│▸    Developed By: *Kai*
+⬡│▸
+⬡│▸ 🌹 To use any of these commands type 
+⬡│▸ " *${prefix}<Command name>* ".
+⬡│▸
+⬡│▸ 🌹 To get Support Group link type " *${prefix}support* ".
+⬡│▸
+⬡│▸ 🌹 Type " *${prefix}help* " to get full command list.`
     
 
  let buttonshelpm = [

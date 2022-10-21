@@ -4720,8 +4720,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ *Owner name :* ${global.OwnerName} 
 ⬡│▸ *Bot speed :* ${latensie.toFixed(4)} ms 
 ⬡│▸ *Bot runtime :* ${runtime(process.uptime())} 
-⬡│▸ *Platform :* Unbuntu linux
-⬡│▸ *Battery: * ${conn.battery != undefined ? `${conn.battery.value}% ${conn.battery.live ? '🔌 ' : ''}` : 'unknown'}
+⬡│▸ *Platform :* Unbuntu Linux 
 ┬│▸
 │╰────────────────···▸
 ┠⬡│▸ Here's the list of my Commands.

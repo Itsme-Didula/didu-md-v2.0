@@ -168,9 +168,9 @@ A17.sendMessage(anu.id, buttonMessage)
                 } else if (anu.action == 'remove') {
                 	let WAuserName = num
                     A17text = `
-Sayonara 👋, @${WAuserName.split("@")[0]},
+Okay Bye 👋, @${WAuserName.split("@")[0]},
 
-I hope you will come back soon, but we are not going to miss you though!
+I hope you will come back soon, but You will be missed!
 `
 
     let buttonMessage = {

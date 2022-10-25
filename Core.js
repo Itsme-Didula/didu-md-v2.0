@@ -4726,7 +4726,9 @@ console.log('Date: ' + n);
 
 // display time
 console.log('Time: ' + time);
-
+const date = new Date();
+console.log(date);
+// Sun Aug 23 2020 10:46:38 GMT+0545 (+0545)
 
 
 

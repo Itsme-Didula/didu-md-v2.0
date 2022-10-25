@@ -1385,7 +1385,7 @@ switch(command) {
     if (isBanChat) return reply(mess.bangc)
     teks = `*${global.BotName}'s Script*\n\n*GitHub*: ${global.BotSourceCode}\n\nDont forget to follow me on *GitHub* and give a ⭐️ to my projects. `
     let buttons = [
-    {buttonId: `-menu`, buttonText: {displayText: '✨Bot Menu✨'}, type: 1}
+    {buttonId: `-menu`, buttonText: {displayText: '🍁 Bot Menu 🍁'}, type: 1}
     ]
     let buttonMessage = {
     image: Thumb,
@@ -1486,7 +1486,7 @@ case 'support': case 'supportgc':
 
 case 'repo': case 'botrepo':
     
-    reply(`*My Source Code:* https://github.com/Kai0071/A17`)
+    reply(`*My Source Code is - * https://github.com/Kai0071/A17`)
     break
 
 case 'nsfwmenu':
@@ -1728,7 +1728,7 @@ case 'coffee': case 'kopi': {
 case 'emojimix': {
 	   if (isBan) return reply(mess.banned)	 			
 if (isBanChat) return reply(mess.bangc)
-if (!q) reply(`*Example :* ${prefix + command} 🦉+🤣`)
+if (!q) reply(`*Example :* ${prefix + command} 😊+🌹`)
 let [emoji1, emoji2] = q.split`+`
 let kuntuh = await fetchJson(`https://tenor.googleapis.com/v2/featured?key=AIzaSyAyimkuYQYF_FXVALexPuGQctUWRURdCYQ&contentfilter=high&media_filter=png_transparent&component=proactive&collection=emoji_kitchen_v5&q=${encodeURIComponent(emoji1)}_${encodeURIComponent(emoji2)}`)
 for (let res of kuntuh.results) {
@@ -2315,7 +2315,7 @@ case 'happymod': {
  teks += `${i.link}`
  }
  let buttons = [
- {buttonId: `-menu`, buttonText: {displayText: '✨Menu✨'}, type: 1}
+ {buttonId: `-menu`, buttonText: {displayText: '✨ Menu ✨'}, type: 1}
  ]
  let buttonMessage = {
  image: {url:res[0].icon},
@@ -4677,7 +4677,7 @@ for (let yoi of anu) {
 await sleep(1500)
 let btn = [{
 quickReplyButton: {
-displayText: '🌟Menu🌟',
+displayText: '💡 Menu 💡',
 id: '-menu'
 }  
 }, {
@@ -4708,34 +4708,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 │╰────────────────···▸
 │╭────────────────···▸
 ┴│▸
-⬡│▸ *Time* :
-
-
-// program to display the date
-// get local machine date time
-const date = new Date();
-
-// get the date as a string
-const n = date.toDateString();
-
-// get the time as a string
-const time = date.toLocaleTimeString();
-
-// display date
-console.log('Date: ' + n);
-
-// display time
-console.log('Time: ' + time);
-const date = new Date();
-console.log(date);
-// Sun Aug 23 2020 10:46:38 GMT+0545 (+0545)
-
-
-
-
-
-
-
+⬡│▸ *Time* : -----
 ┬│▸
 │╰────────────────···▸
 ┠───═[ *BOT INFO* ]═──▸

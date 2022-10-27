@@ -15,10 +15,27 @@
    <p align="center"> 
   <a href="https://github.com/Kai0071/A17/stargazers">
     <img src="https://img.shields.io/github/stars/Kai0071/A17?style=social">
-  </a>
 
  
+  <p align="CENTER">
+  <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/Maintain-Yes-cyan.svg?style=for-the-badge&logo=xcode" /></a>
+</p>
+    
 
+     
+  
+<p align="CENTER">
+  <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/next%20Update-Undefined!-green.svg?style=for-the-badge&logo=xcode" /></a>
+</p>
+      
+      
+      
+      
+      
+      
+      
+      
+      
 </br>
       
 </br> 

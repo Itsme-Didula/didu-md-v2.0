@@ -70,7 +70,7 @@ https://github.com/clhuang/heroku-buildpack-webp-binaries.git
 
 <br>
 ✧ Fork this repo.
-
+<br>
 ✧ Click this scan button below and scan the given QR within 15 seconds from your WhatsApp.
 
 ✧ Download the session.json file and upload it on the hompage of your Fork ---> session.json

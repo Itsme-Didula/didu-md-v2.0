@@ -28,9 +28,13 @@
   <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/next%20Update-Undefined!-green.svg?style=for-the-badge&logo=xcode" /></a>
 </p>
       
-    
-      
-     
+ 
+  <p align="center">
+<a href="https://replit.com/@Broken0007/A17-QR-Scanner?v=1"><img title="K a i 0 0 7 1" src="https://repl.it/badge/github/quiec/whatsasena" width="400"></a>
+</p>
+
+
+
   <h1 align="center">  ✧ Deploy In Heroku ✧
 </h1>
 
@@ -38,9 +42,7 @@
 <a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17"><img title="K a i 0 0 7 1" src="https://www.herokucdn.com/deploy/button.svg" width="400"></a>
 </p>
       
-      
-      
-      
+        
        
 </br> 
    
@@ -69,13 +71,7 @@ https://github.com/clhuang/heroku-buildpack-webp-binaries.git
 <br>
 ✧ Fork this repo.
 
-✧ I'm using Bro's Qr So Click this scan button below and scan the given QR within 15 seconds from your WhatsApp.
-
-
-<a href="https://miku-qr--fantox001.repl.co/"><img src="https://play-lh.googleusercontent.com/901aMQFFnVoX2T-YuJmTIwpPve_SUgMv_QSyzMSPtAqt_l0CyXN1DxfD6xXU0r2f9iM=w240-h480-rw" width="90" />
-</a>
-
-
+✧ Click this scan button below and scan the given QR within 15 seconds from your WhatsApp.
 
 ✧ Download the session.json file and upload it on the hompage of your Fork ---> session.json
 

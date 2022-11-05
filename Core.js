@@ -212,8 +212,12 @@ const isQuotedAudio = m.mtype === 'extendedTextMessage' && content.includes('aud
 
 const mongoose = require("mongoose");
 
-
-
+   
+	
+	
+	
+	
+/* Dm and Groups Autoreply/Bot chat
 
 if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`http://api.brainshop.ai/get?bid=166512&key=5nz1Ha6nS9Zx1MfT&uid=[uid]&msg=[msg]=[${budy}]`)
@@ -221,7 +225,11 @@ if (!isCmd && !m.isGroup){
     m.reply(txt)
     }    
     
-    
+  */  
+
+	
+	
+	
 	
 _sewa.expiredCheck(A17, sewa)
 

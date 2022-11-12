@@ -246,6 +246,20 @@ function randomNomor(angka){
             return Math.floor(Math.random() * angka) + 1
             }
             
+
+/*
+
+//auto react all message
+A17.sendMessage(m.chat, {
+          react: {
+            text: `${pickRandom(['👀', '🥂', '❤‍🩹', '🫢', '🥲', '🫡', ' ✨', '🔥',  '🖤', '🥹'])}`,
+            key: m.key,
+          }})
+	
+*/
+	
+	
+	
 		
 if (m.message) {
 addBalance(m.sender, randomNomor(574), balance)
@@ -1385,11 +1399,23 @@ for (let anju of xeonyaudio){
 					}
 			}
            
+
+	
+	
+	
 	
 	let smallinput = budy.toLowerCase()
     if (smallinput.includes('hello')) {
       reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
     } 
+	
+
+	
+	if (smallinput.includes('bot')) {
+      reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
+    } 
+
+	
 
     if( smallinput.includes('konichiwa') || smallinput.includes('konochiwa') || smallinput.includes('konichiba') || smallinput.includes('salute')){
       reply (`Konichiwa ${pushname}, I am ${BotName}. How can i help you?`);
@@ -1407,6 +1433,7 @@ for (let anju of xeonyaudio){
     if (smallinput.includes('arigato')|| smallinput.includes('arigatou') || smallinput.includes('thank')) {
       reply (`Mention not ${pushname} 😇. I am a bot afterall.`);
     }
+	
 	
 	
 	
@@ -1520,7 +1547,7 @@ case 'support': case 'supportgc':
 
 case 'repo': case 'botrepo':
     
-    reply(`*My Source Code is - * https://github.com/Kai0071/A17`)
+    reply(`My Source Code is - https://github.com/Kai0071/A17`)
     break
 
 case 'nsfwmenu':
@@ -2548,7 +2575,7 @@ let mentioned = participants.map(v => v.jid)
         if (anu1 == '401' || anu1.status.length == 0) {
         nobio += `wa.me/${anu[0].jid.split("@")[0]}\n`
         } else {
-        nomerny += `🎀 *Number:* wa.me/${anu[0].jid.split("@")[0]}\n🔹 *Bio :* ${anu1.status}\n🔸 *Updated On :* ${moment(anu1.setAt).tz('Asia/Kolkata').format('HH:mm:ss DD/MM/YYYY')}\n\n`
+        nomerny += `🖤 *Number:* wa.me/${anu[0].jid.split("@")[0]}\n🔹 *Bio :* ${anu1.status}\n🔸 *Updated On :* ${moment(anu1.setAt).tz('Asia/Kolkata').format('HH:mm:ss DD/MM/YYYY')}\n\n`
         }
         } catch {
         nowhatsapp += `${number0}${i}${number1}\n`
@@ -3317,7 +3344,7 @@ break
 
               
 
-case 'music': case 'play': case 'song': case 'ytplay': {
+case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  const YT=require('./lib/ytdlcore')
@@ -3396,7 +3423,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
- caption: `「  _A17 Youtube Downloader 2.0_  」
+ caption: `「  A17 Youtube Downloader 2.0  」
 
 *Title :* ${anu.title}
 
@@ -3436,7 +3463,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
 
 
 
-case 'couplepp':  case 'ppcouple': {
+case 'couplepp': case 'cpp': case 'ppcouple': {
 if (isBan) return reply(mess.banned)
 if (isBanChat) return reply(mess.bangc)
          reply(mess.waiting)
@@ -4879,7 +4906,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ┠━━〈 ♨️ *Informative* ♨️ 〉━━
 │╭───────────────···▸
 ┴│▸
-⬡│▸ animequote, quote
+⬡│▸ animequote, quote, weather
 ⬡│▸ covid, earthquake, wiki
 ┬│▸
 ╰────────────────···▸

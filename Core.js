@@ -1385,6 +1385,32 @@ for (let anju of xeonyaudio){
 					}
 			}
            
+	
+	let smallinput = budy.toLowerCase()
+    if (smallinput.includes('hello')) {
+      reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
+    } 
+
+    if( smallinput.includes('konichiwa') || smallinput.includes('konochiwa') || smallinput.includes('konichiba') || smallinput.includes('salute')){
+      reply (`Konichiwa ${pushname}, I am ${BotName}. How can i help you?`);
+    }
+    
+
+    if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
+      reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
+    }
+
+    if (smallinput.includes('good night')) {
+      reply (`Good night to you too ${pushname} 😇. Sleep well and sweet dreams.`);
+    }
+
+    if (smallinput.includes('arigato')|| smallinput.includes('arigatou') || smallinput.includes('thank')) {
+      reply (`Mention not ${pushname} 😇. I am a bot afterall.`);
+    }
+	
+	
+	
+	
 
 switch(command) {
 	
@@ -4986,7 +5012,17 @@ case 'add':{
   await A17.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => replay(`User Added Successfully!`)).catch((err) => replay(`Cannot add that user to this group!`))
  }
  break
+		
+case 'weather':
+        if (isBan) return reply(mess.banned)
+        if (!args[0]) return reply("Enter your location to search weather.")
+         myweather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(" ")}&units=metric&appid=e409825a497a0c894d2dd975542234b0&language=tr`)
 
+        const text = `           🌤 Weather Report 🌤  \n\n🔎 Search Location: ${myweather.data.name}\n*💮 Country:* ${myweather.data.sys.country}\n🌈 Weather: ${myweather.data.weather[0].description}\n🌡️ Temperature: ${myweather.data.main.temp}°C\n❄️ Minimum Temperature: ${myweather.data.main.temp_min}°C\n📛 Maximum Temperature: ${myweather.data.main.temp_max}°C\n💦 Humidity: ${myweather.data.main.humidity}%\n🎐 Wind: ${myweather.data.wind.speed} km/h\n`
+        A17.sendMessage(from, { video: { url: 'https://media.tenor.com/bC57J4v11UcAAAPo/weather-sunny.mp4' }, gifPlayback: true, caption: text }, { quoted: m })
+
+        break
+		
 
  case "tts":  case "texttospeech":  case "say": case "speak":{
     if (isBan) return reply(mess.banned)	 			

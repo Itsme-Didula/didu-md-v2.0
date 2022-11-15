@@ -1414,7 +1414,11 @@ for (let anju of xeonyaudio){
 	if (smallinput.includes('bot')) {
       reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
     } 
-
+	
+	 if (smallinput=='Kai') {
+        reply (`*My Boss is lost in another Multiverse, I lost contact with him...*`)
+    }
+	
 	
 
     if( smallinput.includes('konichiwa') || smallinput.includes('konochiwa') || smallinput.includes('konichiba') || smallinput.includes('salute')){
@@ -1426,6 +1430,14 @@ for (let anju of xeonyaudio){
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
     }
 
+	
+	if (smallinput.includes('good afthernoon')) {
+      reply (`Huh ${pushname} ...😇  Wishing you an enjoyable afternoon too...`);
+    }
+	
+	
+	
+	
     if (smallinput.includes('good night')) {
       reply (`Good night to you too ${pushname} 😇. Sleep well and sweet dreams.`);
     }
@@ -4780,7 +4792,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ *Owner name :* ${global.OwnerName} 
 ⬡│▸ *Bot speed :* ${latensie.toFixed(4)} ms 
 ⬡│▸ *Bot runtime :* ${runtime(process.uptime())} 
-⬡│▸ *Platform :* Unbuntu Linux 
+⬡│▸ *Platform :* Linux 
 ┬│▸
 │╰────────────────···▸
 ┠⬡│▸ Here's the list of my Commands.
@@ -4928,7 +4940,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ┴│▸
 ⬡│▸ 🍁 Type " *${prefix}nsfw* " then enable NSFW (Admin only!) 
 ⬡│▸
-⬡│▸ 🍁 Then type " *${prefix}nsfwmenu* " to get full list of NSFW commands.
+⬡│▸ 🍁 Then type " *${prefix}nsfwmenu* " for all NSFW commands.
 ⬡│▸
 ⬡│▸
 ⬡│▸ 『  *${global.BotName}*  』
@@ -4984,7 +4996,8 @@ break
 
 
 
-case 'A17':
+case 'A17': case '17': 
+		
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
 
@@ -5028,8 +5041,7 @@ const A17array= [
             const A17selection = A17array[Math.floor(Math.random()*A17array.length)]
         
             A17.sendMessage(from,{video:{url:A17selection},gifPlayback:true,caption:txt},{quoted:m})
-
-break
+		break
 
 case 'add':{     			
     if (!m.isGroup) return replay(mess.grouponly)

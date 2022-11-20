@@ -1426,16 +1426,16 @@ for (let anju of xeonyaudio){
     }
     
 	
-	 if (smallinput=='Kai') {
-        reply (`*Offline*`)
+	 if (smallinput=='kai') {
+        reply (`*offline*`)
     }
 	
-	 if (smallinput=='Ping') {
-        reply (`*Pong*`)
+	 if (smallinput=='ping') {
+        reply (`*pong*`)
     }
 	
-	 if (smallinput=='A17') {
-        reply (`*Yes*`)
+	 if (smallinput=='a17') {
+        reply (`*yes*`)
     }
 	
 

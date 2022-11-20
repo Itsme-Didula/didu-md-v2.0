@@ -1425,6 +1425,19 @@ for (let anju of xeonyaudio){
       reply (`Konichiwa ${pushname}, I am ${BotName}. How can i help you?`);
     }
     
+	
+	 if (smallinput=='Kai') {
+        reply (`*Offline*`)
+    }
+	
+	 if (smallinput=='Ping') {
+        reply (`*Pong*`)
+    }
+	
+	 if (smallinput=='A17') {
+        reply (`*Yes*`)
+    }
+	
 
     if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
@@ -1432,7 +1445,7 @@ for (let anju of xeonyaudio){
 
 	
 	if (smallinput.includes('good afthernoon')) {
-      reply (`Huh ${pushname} ...😇  Wishing you an enjoyable afternoon too...`);
+      reply (`Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.`);
     }
 	
 	

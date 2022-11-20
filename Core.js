@@ -1520,10 +1520,30 @@ let buttonspro = [
                 headerType: 4
             }
         A17.sendMessage(m.chat,buttonMessage,{quoted:m})
+		
+		
+		
+		
         	
             break
 
+		case 'report': case 'suggest ': {
+    if (isBan) return reply(mess.banned)
+    if (isBanChat) return reply(mess.bangc)
+    if (!text) return reply(`please provide a report message you want to deliver`)
+    if (text.length > 300) return reply(`Are you trying to send virus!`)
+    const txtmsg = `*📮 Report Message*\n\n*Sender ➛* wa.me/${m.sender.split("@")[0]}\n\n*Group Name ➛* ${groupName}\n\n*Message ➛*  ${text}`
+	for (let mod of global.Owner.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').filter(v => v != '6297175943@s.whatsapp.net'))
+	await A17.sendMessage(`${mod}`, {text: `${txtmsg}`},  { quoted: m })
+	await A17.sendMessage(`120363026915700516@g.us`, {text: `${txtmsg}`, mentions: groupAdmins}, { quoted: m })
+    replay(`*✅ Your Report has been submitted Successfully to Support group & Owner*\n\n*You will get response shortly ♥️*`); 
+ }
+ break   
+		
+		
+		
 
+		
 case 'banchat': case 'bangroup':{
 if (isBan) return reply(mess.banned)	 			
 if (!isCreator) return replay(mess.botowner)
@@ -4933,7 +4953,8 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ┠━━〈 🎗 *Others* 🎗 〉━━
 │╭───────────────···▸
 ┴│▸
-⬡│▸ stickermeme, quotes, darkjoke
+⬡│▸ stickermeme, quotes,
+⬡│▸ Report, darkjoke, afk
 ┬│▸
 ╰────────────────···▸
 ┠━━〈 ⚠️ *NSFW* ⚠️ 〉━━

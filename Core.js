@@ -1931,6 +1931,21 @@ await A17.sendMessage(m.chat, { delete: key })
  }
  break
 
+		
+		
+		case 'listonline': case 'here':{
+    if (isBan) return reply(mess.banned)	 			
+ if (isBanChat) return reply(mess.bangc)
+ if (!m.isGroup) return replay(mess.grouponly)
+ let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
+ let online = [...Object.keys(store.presences[id]), botNumber]
+ let liston = 1
+ A17.sendText(m.chat, '  「 *Now Online Members* 」\n\n' + online.map(v => `${liston++} . @` + v.replace(/@.+/, '')).join`\n`, m, { mentions: online })
+ }
+ break
+		
+		
+		
  case 'afk': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)

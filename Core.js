@@ -1944,6 +1944,62 @@ await A17.sendMessage(m.chat, { delete: key })
  }
  break
 		
+	
+		
+		
+	case "pp": case "setdp":
+      case "setbotpp":
+        {
+          if (!isCreator) return replay(mess.botowner);
+          if (!quoted)
+            return replay(`Send/Reply Image With Caption ${prefix}setbotpp`);
+          if (!/image/.test(mime))
+          return replay(`Send/Reply Image With Caption ${prefix}setbotpp`);
+          if (/webp/.test(mime))
+          return replay(`Send/Reply Image With Caption ${prefix}setbotpp`);
+          let media = await A17.downloadAndSaveMediaMessage(quoted);
+          await A17.updateProfilePicture(botNumber, {
+            url: media,
+          }).catch((err) => fs.unlinkSync(media));
+          replay(`*✨ ${pushname}...!! My Profile Pic Updated ✨*`);
+        }
+         break;
+		
+		
+
+		
+		
+		
+		
+		case 'status': case 'post': {
+        if (!isCreator) return replay(mess.owner)
+        if (!quoted) return replay(`Send/Reply Image With Caption ${prefix}status`)
+        if (/video/.test(mime)) {
+            if ((quoted.msg || quoted).seconds > 30) return reply('Maximum 30 seconds video is allowed!')
+        }
+        const messageType = Object.keys (m.message)[0]
+        if (messageType === 'imageMessage') {
+            const media = await downloadMediaMessage(m,'media',{ },{ logger,reuploadRequest: sock.updateMediaMessage})
+            await writeFile('./image.jpeg', media)
+            await A17.sendMessage(botNumber, 'status@broadcast',  { url: './image.jpeg', media}).catch((err) => fs.unlinkSync(media))
+           replay(`*✨ ${pushname}...!! Posted On My Status ✨*`);
+        }
+        else if (messageType === 'videoMessage') {
+            const media = await downloadMediaMessage(m,'media',{ },{ logger,reuploadRequest: sock.updateMediaMessage})
+            await writeFile('./video.mp4', media)
+            await A17.sendMessage(botNumber, 'status@broadcast',  { url: 'video.mp4', media}).catch((err) => fs.unlinkSync(media))
+		replay(`*✨ ${pushname}...!! Posted On My Status ✨*`);
+        }
+        else {
+            replay(`an error occurred`)
+        }
+
+ }
+ break
+		
+		
+		
+		
 		
 		
  case 'afk': {
@@ -2546,6 +2602,36 @@ if (isBanChat) return reply(mess.bangc)
  }
  break
 
+		
+		
+		
+		
+		
+		
+		case'tagadmins': case 'admins': case 'admin': {
+    if (isBan) return reply(mess.banned)	 			
+ if (isBanChat) return reply(mess.bangc)
+ if (!m.isGroup) return replay(mess.grouponly)
+ if (!text) return replay(`*Please quote or write a meaningful message to tag admins to*`)
+ let teks = `*「 Tag Admins 」*
+  
+ *Message : ${text}*\n\n`
+ for (let mem of groupAdmins) {
+ teks += `🎀 @${mem.split('@')[0]}\n`
+ }
+ A17.sendMessage(m.chat, { text: teks, mentions: groupAdmins}, { quoted: m })
+ }
+ break
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 /*
      case 'purge':{
         if (isBan) return reply(mess.banned)	 			

@@ -1410,12 +1410,12 @@ for (let anju of xeonyaudio){
     } 
 	
 
-	
-	if (smallinput.includes('bot')) {
+	let smallinput = budy.toLowerCase()
+    if (smallinput.includes('bot')) {
       reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
-    } 
+    }
 	
-	 if (smallinput=='Kai') {
+	 if (smallinput=='kai') {
         reply (`*My Boss is lost in another Multiverse, I lost contact with him...*`)
     }
 	
@@ -1426,18 +1426,14 @@ for (let anju of xeonyaudio){
     }
     
 	
-	 if (smallinput=='kai') {
-        reply (`*offline*`)
+	
+	 if (smallinput=='a17') {
+        reply ('Yes I am Alive 🫂')
     }
 	
 	 if (smallinput=='ping') {
-        reply (`*pong*`)
+        reply ('Hey ${pushname} Pong ${latensie.toFixed(4)} ms')
     }
-	
-	 if (smallinput=='a17') {
-        reply (`*yes*`)
-    }
-	
 
     if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
@@ -1445,7 +1441,7 @@ for (let anju of xeonyaudio){
 
 	
 	if (smallinput.includes('good afthernoon')) {
-      reply (`Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.`);
+      reply ('Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.');
     }
 	
 	

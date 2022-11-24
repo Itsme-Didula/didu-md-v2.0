@@ -35,6 +35,8 @@ const emoji = new EmojiAPI()
 const { smsg, formatp, tanggal, GIFBufferToVideoBuffer, formatDate, getTime, isUrl, sleep, clockString, runtime, fetchJson, getBuffer, jsonformat, format, parseMention, getRandom } = require('./lib/myfunc')
 const { aiovideodl } = require('./lib/scraper.js')
 const cheerio = require ("cheerio");
+const eco = require('discord-mongoose-economy')
+const ty = eco.connect('mongodb+srv://Arch:1t6l2G0r6nagLlOb@cluster0.gedh4.mongodb.net/?retryWrites=true&w=majority');
 const textpro = require('./lib/textpro')
 const { detikNews } = require('./lib/detik')
 const { wikiSearch } = require('./lib/wiki.js');

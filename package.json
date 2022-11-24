@@ -67,6 +67,7 @@
   "node-youtube-music": "^0.7.0",
   "rumus-bdr": "^1.0.0",
   "mongoose": "^6.2.1",
+  "discord-mongoose-economy": "^1.2.0",
   "google-tts-api": "^2.0.2",
   "os": "^0.1.2",
   "mumaker": "^1.0.0",

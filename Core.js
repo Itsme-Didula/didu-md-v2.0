@@ -1547,7 +1547,48 @@ let buttonspro = [
 		
 		
 		
+//game
+		
+      case'daily': case 'reward': {
+	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
+        if (isBan) return reply(mess.banned)	 			
+        if (isBanChat) return reply(mess.bangc)
+        let user = m.sender
+	const cara = "cara"
+	const daily  = await eco.daily(user, cara, 999); //give 999 for daily, can be changed
+	
+	        if (daily.cd) return replay(`You already claimed daily for today, come back in ${daily.cdL}`); //cdL is already formatted cooldown Left
+	
+            replay(`You claimed 💎${daily.amount} for daily`);        
+}
+break
+		
+		
+	
+		
+		
 
+	
+
+        if (isBanChat) return reply(mess.bangc)
+
+	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
+
+    const user = m.sender
+
+    const cara = "cara"
+
+    const balance = await eco.balance(user, cara); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
+
+    await replay(`👛 ${pushname}'s Purse:\n\n_💎${balance.wallet}_`);
+
+}
+
+break
+		
+		
+		
+		
 		
 case 'banchat': case 'bangroup':{
 if (isBan) return reply(mess.banned)	 			

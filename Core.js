@@ -1563,12 +1563,11 @@ let buttonspro = [
 }
 break
 		
-		
-	
-		
-		
+				
 
-	
+  case'wallet':  case 'purse': {
+
+        if (isBan) return reply(mess.banned)	 			
 
         if (isBanChat) return reply(mess.bangc)
 
@@ -1585,7 +1584,8 @@ break
 }
 
 break
-		
+
+    	
 		
 		
 		

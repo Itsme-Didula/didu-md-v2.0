@@ -1681,7 +1681,8 @@ break
   switch (random) {
           case 'ran':
                 await replay(`Your victim escaped, be more scaryðŸ˜¤ next time.`)
-     
+  }
+	}
                 break  
 		  
 		  

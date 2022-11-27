@@ -71,7 +71,7 @@ const {
 
 let banUser = JSON.parse(fs.readFileSync('./database/banUser.json'));
 let banchat = JSON.parse(fs.readFileSync('./database/banChat.json'));
-let xeonyaudio = JSON.parse(fs.readFileSync('./Media-Database/audio.json'));
+let kaiaudio = JSON.parse(fs.readFileSync('./Media-Database/audio.json'));
  let _limit = JSON.parse(fs.readFileSync('./storage/user/limit.json'));
  let _buruan = JSON.parse(fs.readFileSync('./storage/user/bounty.json'));
  let _darahOrg = JSON.parse(fs.readFileSync('./storage/user/blood.json'))
@@ -1394,7 +1394,7 @@ return list[Math.floor(list.length * Math.random())]
 }
 
 	//auto vn reply
-for (let anju of xeonyaudio){
+for (let anju of kaiaudio){
 				if (budy === anju){
 					result = fs.readFileSync(`./Assets/audio/${anju}.mp3`)
 					A17.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
@@ -1598,11 +1598,9 @@ break
 break
 		
 		
-		
-		
-	case'capacity':  case 'bankupgrade': {
+		case'capacity':  case 'bankupgrade': {
 	//if (!isCreator) return replay(mess.botowner)
-	if (!text) return replay(`💴 Bank-capacity 💳\n\n1 | 1000 sp = 💎100\n\n2 | 100000 sp = 💎1000\n\n3 | 10000000 sp = 💎10000000\n\nExample- ${prefix}capacity 1 OR ${prefix}bankupgrade 1000`)	
+	if (!text) return replay(`💴 Bank-capacity 💳\n\n1 | 1000 sp = 💎100\n\n2 | 10000 sp = 💎1000\n\n3 | 100000 sp = 💎10000\n\nExample- ${prefix}capacity 1 OR ${prefix}bankupgrade 1000`)	
 	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
         const user = m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
 	const cara = "cara"
@@ -1616,8 +1614,21 @@ break
             const deduct1 = await eco.deduct(user, cara, 100);
             const add1 = eco.giveCapacity(user, cara, 1000); 
                 await replay(`1000 💎diamond storage has been added in ${pushname} bank`)
-     
-                break	
+         case '10000':
+          case '2':
+          if (k > balance.wallet ) return replay(`You need to pay 💎1000 to increase bank capacity ~ 10000 sp`);
+            const deduct2 = await eco.deduct(user, cara, 1000);
+            const add2 = eco.giveCapacity(user, cara, 10000); 
+                await replay(`10000 💎diamond storage has been added in ${pushname} bank`)
+         case '100000':
+          case '3':
+          if (k > balance.wallet ) return replay(`You need to pay 💎10000 to increase bank capacity ~ 100000 sp`);
+            const deduct3 = await eco.deduct(user, cara, 10000);
+            const add3 = eco.giveCapacity(user, cara, 100000); 
+                await replay(`100000 💎diamond storage has been added in ${pushname} bank`)
+          }
+            }
+                break
 		
 		
 		  
@@ -5060,6 +5071,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ *My prefix is :*  ${prefix}
 ⬡│▸ *Owner name :* ${global.OwnerName} 
 ⬡│▸ *Bot speed :* ${latensie.toFixed(4)} ms 
+⬡│▸ *Total Bot user :* ${Object.keys(global.db.users).length}
 ⬡│▸ *Bot runtime :* ${runtime(process.uptime())} 
 ⬡│▸ *Platform :* Linux 
 ┬│▸

@@ -1400,8 +1400,73 @@ for (let anju of kaiaudio){
 					A17.sendMessage(m.chat, { audio: result, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 					}
 			}
-           
+        
+	
+	
+	
 
+	this.game = this.game ? this.game : {}
+            let room = Object.values(this.game).find(room => room.id && room.game && room.state && room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender) && room.state == 'PLAYING')
+            if (room) {
+            let ok
+            let isWin = !1
+            let isTie = !1
+            let isSurrender = !1
+            //reply(`[DEBUG]\n${parseInt(m.text)}`)
+            if (!/^([1-9]|(me)?give up|surr?ender|off|skip)$/i.test(m.text)) return
+            isSurrender = !/^[1-9]$/.test(m.text)
+            if (m.sender !== room.game.currentTurn) { 
+            if (!isSurrender) return !0
+            }
+            if (!isSurrender && 1 > (ok = room.game.turn(m.sender === room.game.playerO, parseInt(m.text) - 1))) {
+            reply({
+            '-3': 'Game Has Ended',
+            '-2': 'Invalid',
+            '-1': 'Invalid Position',
+            0: 'Invalid Position',
+            }[ok])
+            return !0
+            }
+            if (m.sender === room.game.winner) isWin = true
+            else if (room.game.board === 511) isTie = true
+            let arr = room.game.render().map(v => {
+            return {
+            X: '❌',
+            O: '⭕',
+            1: '1️⃣',
+            2: '2️⃣',
+            3: '3️⃣',
+            4: '4️⃣',
+            5: '5️⃣',
+            6: '6️⃣',
+            7: '7️⃣',
+            8: '8️⃣',
+            9: '9️⃣',
+            }[v]
+            })
+            if (isSurrender) {
+            room.game._currentTurn = m.sender === room.game.playerX
+            isWin = true
+            }
+            let winner = isSurrender ? room.game.currentTurn : room.game.winner
+            let str = `Room ID: ${room.id}
+    ${arr.slice(0, 3).join('')}
+    ${arr.slice(3, 6).join('')}
+    ${arr.slice(6).join('')}
+    ${isWin ? `@${winner.split('@')[0]} Won!` : isTie ? `Game Over` : `Turn ${['❌', '⭕'][1 * room.game._currentTurn]} (@${room.game.currentTurn.split('@')[0]})`}
+    ❌: @${room.game.playerX.split('@')[0]}
+    ⭕: @${room.game.playerO.split('@')[0]}
+    Typed *surrender* to surrender and admited defeat`
+            if ((room.game._currentTurn ^ isSurrender ? room.x : room.o) !== m.chat)
+            room[room.game._currentTurn ^ isSurrender ? 'x' : 'o'] = m.chat
+            if (room.x !== room.o) await A17.sendText(room.x, str, m, { mentions: parseMention(str) } )
+            await A17.sendText(room.o, str, m, { mentions: parseMention(str) } )
+            if (isTie || isWin) {
+            delete this.game[room.id]
+            }
+            }
+	
+	
 	
 	
 	
@@ -1695,10 +1760,292 @@ break
   }
 	}
                 break  
+		
+		
 		  
-		  
-		  
-		  
+	case'transfer':  case 'give': {
+        if (isBan) return reply(mess.banned)	 			
+        if (isBanChat) return reply(mess.bangc)
+	let value = text.trim().split(" ");
+	if (value[0] === "") return replay(`Use ${prefix}transfer 100 @user`);
+	const target =
+			             m.quoted && m.mentionedJid.length === 0
+			             ? m.quoted.sender
+			             : m.mentionedJid[0] || null;    
+           if (!target || target === m.sender) return replay("what are you trying to do!")
+           if (m.quoted?.sender && !m.mentionedJid.includes(m.quoted.sender)) m.mentionedJid.push(m.quoted.sender)
+        while (m.mentionedJid.length < 2) m.mentionedJid.push(m.sender)
+        const cara = "cara"
+        const user1 = m.sender
+        const user2 = target
+		           const word = value[0];
+		           const code = value[1];
+		let d = parseInt(word)
+		if (!d) return replay("check your text plz u r using the command in a wrong way")
+		
+		const balance = await eco.balance(user1, cara); 
+        let a = (balance.wallet) < parseInt(word)
+        //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.	
+        if(a == true) return replay("you dont have sufficient money to transfer");
+        
+        const deduct = await eco.deduct(user1, cara, value[0]);
+        const give = await eco.give(user2, cara, value[0]);
+        replay(`📠 Transaction successful`)
+
+}
+break  	  
+	
+		
+		
+	 case 'wealth': case 'ritual': {
+                    if (!isCreator) return replay(mess.botowner)
+                    var user = m.sender
+                    var cara = 'cara'
+                    const give1 = eco.give(user, cara, 2000)
+                    replay(`You are the wealthiest my *Lord*`)
+            }
+            break
+            
+		
+		
+		case'gamble':  case 'lottery': {
+    //var response = await Miku.groupInviteCode(from)
+    //var link1 = `https://chat.whatsapp.com/${response}`
+    //var link2 = `https://chat.whatsapp.com/BXQaaeg7utI29OI4RbhdIhl`
+    var texts = text.trim().split(" ");
+    var opp = texts[1];// your value
+    var value = texts[0].toLowerCase();
+    var gg = parseInt(value)
+    var user = m.sender //m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
+    const cara = 'cara'
+    const balance = await eco.balance(user, cara); 
+    const g = (balance.wallet) > parseInt(value)
+    const k = 50
+    const a = (k) > parseInt(value)
+    const twice = gg*2
+    const f = ["up", "right", "left", "down", "up", "left", "down", "right", "up", "down", "right", "left"]
+    const r = f[Math.floor(Math.random () * f.length)]
+    if (isBan) return reply(mess.banned)	 			
+    if (isBanChat) return reply(mess.bangc)
+    if (!m.isGroup) return reply(mess.grouponly)
+    //if (link1 == link2){
+       if (texts[0] === "")
+           return replay(
+               `Example:  ${prefix}gamble 100 direction(left,right,up,down)`
+           );
+       if (!value) return replay("*Please, specify the amount you are gambling with!");
+       if (!opp) return replay("Specify the direction you are betting on!");
+       if (!gg) return replay("Check your text please, You are using the command in a wrong way")
+       if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
+       if (g == false) return replay(`You don't have sufficient 💎 Diamond to gamble with`);
+       if (a == true) return replay(`Sorry ${pushname}, you can only gamble with more than 💎50.`);
+       if ( r == opp){
+          let give = await eco.give(user , cara, twice);
+          replay(`*📉 You won 💎${twice}*`)
+       }
+       else{
+          let deduct = await eco.deduct(user, cara, texts[0]);
+          replay(`*📈 You lost 💎${texts[0]}*`)
+        }
+    //}
+    //else{
+        //replay(`Gambling is allowed only in Casino/Gamble Group,\n\ntype ${prefix}casino to get the group link`)
+    //}
+}
+break
+		
+	//-----------------Slot----------------------
+/*
+case'slot': case 'spin': {
+       if (isBan) return replay(mess.banned);
+       if (isBanChat) return replay(mess.bangc)
+       if (!m.isGroup) return replay(mess.grouponly)
+       var today = new Date();
+   if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
+       if (text == 'help') return replay(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
+       if (text == 'money') return replay(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
+       const fruit1= ["🥥", "🍎", "🍇"]
+       const fruit2 = ["🍎", "🍇", "🥥"]  
+       const fruit3 = ["🍇", "🥥", "🍎"]         
+       const fruit4 = ["🍇", "🍎", "🥥"]
+       const lose = ['*You suck at playing this game*\n\n_--> 🍍-🥥-🍎_', '*Totally out of line*\n\n_--> 🥥-🍎-🍍_', '*Are you a newbie?*\n\n_--> 🍎-🍍-🥥_']
+       const smallLose = ['*You cannot harvest coconut 🥥 in a pineapple 🍍 farm*\n\n_--> 🍍>🥥<🍍_', '*Apples and Coconut are not best Combo*\n\n_--> 🍎>🥥<🍎_', '*Coconuts and Apple are not great deal*\n\n_--> 🥥>🍎<🥥_']
+       const won = ['*You harvested a basket of*\n\n_--> 🍎+🍎+🍎_', '*Impressive, You must be a specialist in plucking coconuts*\n\n_--> 🥥+🥥+🥥_', '*Amazing, you are going to be making pineapple juice for the family*\n\n_--> 🍍+🍍+🍍_']             
+       const near = ['*Wow, you were so close to winning pineapples*\n\n_--> 🍎-🍍+🍍_', '*Hmmm, you were so close to winning Apples*\n\n_--> 🍎+🍎-🍍_']          
+       const jack = ['*🥳 JackPot 🤑*\n\n_--> 🍇×🍇×🍇×🍇_', '*🎉 JaaackPooot!*\n\n_--> 🥥×🥥×🥥×🥥_', '*🎊 You Just hit a jackpot worth 💎1000*']
+       const user = m.sender
+       const cara = "cara"
+       const k = 100
+       const balance1  = await eco.balance(user, cara)
+       
+       if (k > balance1.wallet) return replay(`You are going to be spinning on your wallet, you need at least 💎100`);
+       const f1 = fruit1[Math.floor(Math.random() * fruit1.length)];
+       const f2 = fruit2[Math.floor(Math.random() * fruit2.length)];
+       const f3 = fruit3[Math.floor(Math.random() * fruit3.length)];
+       const f4 = fruit4[Math.floor(Math.random() * fruit4.length)];
+       const mess1 = lose[Math.floor(Math.random() * lose.length)];
+       const mess2 = won[Math.floor(Math.random() * won.length)];
+       const mess3 = near[Math.floor(Math.random() * near.length)];
+       const mess4 = jack[Math.floor(Math.random() * jack.length)];
+       const mess5 = smallLose[Math.floor(Math.random() * smallLose.length)];
+       
+       if ((f1 !== f2) && f2 !== f3){
+          const deduct1 = await eco.deduct(user, cara, 50);
+                 replay(`${mess1}\n\n*Big Lose -->* _💎50_`)
+       }
+       else if ((f1 == f2) && f2 == f3){
+          const give1 = await eco.give(user, cara, 100); 
+                replay(`${mess2}\n*_Big Win -->* _💎100_`)
+       }
+       else if ((f1 == f2) && f2 !== f3){
+          const give2 = await eco.give(user, cara, 20);
+                replay(`${mess3}\n*Small Win -->* _💎20_`)
+       }
+       else if ((f1 !== f2) && f1 == f3){
+          const deduct2 = await eco.deduct(user, cara, 20);
+                replay(`${mess5}\n\n*Small Lose -->* _💎20_`)
+       }
+       else if ((f1 !== f2) && f2 == f3){
+          const give4 = eco.give(user, cara, 20); 
+                replay(`${mess3}\n\n*Small Win -->* _💎20_`)
+       }
+       else if (((f1 == f2) && f2 == f3) && f3 == f4){
+          const give5 = eco.give(user, cara, 1000);
+               replay(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
+       }
+       else { 
+               replay(`Do you understand what you are doing?`)
+       }
+    }
+    else{
+           replay(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
+    }
+}
+break
+*/	
+
+case'slot': case 'spin': {
+    if (isBan) return replay(mess.banned);
+    if (isBanChat) return replay(mess.bangc)
+    if (!m.isGroup) return replay(mess.grouponly)
+    var today = new Date();
+if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
+    if (text == 'help') return replay(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
+    if (text == 'money') return replay(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
+    const fruit1= ["🥥", "🍎", "🍇"]
+    const fruit2 = ["🍎", "🍇", "🥥"]  
+    const fruit3 = ["🍇", "🥥", "🍎"]         
+    const fruit4 = ["🍇", "🥥", "🍎"]
+    const lose = ['*You suck at playing this game*\n\n_--> 🍍-🥥-🍎_', '*Totally out of line*\n\n_--> 🥥-🍎-🍍_', '*Are you a newbie?*\n\n_--> 🍎-🍍-🥥_']
+    const smallLose = ['*You cannot harvest coconut 🥥 in a pineapple 🍍 farm*\n\n_--> 🍍>🥥<🍍_', '*Apples and Coconut are not best Combo*\n\n_--> 🍎>🥥<🍎_', '*Coconuts and Apple are not great deal*\n\n_--> 🥥>🍎<🥥_']
+    const won = ['*You harvested a basket of*\n\n_--> 🍎+🍎+🍎_', '*Impressive, You must be a specialist in plucking coconuts*\n\n_--> 🥥+🥥+🥥_', '*Amazing, you are going to be making pineapple juice for the family*\n\n_--> 🍍+🍍+🍍_']             
+    const near = ['*Wow, you were so close to winning pineapples*\n\n_--> 🍎-🍍+🍍_', '*Hmmm, you were so close to winning Apples*\n\n_--> 🍎+🍎-🍍_']          
+    const jack = ['*🥳 JackPot 🤑*\n\n_--> 🍇×🍇×🍇×🍇_', '*🎉 JaaackPooot!*\n\n_--> 🥥×🥥×🥥×🥥_', '*🎊 You Just hit a jackpot worth 💎1000*']
+    const user = m.sender
+    const cara = "cara"
+    const k = 100
+    const balance1  = await eco.balance(user, cara)
+    
+    if (k > balance1.wallet) return replay(`You are going to be spinning on your wallet, you need at least 💎100`);
+    const f1 = fruit1[Math.floor(Math.random() * fruit1.length)];
+    const f2 = fruit2[Math.floor(Math.random() * fruit2.length)];
+    const f3 = fruit3[Math.floor(Math.random() * fruit3.length)];
+    const f4 = fruit4[Math.floor(Math.random() * fruit4.length)];
+    const mess1 = lose[Math.floor(Math.random() * lose.length)];
+    const mess2 = won[Math.floor(Math.random() * won.length)];
+    const mess3 = near[Math.floor(Math.random() * near.length)];
+    const mess4 = jack[Math.floor(Math.random() * jack.length)];
+    const mess5 = smallLose[Math.floor(Math.random() * smallLose.length)];
+    
+    if ((f1 !== f2) && f2 !== f3){
+       const deduct1 = await eco.deduct(user, cara, 50);
+              replay(`${mess1}\n\n*Big Lose -->* _💎50_`)
+    }
+    else if ((f1 == f2) && f2 == f3){
+       const give1 = await eco.give(user, cara, 100); 
+             replay(`${mess2}\n*_Big Win -->* _💎100_`)
+    }
+    else if ((f1 == f2) && f2 !== f3){
+       const give2 = await eco.give(user, cara, 20);
+             replay(`${mess3}\n*Small Win -->* _💎20_`)
+    }
+    else if ((f1 !== f2) && f1 == f3){
+       const deduct2 = await eco.deduct(user, cara, 20);
+             replay(`${mess5}\n\n*Small Lose -->* _💎20_`)
+    }
+    else if ((f1 !== f2) && f2 == f3){
+       const give4 = eco.give(user, cara, 20); 
+             replay(`${mess3}\n\n*Small Win -->* _💎20_`)
+    }
+    else if (((f1 == f2) && f2 == f3) && f3 == f4){
+       const give5 = eco.give(user, cara, 1000);
+            replay(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
+    }
+    else { 
+            replay(`Do you understand what you are doing?`)
+    }
+ }
+ else{
+        replay(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
+ }
+}
+break
+	
+		
+		
+		
+		
+case 'ttc': case 'ttt': case 'tictactoe': {
+    if (isBan) return reply(mess.ban)	 			
+if (isBanChat) return reply(mess.banChat)
+    let TicTacToe = require("./lib/tictactoe")
+    this.game = this.game ? this.game : {}
+    if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return replay(`You Are Still In The Game`)
+    let room = Object.values(this.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
+    if (room) {
+    reply('Partner found!')
+    room.o = m.chat
+    room.game.playerO = m.sender
+    room.state = 'PLAYING'
+    let arr = room.game.render().map(v => {
+    return {
+    X: '❌',
+    O: '⭕',
+    1: '1️⃣',
+    2: '2️⃣',
+    3: '3️⃣',
+    4: '4️⃣',
+    5: '5️⃣',
+    6: '6️⃣',
+    7: '7️⃣',
+    8: '8️⃣',
+    9: '9️⃣',
+    }[v]
+    })
+    let str = `Room ID: ${room.id}
+${arr.slice(0, 3).join('')}
+${arr.slice(3, 6).join('')}
+${arr.slice(6).join('')}
+Waiting @${room.game.currentTurn.split('@')[0]}
+Type *surrender* to surrender and admit defeat`
+    if (room.x !== room.o) await A17.sendText(room.x, str, m, { mentions: parseMention(str) } )
+    await   A17.sendText(room.o, str, m, { mentions: parseMention(str) } )
+    } else {
+    room = {
+    id: 'tictactoe-' + (+new Date),
+    x: m.chat,
+    o: '',
+    game: new TicTacToe(m.sender, 'o'),
+    state: 'WAITING'
+    }
+    if (text) room.name = text
+    reply('Waiting For Partner' + (text ? ` Type The Command Below ${prefix}${command} ${text}` : ''))
+    this.game[room.id] = room
+    }
+    }
+    break		
+		
+		
 		
 		
 case 'banchat': case 'bangroup':{

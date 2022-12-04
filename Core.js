@@ -2422,10 +2422,11 @@ await A17.sendMessage(m.chat, { delete: key })
  A17.sendTextWithMentions(m.chat, teks, m)
  }
  break
-
 		
 		
-		case 'listonline': case 'here':{
+		
+		
+case 'listonline': case 'here':{
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
@@ -2436,7 +2437,8 @@ await A17.sendMessage(m.chat, { delete: key })
  }
  break
 		
-	
+		
+			
 		
 		
 	case "pp": case "setdp":

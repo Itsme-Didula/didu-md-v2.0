@@ -229,6 +229,13 @@ if (!isCmd && !m.isGroup){
     
   */  
 
+//auto recording everything
+    if (global.autoRecord) { if (m.chat) { A17.sendPresenceUpdate('recording', m.chat) }
+}
+//auto typing everything
+  if (global.autoTyping) { if (m.chat) { A17.sendPresenceUpdate('composing', m.chat) }
+}
+	
 	
 	
 	

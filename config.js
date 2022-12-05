@@ -6,6 +6,9 @@ global.autoReadGc = true
 global.autoReadAll = false
 global.antitags = true
 
+//aumto functioner
+global.autoTyping = false //auto tying in gc (true to on, false to off)
+global.autoRecord = true //auto recording (true to on, false to off)
 
 global.Owner = ['916297175943']
 global.OwnerNumber = ['916297175943']

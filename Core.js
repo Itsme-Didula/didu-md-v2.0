@@ -50,6 +50,8 @@ const xfarrapi = require('xfarr-api')
 const { hentai } = require('./lib/scraper2.js')
 let { msgFilter } = require('./lib/antispam')
 const { mediafireDl } = require('./lib/mediafire.js')
+const kaitime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
+const kaidate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
 
 
 const _ = require('lodash')
@@ -5462,7 +5464,8 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 │╰────────────────···▸
 │╭────────────────···▸
 ┴│▸
-⬡│▸ *Time* : -----
+⬡│▸ *Time* : ${kaitime}
+⬡│▸ *Date* : ${kaidate}
 ┬│▸
 │╰────────────────···▸
 ┠───═[ *BOT INFO* ]═──▸

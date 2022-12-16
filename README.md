@@ -35,11 +35,11 @@
 
 
 
-  <h1 align="center">  ✧ Deploy In Heroku ✧
+  <h1 align="center">  ✧ Deploy To Railway ✧
 </h1>
 
 <p align="center">
-<a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17"><img title="K a i 0 0 7 1" src="https://www.herokucdn.com/deploy/button.svg" width="400"></a>
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
 </p>
       
         

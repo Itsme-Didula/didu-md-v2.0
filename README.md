@@ -58,34 +58,7 @@
 * [`Aswin Sparky`](https://github.com/Sparkymon777)
 
 
-<h1 align="center">  ✧ Deploy Method Step By Step ✧
-</h1>
 
-<br>
-
-✧ Fork this repo.
-
-
-✧ Click this scan button below and scan the given QR within 15 seconds from your WhatsApp.
-
-✧ Download the session.json file and upload it on the hompage of your Fork ---> session.json
-
-✧ Go to your Heroku account.
-
-✧ Create a random app in Heroku with any name.
-
-✧ Connect your GitHub with Heroku
-
-✧ Then connect A17's repo from your GitHub.
-
-✧ Go to Heroku's settings ---> Add Buildpacks then connect  
-these 3 buildpacks one by one mentionned below.
-
-✧ Then come back to Heroku ---> Deploy then deploy the app
-
-✧ After deploy is finished goto Heroku ---> Resources and   turn on the switch.
-
-✧ Enjoy ✧
 <br>
 
 

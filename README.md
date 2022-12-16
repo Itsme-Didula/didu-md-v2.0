@@ -28,6 +28,11 @@
   <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/next%20Update-Undefined!-green.svg?style=for-the-badge&logo=xcode" /></a>
 </p>
       
+# Setup For Deployment 👇
+
+- FORK THE REPOSITORY [Here](https://github.com/Sparkymon777/SPARKY-BOT-MD/fork)
+
+
  
   <p align="center">
 <a href="https://replit.com/@Broken0007/A17-QR-Scanner?v=1"><img title="K a i 0 0 7 1" src="https://repl.it/badge/github/quiec/whatsasena" width="400"></a>

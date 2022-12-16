@@ -52,14 +52,12 @@
    
 </br></br>
   
-<h1 align="center">  ⭐ Thanks To ⭐
+<h1 align="center">  ⭐ Spacial Thanks To ⭐
 </h1>
 
 * [`Aswin Sparky`](https://github.com/Sparkymon777)
+* [`FantoxBro`](https://github.com/FantoX001)
 
-
-
-<br>
 
 
 

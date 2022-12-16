@@ -39,19 +39,21 @@
 </h1>
 
 <p align="center">
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+
+
+
 </p>
-      
-        
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
+
+---------------------    
        
 </br> 
    
 </br></br>
   
-  
 <h1 align="center">  ⭐ Thanks To ⭐
 </h1>
-
 
 * [`Aswin Sparky`](https://github.com/Sparkymon777)
 

@@ -49,21 +49,12 @@
 </br></br>
   
   
-<h1 align="center">  ✧ Heroku Builbpacks ✧
+<h1 align="center">  ⭐ Thanks To ⭐
 </h1>
 
-```
-heroku/node.js
-```
 
-```
-https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
-``` 
-```
-https://github.com/clhuang/heroku-buildpack-webp-binaries.git
-```
+* [`Aswin Sparky`](https://github.com/Sparkymon777)
 
-<br>
 
 <h1 align="center">  ✧ Deploy Method Step By Step ✧
 </h1>

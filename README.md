@@ -30,7 +30,7 @@
       
 # Setup For Deployment 👇
 
-- FORK THE REPOSITORY [Here](https://github.com/Sparkymon777/SPARKY-BOT-MD/fork)
+- FORK THE REPOSITORY [Here](https://github.com/Kai0071/A17/fork)
 
 
  

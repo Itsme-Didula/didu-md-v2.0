@@ -1501,7 +1501,8 @@ for (let anju of kaiaudio){
         reply ('Yes I am Alive 🫂')
     }
 	
-	 if (smallinput=='ping') {
+	
+if (smallinput=='ping') {
         reply (`Hey ${pushname} Pong ${latensie.toFixed(4)} ms`)
     }
 

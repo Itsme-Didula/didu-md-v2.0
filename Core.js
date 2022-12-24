@@ -1502,7 +1502,7 @@ for (let anju of kaiaudio){
     }
 	
 	 if (smallinput=='ping') {
-        reply ('Hey ${pushname} Pong ${latensie.toFixed(4)} ms')
+        reply (`Hey ${pushname} Pong ${latensie.toFixed(4)} ms`)
     }
 
     if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
@@ -1511,7 +1511,7 @@ for (let anju of kaiaudio){
 
 	
 	if (smallinput.includes('good afthernoon')) {
-      reply ('Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.');
+      reply (`Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.`);
     }
 	
 	
@@ -1623,7 +1623,7 @@ let buttonspro = [
 		
 //game
 		
-      case'daily': case 'reward': {
+      case'daily': case'claim': case 'reward': {
 	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
         if (isBan) return reply(mess.banned)	 			
         if (isBanChat) return reply(mess.bangc)

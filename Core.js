@@ -1505,6 +1505,7 @@ for (let anju of kaiaudio){
         reply (`Hey ${pushname} Pong ${latensie.toFixed(4)} ms`)
     }
 
+	
     if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
     }

@@ -99,7 +99,7 @@ npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
 
 
 ## Edit config file
-Edit your config details in your own repo [`config.json`](https://github.com/Kai0071/A17/blob/master/config.js)
+Edit your config details in your own repo like -- [`config.js`](https://github.com/Kai0071/A17/blob/master/config.js)
 ```js
 
 13  global.Owner = ['916297175943']
@@ -110,6 +110,23 @@ Edit your config details in your own repo [`config.json`](https://github.com/Kai
 18  global.author = "By: Kai"
 19  global.OwnerName = "Kai"
 
+```
+   
+   
+ ## If you want Autoreply/Bot chat
+Comment out the code form your Core.js line 224,332 in your own repo like -- [`Core.js`](https://github.com/Kai0071/A17/blob/main/Core.js)
+```js  
+   
+224   /* Dm and Groups Autoreply/Bot chat
+225   
+226   if (!isCmd && !m.isGroup){
+227   const botreply = await axios.get(`http://api.brainshop.ai/get?bid=166512&key=5nz1Ha6nS9Zx1MfT&uid=[uid]&msg=[msg]=[${budy}]`)
+228   txt = `${botreply.data.cnt}`
+229   m.reply(txt)
+230   }    
+231   
+232    */
+   
 ```
 
 

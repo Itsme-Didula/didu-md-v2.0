@@ -8,14 +8,17 @@
 <p align="center"> 
   Hemlo, I am "A17" a WhatsApp bot create and recode by Kai to do everything that is possible on WhatsApp based on WhatsApp Multi Device(MD) Support.
 
-<p align="center">
-  <a href="https://github.com/Kai0071/A17/fork">
-    <img src="https://img.shields.io/github/forks/Kai0071/A17?label=Fork&style=social">
-    
    <p align="center"> 
   <a href="https://github.com/Kai0071/A17/stargazers">
     <img src="https://img.shields.io/github/stars/Kai0071/A17?style=social">
-
+    
+   <p align="center">
+  <a href="https://github.com/Kai0071/A17/fork">
+    <img src="https://img.shields.io/github/forks/Kai0071/A17?label=Fork&style=social">
+    
+<p align="center">
+  <a href="https://github.com/Kai0071/A17">
+    <img src="https://visitor-badge.glitch.me/badge?page_id=https://github.com/Kai0071/A17.visitor-badge&left_text=Total%20Repo%20Visits">
  
   <p align="CENTER">
   <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/Maintain-Yes-cyan.svg?style=for-the-badge&logo=xcode" /></a>
@@ -52,6 +55,68 @@
 [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
 ---------------------        
 </br>  
+
+
+## Termux
+```js
+termux-setup-storage
+
+apt update
+apt upgrade
+pkg update && pkg upgrade
+pkg install bash
+pkg install libwebp
+pkg install git -y
+pkg install nodejs -y 
+pkg install ffmpeg -y 
+pkg install wget
+pkg install imagemagick -y
+
+git clone https://github.com/Kai0071/A17
+cd A17
+npm i
+npm start
+
+
+Command For 24/7 
+npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
+
+
+```
+## Windows Cmd & Vs
+* [`Download ffmpeg`](https://ffmpeg.org/download.html#build-windows) and set path
+* [`Download wget`](https://eternallybored.org/misc/wget/releases/) and set path
+* [`Download Node JS`](https://nodejs.org/en/download/)
+* [`Download Git`](https://git-scm.com/downloads)
+* [`Download Libwebp`](https://developers.google.com/speed/webp/download)
+```cmd
+> git clone https://github.com/Kai0071/A17.git
+> cd A17
+> npm i
+> npm start
+```
+
+
+
+## Edit config file
+Edit your config details in your own repo [`config.json`](https://github.com/Kai0071/A17/blob/master/config.js)
+```js
+
+13  global.Owner = ['916297175943']
+14  global.OwnerNumber = ['916297175943']
+15  global.ownertag = ['916297175943']
+16  global.BotName = "A17" 
+17  global.packname = "A17 bot"
+18  global.author = "By: Kai"
+19  global.OwnerName = "Kai"
+
+```
+
+
+
+
+
+
 </br></br>
 <h1 align="center">  ⭐ Spacial Thanks To ⭐
 </h1>

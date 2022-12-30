@@ -138,8 +138,9 @@ Comment out the code form your Core.js line 224,332 in your own repo like -- [`C
 <h1 align="center">  ⭐ Spacial Thanks To ⭐
 </h1>
 
-* [`Aswin Sparky`](https://github.com/Sparkymon777)
-* [`FantoxBro`](https://github.com/FantoX001)
+* [`🎐 FantoX`](https://github.com/FantoX001)
+* [`🎐 Aswin`](https://github.com/Sparkymon777)
+* [`🎐 Pikachu`](https://github.com/PikaBotz)
 
 
 <h2 align="center"> ✧ Join My Whatsapp Group for Support ✧

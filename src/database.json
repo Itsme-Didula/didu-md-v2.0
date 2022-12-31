@@ -859,6 +859,11 @@
       "afkTime": -1,
       "afkReason": "",
       "limit": "Infinity"
+    },
+    "919497705819@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": "",
+      "limit": 100
     }
   },
   "READ": false,

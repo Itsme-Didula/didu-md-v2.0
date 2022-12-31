@@ -3092,12 +3092,11 @@ case 'happymod': {
  })
  }
  break
-/*
  case 'yts': case 'ytsearch': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  if (!args.join(" ")) return replay(`Example : -yts Heat waves`)
- let yts = require("yt-search")
+ let yts = require("@adiwajshing/keyed-db2")
  let search = await yts(args.join(" "))
  let teks = '```「 YouTube search Engine 」```\n\n Search Term: '+text+'\n\n'
  let no = 1
@@ -3106,7 +3105,7 @@ case 'happymod': {
  }
  A17.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
  }
- break */
+ break 
 
  case 'setname': case 'setsubject': {
     if (isBan) return reply(mess.banned)	 			
@@ -4071,11 +4070,6 @@ reply(mess.error)
   A17.sendMessage(from, { audio: { url: A17tiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
  }
 break
-
-
-
- /*             
-
 case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
@@ -4083,7 +4077,7 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  const { isUrl, fetchBuffer } = require('./lib/Function')
 
  if(!text) return A17.sendMessage(from,{text:"Pls enter song name to play!"},{quoted:m})
- let yts = require("yt-search")
+ let yts = require("@adiwajshing/keyed-db2")
  let search = await yts(text)
  let anu = search.videos[0]
  let buttons = [
@@ -4109,36 +4103,30 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  }
  A17.sendMessage(m.chat, buttonMessage, { quoted: m })
  }
- break */
-/*
+ break
  case 'ytad': {
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
     const YT=require('./lib/ytdlcore')
-    let yts = require("yt-search")
+    let yts = require("@adiwajshing/keyed-db2")
     let search = await yts(text)
     let anu = search.videos[0]
     const ytmp3play = await YT.mp3(anu.url)
     
  await A17.sendMessage(from, {document: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
  }
- break */
-
-/*
+ break 
  case 'ytvd': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  const YT=require('./lib/ytdlcore')
-    let yts = require("yt-search")
+    let yts = require("@adiwajshing/keyed-db2")
     let search = await yts(text)
     let anu = search.videos[0]
     const ytmp4play = await YT.mp4(anu.url)
  A17.sendMessage(from, {video:{url:ytmp4play.videoUrl}, mimetype:"video/mp4", caption:anu.title+' By *A17 MD*',}, {quoted:m})
  }
  break
-*/
-
-/*
  case 'ytmp3': case 'ytmusic':  case 'ytmp4': case 'ytvideo': case 'ytdl':{
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
@@ -4146,7 +4134,7 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
 
  const YT=require('./lib/ytdlcore')
  if(!text) return A17.sendMessage(from,{text:"Please provide a valid youtube link!"},{quoted:m})
- let yts = require("yt-search")
+ let yts = require("@adiwajshing/keyed-db2")
  let search = await yts(text)
  let anu = search.videos[0]
  let buttons = [
@@ -4172,9 +4160,7 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  }
  A17.sendMessage(m.chat, buttonMessage, { quoted: m })
  }
- break */
-
-/*
+ break 
  case 'ytad2': {
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
@@ -4193,7 +4179,6 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  A17.sendMessage(from, {video:{url:ytmp4play2.videoUrl}, mimetype:"video/mp4", caption:'Downloaded by *A17 MD*',}, {quoted:m})
  }
  break
-*/
 
 
 case 'couplepp': case 'cpp': case 'ppcouple': {

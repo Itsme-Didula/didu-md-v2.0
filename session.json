@@ -57,8 +57,8 @@
         "messageTimestamp": 1671276020
       }
     ],
-    "nextPreKeyId": 56,
-    "firstUnuploadedPreKeyId": 56,
+    "nextPreKeyId": 60,
+    "firstUnuploadedPreKeyId": 60,
     "accountSettings": {
       "unarchiveChats": false
     },
@@ -620,6 +620,46 @@
         "public": {
           "type": "Buffer",
           "data": "VX3bbYexuBAzyzwUHYphqrajg2QwbRnL8B9mHEzjYVo="
+        }
+      },
+      "56": {
+        "private": {
+          "type": "Buffer",
+          "data": "qEyF10h7lTEKsYx4FuqnDd5Pnk7/xn4O/GOdB0OgGkE="
+        },
+        "public": {
+          "type": "Buffer",
+          "data": "bWvrwzXBZmWo+pBY2ZE3H2kC2Mj2+zx5l9nBzN8AhTQ="
+        }
+      },
+      "57": {
+        "private": {
+          "type": "Buffer",
+          "data": "wL24wNIHjAUGKlYnIlzAtvu9SMVU+f2WMmkpGusW5E0="
+        },
+        "public": {
+          "type": "Buffer",
+          "data": "gN78XdY18/ygsOxScL/Omjl3YHT3TDQcZCI3koIC4k4="
+        }
+      },
+      "58": {
+        "private": {
+          "type": "Buffer",
+          "data": "wPlkw5Tup57nNMnx/VgTzSyrsKBKXw3JXffob5DnbE8="
+        },
+        "public": {
+          "type": "Buffer",
+          "data": "FBG5hq8BAnBxXS126/YCTNLeF6Aky4y6eQmf1rcGrzQ="
+        }
+      },
+      "59": {
+        "private": {
+          "type": "Buffer",
+          "data": "2BRTsrivc2OVtVmBnTFxLFylWoc2gssJpVxSpOuR5WY="
+        },
+        "public": {
+          "type": "Buffer",
+          "data": "dP3s10ueeqz/V970b+tWUGedqOD6ebv0lxYZotmkjBs="
         }
       }
     },
@@ -1968,8 +2008,8 @@
         {
           "senderKeyId": 1343503951,
           "senderChainKey": {
-            "iteration": 48,
-            "seed": "YcH7ZwWSs/N0ZuufgFiEUwn4czIDvbraGXCwP+pKA90="
+            "iteration": 68,
+            "seed": "z6oA3Rg+kyYQkRNZwht2mouErk3TWGpPgJ8MS/5u214="
           },
           "senderSigningKey": {
             "public": "BRsPF7bfe4nasRMCKQqbJtbx2oF/ZRD7QQ9AJ+VtssAi"
@@ -1992,8 +2032,8 @@
         {
           "senderKeyId": 1562495719,
           "senderChainKey": {
-            "iteration": 15,
-            "seed": "U8MoEswIbRCjFwf5ku4A92mkIwKQtT9B+eUim6pOS80="
+            "iteration": 28,
+            "seed": "n1c2MuvBi/XAVSpkZdMG526kp8lSVAmGvGDVM3P35Kg="
           },
           "senderSigningKey": {
             "public": "BaqvLt5tr9iat8/5upP9cDf234SaXpIOa4fzLar8G0pB",
@@ -2005,8 +2045,8 @@
         {
           "senderKeyId": 1528774112,
           "senderChainKey": {
-            "iteration": 25,
-            "seed": "KqR8jLWDfw5rmf2CFvwXgqqNNiEXxHXeTgsqGlhl7DY="
+            "iteration": 37,
+            "seed": "lWWfr3AUqt1qhiu7mfGQdLDKw5MH1BC5r3CsTuuNq8A="
           },
           "senderSigningKey": {
             "public": "Bae4VHKP5wqaqgRUsocy7oV3xhkdrobA/aWyQDOrqpIw"

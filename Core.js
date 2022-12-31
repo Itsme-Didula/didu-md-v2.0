@@ -52,7 +52,43 @@ let { msgFilter } = require('./lib/antispam')
 const { mediafireDl } = require('./lib/mediafire.js')
 const kaitime = moment.tz('Asia/Kolkata').format('HH:mm:ss')
 const kaidate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY')
+const time2 = moment().tz('Asia/Kolkata').format('HH:mm:ss')
 
+        if(time2 < "23:59:00"){
+
+        var ucapanWaktu = 'Good night 🌌'
+
+}
+
+        if(time2 < "19:00:00"){
+
+        var ucapanWaktu = 'Good afternoon 🌆'
+
+}
+
+        if(time2 < "18:00:00"){
+
+        var ucapanWaktu = 'Good afternoon 🌇'
+
+}
+
+        if(time2 < "15:00:00"){
+
+        var ucapanWaktu = 'Good afternoon 🏞'
+
+}
+
+        if(time2 < "11:00:00"){
+
+        var ucapanWaktu = 'Good morning 🌅'
+
+}
+
+        if(time2 < "05:00:00"){
+
+        var ucapanWaktu = 'Good night 🏙'
+
+}
 
 const _ = require('lodash')
 const yargs = require('yargs/yargs')
@@ -5459,13 +5495,13 @@ A17.sendMessage(from, { react: { text: "📃" , key: m.key }})
 const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 
 │───────────────────────│
-┠⬡│▸ I am *A17*, a Bot Developed by *Kai*.
+┠⬡│▸ I am *A17*, ${ucapanWaktu}  a Bot Developed by *Kai*.
 │───────────────────────│
 │╭────────────────···▸
 ┠─────═[ *TODAY* ]═────
 │╰────────────────···▸
 │╭────────────────···▸
-┴│▸
+┴│▸ 
 ⬡│▸ *Time* : ${kaitime}
 ⬡│▸ *Date* : ${kaidate}
 ┬│▸

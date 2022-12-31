@@ -4067,7 +4067,7 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  }
  A17.sendMessage(m.chat, buttonMessage, { quoted: m })
  }
- break *
+ break
  case 'ytad': {
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)

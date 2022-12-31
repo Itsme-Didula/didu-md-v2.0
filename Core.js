@@ -5477,10 +5477,10 @@ case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
 A17.sendMessage(from, { react: { text: "📃" , key: m.key }})      
-const helpmenu = `Hemlo *${pushname}* Dear...!! ,
+const helpmenu = `Hemlo *${pushname}* Dear...!! ${ucapanWaktu} ,
 
 │───────────────────────│
-┠⬡│▸ I am *A17*, ${ucapanWaktu}  a Bot Developed by *Kai*.
+┠⬡│▸ ${pushname} I am *A17*, a Bot Developed by *Kai*.
 │───────────────────────│
 │╭────────────────···▸
 ┠─────═[ *TODAY* ]═────
@@ -5519,10 +5519,15 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ┠━━〈 ❤️‍🔥 *Owner* ❤️‍🔥 〉━━
 │╭───────────────···▸
 ┴│▸
-⬡│▸ self, public,join,
-⬡│▸ bangroup, ban, block, 
-⬡│▸ unblock, broadcast, bye
-┬│▸
+⬡│▸ self, public,
+⬡│▸ setdp, post
+⬡│▸ join, bye
+⬡│▸ listonline, listgc
+⬡│▸ listpc, cpp, getcase
+⬡│▸ bangroup, block, 
+⬡│▸ unblock, broadcast,
+⬡│▸ ban add, ban del
+┬│▸ 
 ╰────────────────···▸
 ┠━━〈 ⭕ *Group* ⭕ 〉━━
 │╭───────────────···▸
@@ -5531,7 +5536,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ promote, demote, revoke
 ⬡│▸ hidetag, groupsetting 
 ⬡│▸ grouplink, setgcpp
-⬡│▸ setname, setdesc
+⬡│▸ setname, setdesc,leveling
 ⬡│▸ group, nsfw, nsnfwmenu
 ┬│▸
 ╰────────────────···▸
@@ -5556,6 +5561,26 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ wikimedia, ringtone
 ⬡│▸ anime, animestory
 ⬡│▸ manga, ringtone
+┬│▸
+╰────────────────···▸
+┠━━〈 📈 *Economy* 📈 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ daily, wallet
+⬡│▸ bank, bankupgrade
+⬡│▸ deposit, withdraw 
+⬡│▸ rob / attack
+⬡│▸ transfer / give
+⬡│▸ wealth / ritual
+┬│▸
+╰────────────────···▸
+┠━━〈 🎮 *Games* 🎮 〉━━
+│╭───────────────···▸
+┴│▸
+⬡│▸ ttt / tictactoe
+⬡│▸ truth, dare
+⬡│▸ spin / slot
+⬡│▸ gamble / lottery
 ┬│▸
 ╰────────────────···▸
 ┠━━〈 🛠️ *Convert* 🛠️ 〉━━
@@ -5594,17 +5619,17 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ⬡│▸ ytvideo, mediafire, instagram,
 ⬡│▸ igtv, facebook, fbmp3,
 ⬡│▸ twitter, twittermp3,
-⬡│▸ tiktok, tiktokaudio
+⬡│▸ tiktok, tiktokaudio, happymod
 ⬡│▸ tiktoknowm, mediafire  
 ┬│▸
 ╰────────────────···▸
 ┠━━〈 🎐 *Fun* 🎐 〉━━
 │╭───────────────···▸
 ┴│▸
-⬡│▸ reaction, truth, dare
+⬡│▸ reaction,  cutecheck
 ⬡│▸ couple, soulmate, handsomecheck
 ⬡│▸ beautifulcheck, awesomecheck
-⬡│▸ greatcheck, gaycheck, cutecheck
+⬡│▸ greatcheck, gaycheck,
 ⬡│▸ uglycheck, charactercheck
 ⬡│▸ lesbiancheck, hornycheck,
 ⬡│▸ prettycheck, lovelycheck,
@@ -5628,6 +5653,7 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ,
 ┴│▸
 ⬡│▸ animequote, quote, weather
 ⬡│▸ covid, earthquake, wiki
+⬡│▸ stalknumber / nowa
 ┬│▸
 ╰────────────────···▸
 ━━〈 🪁 *Essentials* 🪁 〉━━
@@ -5687,7 +5713,7 @@ case '':
       A17pic ='https://wallpapercave.com/wp/wp10524580.jpg'
     
         
- const needhelpmenu = `Do you need help ${pushname} Senpai? Type *${prefix}help* to get my full command list.`
+ const needhelpmenu = `Do you need help ${pushname} ? Type *${prefix}help* to get my full command list.`
      
          let butRun = [
                 {buttonId: `${prefix}help`, buttonText: {displayText: 'Help'}, type: 1}

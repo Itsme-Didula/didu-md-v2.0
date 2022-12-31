@@ -21,8 +21,10 @@
  "author": "Kai (Kai0071)",
  "license": "MIT",
  "dependencies": {
-  "@adiwajshing/baileys": "^4.3.0",
+  "@adiwajshing/baileys": "^4.4.0",
+  "@adiwajshing/baileys2": "github:QueenAnya/topa",
   "@adiwajshing/keyed-db": "^0.2.4",
+  "@adiwajshing/keyed-db2": "github:QueenAnya/topb",
   "@develoka/angka-terbilang-js": "^1.4.2",
   "@shineiichijo/marika": "^2.0.2",
   "@shineiichijo/nhentai-pdf": "^1.0.5",

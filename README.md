@@ -141,7 +141,8 @@ Comment out the code form your Core.js line 224,332 in your own repo like -- [`C
 * [`🎐 FantoX`](https://github.com/FantoX001)
 * [`🎐 Aswin`](https://github.com/Sparkymon777)
 * [`🎐 Pikachu`](https://github.com/PikaBotz)
-
+* [`🎐 Shubham`](https://github.com/Devil0074)
+* [`🎐 Itz Me`](https://github.com/teamolduser)
 
 <h2 align="center"> ✧ Join My Whatsapp Group for Support ✧
 </h2>

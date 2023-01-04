@@ -1,4 +1,5 @@
-/*{
+/*
+{
 "$schema": "https://railway.app/railway.schema.json",
 "build": {
 "builder": "DOCKERFILE",
@@ -11,3 +12,5 @@
 }
 
 */
+
+bash install.sh

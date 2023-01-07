@@ -4103,7 +4103,7 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
- caption: `「  _A17 Youtube Player 2.0_  」
+ caption: `「  A17 Youtube Player 2.0  」
 
 *Title :* ${anu.title}
 

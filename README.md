@@ -76,12 +76,11 @@ git clone https://github.com/Kai0071/A17
 cd A17
 npm i
 npm start
+```
 
-
-Command For 24/7 
-npm i -g pm2 && pm2 start index.js && pm2 save && pm2 logs
-
-
+## Command For 24/7
+```js
+npm i -g forever && forever index.js && forever save && forever logs
 ```
 ## Windows Cmd & Vs
 * [`Download ffmpeg`](https://ffmpeg.org/download.html#build-windows) and set path
@@ -114,7 +113,7 @@ Edit your config details in your own repo like -- [`config.js`](https://github.c
    
    
  ## If you want Autoreply/Bot chat
-Comment out the code form your Core.js line 224,332 in your own repo like -- [`Core.js`](https://github.com/Kai0071/A17/blob/main/Core.js)
+Comment out/delete /* , */ the code form your Core.js line 224,332 in your own repo like -- [`Core.js`](https://github.com/Kai0071/A17/blob/main/Core.js)
 ```js  
    
 224   /* Dm and Groups Autoreply/Bot chat

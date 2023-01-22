@@ -1545,11 +1545,18 @@ if (smallinput=='ping') {
     if (smallinput.includes('good morning') || smallinput.includes('ohayo')) {
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
     }
-
 	
-	if (smallinput.includes('good afthernoon')) {
-      reply (`Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.`);
+    if (smallinput.includes('good afthernoon') || smallinput.includes('konnichiwa')) {
+
+      reply (`Good afthernoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`);
+
     }
+
+
+
+    //if (smallinput.includes('good afthernoon')) {
+     // reply (`Huh ${pushname} 😇. Wishing you an enjoyable afternoon too.`);
+ //   }
 	
 	
 	

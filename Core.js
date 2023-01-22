@@ -1521,7 +1521,7 @@ for (let anju of kaiaudio){
     } 
 		
 	 if (smallinput=='kai') {
-        reply (`*My Boss is lost in another Multiverse, I lost contact with him...*`)
+        reply (`My Boss is lost in another Multiverse, and I lost the connection with him...`)
     }
 	
 	
@@ -1575,7 +1575,7 @@ switch(command) {
     let { data } = await axios.get('https://api.github.com/repos/Kai0071/A17');
     teks = `*A17 Script*\n\n*Total Stars*: ${data.stargazers_count}⭐\n*Total Forks*: ${data.forks_count} forks\n*GitHub*: https://github.com/Kai0071/A17\n\nDont forget to follow me on *GitHub* and give a ⭐️ to my projects. `
     let buttons = [
-    {buttonId: `${prefix}menu`, buttonText: {displayText: '🍁 Bot Menu 🍁'}, type: 1}
+    {buttonId: `${prefix}owner`, buttonText: {displayText: '🍁 DEVELOPER 🍁'}, type: 1}
     ]
     let buttonMessage = {
     image: Thumb,
@@ -1666,7 +1666,7 @@ let buttonspro = [
         if (isBanChat) return reply(mess.bangc)
         let user = m.sender
 	const cara = "cara"
-	const daily  = await eco.daily(user, cara, 999); //give 999 for daily, can be changed
+	const daily  = await eco.daily(user, cara, 9999); //give 999 for daily, can be changed
 	
 	        if (daily.cd) return replay(`You already claimed daily for today, come back in ${daily.cdL}`); //cdL is already formatted cooldown Left
 	
@@ -2171,12 +2171,12 @@ replay('This Group has been *unbanned* from using me!')
 
 case 'support': case 'supportgc':
     
-    reply(`*My developer's group:* http://gg.gg/12ewfs`)
+    reply(`⚙ *My developer's group:* ⚙ http://gg.gg/12ewfs`)
     break
 
 case 'repo': case 'botrepo':
     
-    reply(`My Source Code is - https://github.com/Kai0071/A17`)
+    reply(`⚙ My Source Code is </> - https://github.com/Kai0071/A17`)
     break
 
 case 'nsfwmenu':
@@ -3183,7 +3183,7 @@ if (isBanChat) return reply(mess.bangc)
  if (isBanChat) return reply(mess.bangc)
  if (!m.isGroup) return replay(mess.grouponly)
  if (!isAdmins && !isCreator) return replay(mess.useradmin)
- let teks = `「 _Tag All_ 」
+ let teks = `「 Attention 」
   
  *Message : ${args.join(" ") ? args.join(" ") : 'no message'}*\n\n`
  for (let mem of participants) {
@@ -4105,13 +4105,18 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  image: { url: anu.thumbnail },
  caption: `「  A17 Youtube Player 2.0  」
 
-*Title :* ${anu.title}
+✨ *Title :* ${anu.title}
 
-*Duration :* ${anu.timestamp}
-*Viewers :* ${anu.views}
-*Uploaded :* ${anu.ago}
-*Channel :* ${anu.author.name}
-*Url :* ${anu.url}`,
+⏳ *Duration :* ${anu.timestamp}
+
+📈 *Viewers :* ${anu.views}
+
+📍 *Uploaded :* ${anu.ago}
+
+🎐 *Channel :* ${anu.author.name}
+
+🔗 *Url :* ${anu.url}`,
+	 
  footer: `${global.BotName}`,
  buttons: buttons,
  headerType: 4,
@@ -4162,13 +4167,13 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
  image: { url: anu.thumbnail },
  caption: `「  A17 Youtube Downloader 2.0  」
 
-*Title :* ${anu.title}
+✨ *Title :* ${anu.title}
 
-*Duration :* ${anu.timestamp}
-*Viewers :* ${anu.views}
-*Uploaded :* ${anu.ago}
-*Channel :* ${anu.author.name}
-*Url :* ${anu.url}`,
+⏳ *Duration :* ${anu.timestamp}
+👀 *Viewers :* ${anu.views}
+📍 *Uploaded :* ${anu.ago}
+🎐 *Channel :* ${anu.author.name}
+🔗 *Url :* ${anu.url}`,
  footer: `${global.BotName}`,
  buttons: buttons,
  headerType: 4,

@@ -1546,7 +1546,7 @@ if (smallinput=='ping') {
       reply (`Good morning to you too ${pushname} ☺️. Have a great day 😇.`);
     }
 	
-    if (smallinput.includes('good afthernoon') || smallinput.includes('konnichiwa')) {
+    if (smallinput.includes('good afthernoon') || smallinput.includes('good afthernoon')) {
 
       reply (`Good afthernoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`);
 

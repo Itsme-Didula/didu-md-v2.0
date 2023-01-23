@@ -1519,6 +1519,12 @@ for (let anju of kaiaudio){
     if (smallinput.includes('hello')) {
       reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
     } 
+	
+if (smallinput.includes('hi')) {
+
+      reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
+
+    } 
 		
 	 if (smallinput=='kai') {
         reply (`My Boss is lost in another Multiverse, and I lost the connection with him...`)

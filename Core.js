@@ -1,4 +1,5 @@
 //Use latest fork to get latest features
+//update your repo to get new updates
 
 process.on('uncaughtException', console.error)
 require("./config")
@@ -1520,11 +1521,11 @@ for (let anju of kaiaudio){
       reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
     } 
 	
-if (smallinput.includes('hi')) {
+//if (smallinput.includes('hi')) {
 
-      reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
+   //   reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
 
-    } 
+   // } 
 		
 	 if (smallinput=='kai') {
         reply (`My Boss is lost in another Multiverse, and I lost the connection with him...`)

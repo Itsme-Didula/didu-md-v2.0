@@ -181,3 +181,26 @@ Comment out/delete /* , */ the code form your Core.js line 224,332 in your own r
 </p>
 <h1 align="center"> ✧ Thanks To Fantox ✧
 </h1>
+
+
+
+<h4 align="center"> Deploy on Railway - ( YouTube Tutorial Included )
+
+</h4>
+
+  
+
+<p align="center">
+
+    <a href="https://railway.app/new/template/Gts2Zx?referralCode=f3gg2m">
+
+    <img src="https://railway.app/button.svg" alt="Deploy on Railway" width="170px">
+
+    </a>
+
+    <br>
+
+    <a href="https://youtu.be/Qs6ryWnEtu8"><img src="https://i.ibb.co/71mYRh4/116-1161192-podcast-subscribe-listen-button-youtube-sign-hd-png.png" alt="Watch tutorial on YouTube" border="0"  width="105">
+
+    </a>
+

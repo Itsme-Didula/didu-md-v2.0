@@ -9,6 +9,7 @@
         pkgs.libwebp
         pkgs.speedtest-cli
         pkgs.wget
+        pkgs.sharp
         pkgs.yarn
         pkgs.libuuid
     ];

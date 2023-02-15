@@ -3231,7 +3231,7 @@ if (isBanChat) return reply(mess.bangc)
   
  *Message : ${text}*\n\n`
  for (let mem of groupAdmins) {
- teks += `🎀 @${mem.split('@')[0]}\n`
+ teks += `🍁 @${mem.split('@')[0]}\n`
  }
  A17.sendMessage(m.chat, { text: teks, mentions: groupAdmins}, { quoted: m })
  }

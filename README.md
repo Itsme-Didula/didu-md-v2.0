@@ -50,18 +50,24 @@
 
 
 
-  <h1 align="center">  ✧ Deploy To Railway ✧
-</h1>
+ 
+  
 
-<p align="center">
+<h2 align="center"> ✧ Deploy On Railway ✧
 
+</h2>
 
+<h2 align="center">  <a href="https://railway.app/new"><img src="https://railway.app/button.svg" />
 
-</p>
+</a>
 
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new)
----------------------        
-</br>  
+</h2>
+
+   
+     
+     
+     
+     
 
 
 ## Termux
@@ -192,5 +198,10 @@ Comment out/delete /* , */ the code form your Core.js line 224,332 in your own r
 
     
 
-    
+
+
+
+
+
+
 

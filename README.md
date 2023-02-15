@@ -30,11 +30,18 @@
 <p align="CENTER">
   <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/next%20Update-Undefined!-green.svg?style=for-the-badge&logo=xcode" /></a>
 </p>
-      
+     
+
+<h1 align="center"> Now Playing
+
+</h1>
+
+<p align="center"> <img src="https://novatorem-mu-three.vercel.app/api/spotify" alt="kai0071" /> </p>
+     
+     
 # Setup For Deployment 👇
-
 - FORK THE REPOSITORY [Here](https://github.com/Kai0071/A17/fork)
-
+        
 
  
   <p align="center">

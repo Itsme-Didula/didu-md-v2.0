@@ -39,35 +39,36 @@
 <p align="center"> <img src="https://novatorem-mu-three.vercel.app/api/spotify" alt="kai0071" /> </p>
      
      
-# Setup For Deployment 👇
-- FORK THE REPOSITORY [Here](https://github.com/Kai0071/A17/fork)
-        
-
  
-  <p align="center">
-<a href="https://replit.com/@Broken0007/A17-QR-Scanner?v=1"><img title="K a i 0 0 7 1" src="https://repl.it/badge/github/quiec/whatsasena" width="400"></a>
-</p>
 
+<h2 align="center">  <a href="https://github.com/Kai0071/A17/fork"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtAwkI22hemoXSiUNbcg_dFTfuLLPHMc5Cig&usqp=CAU" />
+</a>
+</h2>
+    
+     
+     
 
-
- 
-  
-
-<h2 align="center"> ✧ Deploy On Railway ✧
-
+<h2 align="center"> ✧ Run Repl for Qr ✧
+</h2>
+<h2 align="center">  <a href="https://replit.com/@Broken0007/A17-QR-Scanner?v=1"><img src="https://repl.it/badge/github/quiec/whatsasena" />
+</a>
 </h2>
 
+     
+
+     
+     
+
+<h2 align="center"> ✧ Deploy On Railway ✧
+</h2>
 <h2 align="center">  <a href="https://railway.app/new"><img src="https://railway.app/button.svg" />
-
 </a>
-
 </h2>
 
    
      
      
-     
-     
+
 
 
 ## Termux

@@ -31,44 +31,54 @@
   <a href="https://github.com/Kai0071"><img title="Support" src="https://img.shields.io/badge/next%20Update-Undefined!-green.svg?style=for-the-badge&logo=xcode" /></a>
 </p>
      
+<br>
+<br>
+    
 
-<h1 align="center"> Now Playing
-
+<h1 align="center"> ✨  Now Playing  ✨
 </h1>
 
 <p align="center"> <img src="https://novatorem-mu-three.vercel.app/api/spotify" alt="kai0071" /> </p>
+
      
-     
+ <br>
+     <br>
  
+     
 
 <h2 align="center">  <a href="https://github.com/Kai0071/A17/fork"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtAwkI22hemoXSiUNbcg_dFTfuLLPHMc5Cig&usqp=CAU" />
 </a>
 </h2>
-    
+ 
      
+<br>
+     <br>
      
 
-<h2 align="center"> ✧ Run Repl for Qr ✧
+     
+<h2 align="center"> 🍁  Run Repl for Qr  🍁
 </h2>
 <h2 align="center">  <a href="https://replit.com/@Broken0007/A17-QR-Scanner?v=1"><img src="https://repl.it/badge/github/quiec/whatsasena" />
 </a>
 </h2>
 
      
-
- <br>     
+<br>
+<br>     
      
 
-<h2 align="center"> ✧ Deploy On Railway ✧
+<h2 align="center"> 🍃  Deploy On Railway  🍃
 </h2>
 <h2 align="center">  <a href="https://railway.app/new"><img src="https://railway.app/button.svg" />
 </a>
 </h2>
 
-   
-
+     
+  <br>
    <br>
-<h2 align="center"> ✧ Deploy On Heroku ✧
+
+
+<h2 align="center"> ❤  Deploy On Heroku  ❤
 </h2>
 
 <p align="center" >
@@ -78,8 +88,24 @@
 </p>
      
 
+<h2 align="center"> Add This 2 Builbpacks On Heroku
+</h2>
 
-
+```
+https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest
+``` 
+```
+https://github.com/clhuang/heroku-buildpack-webp-binaries.git
+```
+     
+     
+<br>
+<br>
+<br>
+<br>
+     
+     
+     
 ## Termux
 ```js
 termux-setup-storage

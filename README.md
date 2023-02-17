@@ -56,7 +56,7 @@
 
      
 
-     
+ <br>     
      
 
 <h2 align="center"> ✧ Deploy On Railway ✧
@@ -66,7 +66,16 @@
 </h2>
 
    
-     
+
+   <br>
+<h2 align="center"> ✧ Deploy On Heroku ✧
+</h2>
+
+<p align="center" >
+    <a href="https://heroku.com/deploy?template=https://github.com/Kai0071/A17">
+    <img src="https://www.herokucdn.com/deploy/button.png" width="160px" alt="Deploy on Heroku" >
+    </a>
+</p>
      
 
 

@@ -33,7 +33,7 @@ console.log(color('\nYou can follow me on GitHub: Kai0071','aqua'))
     const A17 = A17Connect({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: true,
-        browser: ['A17 by: Kai','Safari','1.0.0'],
+        browser: ['A17 By: Kai','Safari','1.0.0'],
         auth: state,
         version
     })
@@ -91,7 +91,7 @@ A17.ev.on('groups.update', async pea => {
         try {
         ppgc = await A17.profilePictureUrl(pea[0].id, 'image')
         } catch {
-        ppgc = 'https://wallpapercave.com/wp/wp10524580.jpg'
+        ppgc = 'https://images2.alphacoders.com/882/882819.jpg'
         }
         let wm_fatih = { url : ppgc }
         if (pea[0].announce == true) {
@@ -133,7 +133,7 @@ A17.ev.on('group-participants.update', async (anu) => {
                 try {
                     ppuser = await A17.profilePictureUrl(num, 'image')
                 } catch {
-                    ppuser = 'https://wallpapercave.com/wp/wp10753770.jpg'
+                    ppuser = 'https://images6.alphacoders.com/690/690121.jpg'
                 }
 
                 try {

@@ -4515,7 +4515,7 @@ case 'charactercheck':
           "send abusive words in any grup, excepting this grup, and send screenshot proof here"
      ]
                    const A17dareww = dare[Math.floor(Math.random() * dare.length)]
-                   buffer = await getBuffer(`https://wallpapercave.com/wp/wp10524609.jpg`)
+                   buffer = await getBuffer(`https://images4.alphacoders.com/101/1016619.jpg`)
                    A17.sendMessage(from, { image: buffer, caption: '*You have chosen Dare*\n\n'+ A17dareww }, {quoted:m})
                    break
                        
@@ -4615,7 +4615,7 @@ case 'truth':
                  "do you play pubg, if you then send ur id number"
              ]
                            const A17truthww = truth[Math.floor(Math.random() * truth.length)]
-                           buffer = await getBuffer(`https://wallpapercave.com/wp/wp10524609.jpg`)
+                           buffer = await getBuffer(`https://images2.alphacoders.com/650/650812.jpg`)
                            A17.sendMessage(from, { image: buffer, caption: '*You have chosen Truth*\n'+ A17truthww }, {quoted:m})
                            break
 
@@ -4882,7 +4882,7 @@ case 'crossplay': case 'crosplay': case 'cosplay':
         {buttonId: '-crossplay', buttonText: {displayText: '>>'}, type: 1},
             ]               
         const cosplybutton = {
-        image: {url: 'https://hanzz-web.herokuapp.com/api/randomimage/cosplay'},
+        image: {url: 'https://fantox-cosplay-api.onrender.com/'},
         caption: "Guess who am i...",
         footer: `${global.BotName}`,
         buttons: buttons,
@@ -5745,7 +5745,7 @@ case '':
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
 
-      A17pic ='https://wallpapercave.com/wp/wp10524580.jpg'
+      A17pic ='https://images5.alphacoders.com/106/1065278.jpg'
     
         
  const needhelpmenu = `Do you need help ${pushname} ? Type *${prefix}help* to get my full command list.`

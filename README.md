@@ -64,6 +64,19 @@
 
      
 <br>
+<br>
+
+     
+
+     
+<h2 align="center"> 🍁  QR CODE  🍁
+</h2>
+<h2 align="center">  <a href="https://a17-qr-scanner.broken0007.repl.co/"><img src="https://repl.it/badge/github/quiec/whatsasena" />
+</a>
+</h2>
+
+     
+<br>
 <br>     
      
 

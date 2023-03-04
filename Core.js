@@ -5851,14 +5851,14 @@ case 'weather':
     break;
 
 
-    case 'qr': case 'qrcode':
+    case 'qr': case 'scanner': case 'qrcode':
         if (isBan) return reply(mess.banned)	 			
         if (isBanChat) return reply(mess.bangc)
         if (!m.isGroup) return replay(mess.grouponly)
     reply(`Running repl....Please wait until repl.it responds...`)						
-    var replqr =  await getBuffer(`https://miku-qr--fantox001.repl.co/`)
+    var replqr =  await getBuffer(`https://a17-qr-scanner.broken0007.repl.co/`)
                                var qrbutton = [
-            {buttonId: `${prefix}qr`, buttonText: {displayText: `Re-run Repl`}, type: 1}
+            {buttonId: `${prefix}qr`, buttonText: {displayText: `Tap to Re-run Repl`}, type: 1}
             ]
           let bmffg = {
            image: replqr,

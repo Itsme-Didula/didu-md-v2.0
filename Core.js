@@ -4100,9 +4100,12 @@ reply(mess.error)
   A17.sendMessage(from, { audio: { url: A17tiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
  }
 break
+		
+		
 case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
     if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
+ if (isBanChat) return reply(mess.bangc
+ A17.sendMessage(from, { react: { text: "📃" , key: m.key }}) 
  const YT=require('./lib/ytdlcore')
  const { isUrl, fetchBuffer } = require('./lib/Function')
 

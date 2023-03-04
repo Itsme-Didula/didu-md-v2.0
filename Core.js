@@ -3795,7 +3795,23 @@ case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': ca
 break
 		
 		
-		
+		case 'pornhub':{
+	if (isBan) return reply(mess.banned)
+    if (isBanChat) return reply(mess.bangc)
+    A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
+if(!q) return reply(`Example: ${prefix + command} Oh|No`)
+reply(mess.waiting)	
+
+  inilogo4 = args.join(" ")
+inilogo9 = args.join(" ")
+   var logo4 = inilogo4.split('|')[0]
+var logo9 = inilogo9.split('|')[1]
+    let anu = await textpro("https://textpro.me/pornhub-style-logo-online-generator-free-977.html", [`${logo4}`,`${logo9}`])
+console.log(anu)
+A17.sendMessage(from,{image:{url:anu}, caption:"Here you go!"},{quoted:m})
+}
+break
+
 		
 		
 

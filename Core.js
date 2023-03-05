@@ -1781,7 +1781,70 @@ break
 }
 break	
 		
-	
+	case 'qt': {
+    if (!args[0] && !m.quoted) {
+      return m.reply(`Please provide a text (Type or mention a message) !`);
+    }
+        
+    let userPfp;
+    if (m.quoted) {
+      try {
+        userPfp = await A17.profilePictureUrl(m.quoted.sender, "image");
+      } catch (e) {
+        userPfp = botImage3;
+      }
+    } else {
+      try {
+        userPfp = await A17.profilePictureUrl(m.sender, "image");
+      } catch (e) {
+        userPfp = botImage3;
+      }
+    }
+      
+  
+    const waUserName = pushname;
+    const quoteText = m.quoted ? m.quoted.body : args.join(" ");
+  
+    const quoteJson = {
+      type: "quote",
+      format: "png",
+      backgroundColor: "#FFFFFF",
+      width: 700,
+      height: 580,
+      scale: 2,
+      messages: [
+        {
+          entities: [],
+          avatar: true,
+          from: {
+            id: 1,
+            name: waUserName,
+            photo: {
+              url: userPfp,
+            },
+          },
+          text: quoteText,
+          replyMessage: {},
+        },
+      ],
+    };
+  
+    try {
+      const quoteResponse = await axios.post("https://bot.lyo.su/quote/generate", quoteJson, {
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      const buffer = Buffer.from(quoteResponse.data.result.image, "base64");
+      A17.sendImageAsSticker(m.chat, buffer, m, {
+        packname: `${global.BotName}`,
+        author: waUserName,
+      });
+    } catch (error) {
+      console.error(error);
+      m.reply("Error generating quote!");
+    }
+    break;
+  }
 		  
 		  
 		case'withdraw':  case 'withdrawal': {

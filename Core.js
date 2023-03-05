@@ -1837,7 +1837,8 @@ break
 		  
 	case'transfer':  case 'give': {
         if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc) A17.sendMessage(from, { react: { text: "🗿" , key: m.key }})
+        if (isBanChat) return reply(mess.bangc) 
+	A17.sendMessage(from, { react: { text: "🗿" , key: m.key }})
 	let value = text.trim().split(" ");
 	if (value[0] === "") return replay(`Use ${prefix}transfer 100 @user`);
 	const target =

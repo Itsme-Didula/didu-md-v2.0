@@ -5976,20 +5976,9 @@ case '':
     
         
  const needhelpmenu = `Do you need help ${pushname} ? Type *${prefix}help* to get my full command list.`
-     
-         let butRun = [
-                {buttonId: `${prefix}help`, buttonText: {displayText: 'Help'}, type: 1}
-                ]
-                let buttonMessage = {
-                    video:fs.readFileSync('./system/A17.mp4'),gifPlayback:true,
-                    caption: needhelpmenu,
-                    footer: `${global.BotName}`,
-                    buttons: butRun,
-                    headerType: 4
-                }
-            A17.sendMessage(m.chat,buttonMessage,{quoted:m})
-                }
-break
+    }
+       
+break 
 
 
 

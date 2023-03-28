@@ -5949,15 +5949,10 @@ const helpmenu = `Hemlo *${pushname}* Dear...!! ${ucapanWaktu} ,
 ⬡│▸
 ⬡│▸ 🌹 Type " *${prefix}help* " to get full command list.`
     
-
- let buttonshelpm = [
-    {buttonId: `${prefix}owner`, buttonText: {displayText: 'Bot Owner'}, type: 1}
-    ]
-                let buttonMessage = {
+        let buttonMessage = {
                     video:fs.readFileSync('./system/A17_2.mp4'),gifPlayback:true,
                     caption: helpmenu,
-                    footer: `${BotName}`,
-                    buttons: buttonshelpm,
+                    
                     headerType: 4
                     
                 }

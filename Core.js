@@ -3185,15 +3185,12 @@ case 'happymod': {
  teks += `\n\n${i.name}\n`
  teks += `${i.link}`
  }
- let buttons = [
- {buttonId: `${prefix}menu`, buttonText: {displayText: '✨ Menu ✨'}, type: 1}
- ]
+ 
  let buttonMessage = {
  image: {url:res[0].icon},
  jpegThumbnail: Thumb,
  caption: teks,
  footer: `${global.BotName}`,
- buttons: buttons,
  headerType: 4
  }
  A17.sendMessage(m.chat, buttonMessage, { quoted: m })
@@ -3490,16 +3487,12 @@ let mentioned = participants.map(v => v.jid)
      } else if (args[0] === 'open'){
      await A17.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replay(`Group has been opened!`)).catch((err) => replay(jsonformat(err)))
      } else {
-     let buttons = [
-     { buttonId: '-group open', buttonText: { displayText: 'Open' }, type: 1 },
-     { buttonId: '-group close', buttonText: { displayText: 'Close' }, type: 1 }
-     ]
+    
      let buttonMessage = {
      image: BotLogo,
      jpegThumbnail: Thumb,
-     caption: `*「 ${global.BotName} 」*\n\n_Group Setting Changer tool_:`,
+     caption: `*「 ${global.BotName} 」*\n\n_Group Setting Changer tool_:\n\nIf you want to Group close *-group close*\n\nIf you want to Group Oepn *-group open*`,
      footer: `${BotName}`,
-     buttons: buttons,
      headerType: 4
      }
      A17.sendMessage(m.chat, buttonMessage, { quoted: m })
@@ -5673,18 +5666,18 @@ reply(`
 }
 break
 
-
 case "quotes":
     if (isBan) return reply(mess.banned)	 			
-    if (isBanChat) return reply(mess.bangc)
+  if (isBanChat) return reply(mess.bangc)
     if (!m.isGroup) return replay(mess.grouponly)
-var res = await Quotes()
-teks = `\n*Author:* ${res.author}\n`
+var res = await fetch('https://animechan.vercel.app/api/random')
+teks = `\n*Anime:* ${res.anime}\n`
 teks += `\n*Quotes:*\n`
-teks += `${res.quotes}\n`
+teks += `${res.json}\n`
 
 replay(teks)
 break
+
 
 case "darkjoke":
     if (isBan) return reply(mess.banned)	 			
@@ -5692,7 +5685,6 @@ case "darkjoke":
     if (!m.isGroup) return replay(mess.grouponly)
 var res = await Darkjokes()
 teks = "\nDarkjokes"
-A17.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
 break
 
 case 'leavegc': case 'leavegroup': case 'bye': {

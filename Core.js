@@ -258,7 +258,7 @@ const mongoose = require("mongoose");
 	
 	
 	
-/* Dm and Groups Autoreply/Bot chat
+//Dm and Groups Autoreply/Bot chat
 
 if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`http://api.brainshop.ai/get?bid=166512&key=5nz1Ha6nS9Zx1MfT&uid=[uid]&msg=[msg]=[${budy}]`)
@@ -266,7 +266,7 @@ if (!isCmd && !m.isGroup){
     m.reply(txt)
     }    
     
-  */  
+ 
 
 //auto recording everything
     if (global.autoRecord) { if (m.chat) { A17.sendPresenceUpdate('recording', m.chat) }
@@ -5963,20 +5963,9 @@ case '':
     
         
  const needhelpmenu = `Do you need help ${pushname} ? Type *${prefix}help* to get my full command list.`
-     
-         let butRun = [
-                {buttonId: `${prefix}help`, buttonText: {displayText: 'Help'}, type: 1}
-                ]
-                let buttonMessage = {
-                    video:fs.readFileSync('./system/A17.mp4'),gifPlayback:true,
-                    caption: needhelpmenu,
-                    footer: `${global.BotName}`,
-                    buttons: butRun,
-                    headerType: 4
-                }
-            A17.sendMessage(m.chat,buttonMessage,{quoted:m})
-                }
-break
+    }
+       
+break 
 
 
 

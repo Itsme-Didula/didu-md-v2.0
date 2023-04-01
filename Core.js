@@ -259,14 +259,14 @@ const mongoose = require("mongoose");
 	
 	
 //Dm and Groups Autoreply/Bot chat
-
+/*
 if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`http://api.brainshop.ai/get?bid=166512&key=5nz1Ha6nS9Zx1MfT&uid=[uid]&msg=[msg]=[${budy}]`)
     txt = `${botreply.data.cnt}`
     m.reply(txt)
     }    
     
- 
+ */
 
 //auto recording everything
     if (global.autoRecord) { if (m.chat) { A17.sendPresenceUpdate('recording', m.chat) }

@@ -1596,7 +1596,7 @@ switch(command) {
     image: Thumb,
     jpegThumbnail: BotLogo ,
     caption: teks,
-    footer: `${BotName }`,
+    footer: `${BotName}`,
     buttons: buttons,
     headerType: 4,
     /*contextInfo:{externalAdReply:{
@@ -1781,7 +1781,8 @@ break
 }
 break	
 		
-	case 'qt': {
+	case 'qt': case'text': {
+    A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
     if (!args[0] && !m.quoted) {
       return m.reply(`Please provide a text (Type or mention a message) !`);
     }

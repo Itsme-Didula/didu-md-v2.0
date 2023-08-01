@@ -146,7 +146,10 @@ async function startA17() {
       return list[Math.floor(list.length * Math.random())]
     }
   
-  
+
+    //Group event on off
+    
+  /* 
   
     A17.ev.on('group-participants.update', async (anu) => {
       console.log(anu)
@@ -215,7 +218,7 @@ async function startA17() {
       }
     });
   
-
+*/
 
 
   A17.decodeJid = (jid) => {

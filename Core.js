@@ -4590,71 +4590,71 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
 
 
 /// Normal
-case 'play': case 'song': case 'music': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  A17.sendMessage(from, { react: { text: "🍁" , key: m.key }}) 
-  const YT=require('./lib/ytdl-core')
-  let yts = require("youtube-yts")
-  let search = await yts(text)
-  let anu = search.videos[0]
-  const ytmp3play = await YT.mp3(anu.url)
+// case 'play': case 'song': case 'music': {
+//   if (isBan) return reply(mess.banned)	 			
+//   if (isBanChat) return reply(mess.bangc)
+//   A17.sendMessage(from, { react: { text: "🍁" , key: m.key }}) 
+//   const YT=require('./lib/ytdl-core')
+//   let yts = require("youtube-yts")
+//   let search = await yts(text)
+//   let anu = search.videos[0]
+//   const ytmp3play = await YT.mp3(anu.url)
   
-await A17.sendMessage(from, {audio: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
-}
-break;
-
-
-// case 'play':
-// case 'song':
-// case 'music': {
-//   if (isBan) return reply(mess.banned);
-//   if (isBanChat) return reply(mess.bangc);
-//   A17.sendMessage(from, { react: { text: "🍁", key: m.key }});
-
-//   const YT = require('./lib/ytdl-core');
-//   const yts = require('youtube-yts');
-//   const ffmpeg = require('fluent-ffmpeg');
-  
-//   let search = await yts(text);
-//   let anu = search.videos[0];
-//   const ytmp3play = await YT.mp3(anu.url);
-
-//   // Fetch the thumbnail URL from the 'anu' object
-//   let thumbnailUrl = anu.thumbnail;
-
-//   await A17.sendMessage(
-//     from,
-//     {
-//       image: { url: thumbnailUrl }, // Include the thumbnail image in the response
-//       caption: `\n*Downloading:* *${anu.title}*
-            
-//   ⏳ *Duration :* ${anu.timestamp}
-
-//   📈 *Viewers :* ${anu.views}
-
-//   🎐 *Channel :* ${anu.author.name}
-
-//   🏮 *Video Uploaded:* ${anu.ago}
-
-//   🔗 *Url :* ${anu.url}\n`,
-
-//     },
-//     { quoted: m }
-//   );
-
-//   // Send the audio file with the proper 'type' property set to 'audio'
-//   await A17.sendMessage(from, { 
-//     audio: fs.readFileSync(ytmp3play.path),
-//     filename: anu.title + '.mp3',
-//     mimetype: 'audio/mpeg',
-//     quoted: m,
-//   });
-
-//   // Rest of the code remains unchanged.
-//   // ...
+// await A17.sendMessage(from, {audio: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
 // }
 // break;
+
+
+case 'play':
+case 'song':
+case 'music': {
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
+  A17.sendMessage(from, { react: { text: "🍁", key: m.key }});
+
+  const YT = require('./lib/ytdl-core');
+  const yts = require('youtube-yts');
+  const ffmpeg = require('fluent-ffmpeg');
+  
+  let search = await yts(text);
+  let anu = search.videos[0];
+  const ytmp3play = await YT.mp3(anu.url);
+
+  // Fetch the thumbnail URL from the 'anu' object
+  let thumbnailUrl = anu.thumbnail;
+
+  await A17.sendMessage(
+    from,
+    {
+      image: { url: thumbnailUrl }, // Include the thumbnail image in the response
+      caption: `\n*Downloading:* *${anu.title}*
+            
+  ⏳ *Duration :* ${anu.timestamp}
+
+  📈 *Viewers :* ${anu.views}
+
+  🎐 *Channel :* ${anu.author.name}
+
+  🏮 *Video Uploaded:* ${anu.ago}
+
+  🔗 *Url :* ${anu.url}\n`,
+
+    },
+    { quoted: m }
+  );
+
+  // Send the audio file with the proper 'type' property set to 'audio'
+  await A17.sendMessage(from, { 
+    audio: fs.readFileSync(ytmp3play.path),
+    filename: anu.title + '.mp3',
+    mimetype: 'audio/mpeg',
+    quoted: m,
+  });
+
+  // Rest of the code remains unchanged.
+  // ...
+}
+break;
 
       
  case 'ytvd': case 'video': case'ytvideo': case 'ytmp4': {

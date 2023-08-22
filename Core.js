@@ -32,6 +32,9 @@ const { instadl } = require('./lib/instadl');
 const ty = eco.connect('mongodb+srv://Arch:1t6l2G0r6nagLlOb@cluster0.gedh4.mongodb.net/?retryWrites=true&w=majority');
 const { isLimit, limitAdd, getLimit, giveLimit, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require('./lib/limit.js');
 const githubstalk = require('./lib/githubstalk');
+
+const spaceemojis = ["🌌", "🌠", "🚀", "🪐", "🌟"]; // List of emojis for Space CMDs.
+
 const gis = require("g-i-s");
 const { MessageType } = require('baileysjs');
 const {
@@ -4071,10 +4074,52 @@ break;
 
 
 
+//---------------------------------------- NASA  -----------------------------------------//
+
+case 'apod': {
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
+  
+  //A17.sendMessage(from, { react: { text: "🌌", key: m.key }});
+  const randomEmoji = spaceemojis[Math.floor(Math.random() * spaceemojis.length)]; // Select a random emoji
+  A17.sendMessage(from, { react: { text: randomEmoji, key: m.key }});
+
+  const apiKey = 'ugce43VIO63s8gQhcQ7Ts2DHQo1Srcchdh9mgI2S'; // Replace with your actual NASA API key // You can use it.
+  const moment = require('moment'); // Import moment library here
+  const timeZone = 'Asia/Kolkata'; // Set desired timezone.
+
+  const currentDate = moment().tz(timeZone).format('YYYY-MM-DD'); // Initialize currentDate here
+
+  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&date=${currentDate}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.url) {
+      A17.sendMessage(from, {
+        image: { url: data.url },
+        caption: `*Astronomy Picture of the Day:*\n\n${data.title}\n${data.explanation}`,
+      });
+    } else {
+      console.log("No APOD image data available.");
+     
+      return reply('No APOD image data available.');
+    }
+  } catch (error) {
+    console.error('Error fetching APOD data:', error);
+   
+    return reply('An error occurred while fetching APOD data.');
+  }
+}
+break;
+
+
 case 'google': case 'search': {
 if (isBan) return reply(mess.banned)	 			
 if (isBanChat) return reply(mess.bangc)
 A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
+
 if (!args[0]) return reply(`Example: ${prefix + command} <query>\nUses : ${prefix + command} anything...`)
 let google = require('google-it')
 google({'query': args.join(" ")}).then(res => {

@@ -18,6 +18,10 @@ const yargs = require("yargs/yargs");
 const kaitime = moment.tz('Asia/Kolkata').format('HH:mm:ss');
 const kaidate = moment.tz('Asia/Kolkata').format('DD/MM/YYYY');
 const time2 = moment().tz('Asia/Kolkata').format('HH:mm:ss');
+const currentDate = new Date();
+const options = { weekday: 'long' }; // Specify 'long' to get the full day name
+const currentDay = new Intl.DateTimeFormat('en-US', options).format(currentDate);
+
 const speed = require('performance-now');
 const eco = require('discord-mongoose-economy');
 const thiccysapi = require('textmaker-thiccy');
@@ -25,15 +29,18 @@ const thiccysapi = require('textmaker-thiccy');
 // const ffmpegPath = require('ffmpeg-static').path;
 // ffmpeg.setFfmpegPath(ffmpegPath);
 const maker = require('mumaker');
-const Jimp = require('jimp'); // for full dp etc.
+const Jimp = require('jimp');  // for full dp etc.
 const modapk = require("tod-api");
 const { hentai } = require('./lib/scraper2.js');
 const { instadl } = require('./lib/instadl');
 const ty = eco.connect('mongodb+srv://Arch:1t6l2G0r6nagLlOb@cluster0.gedh4.mongodb.net/?retryWrites=true&w=majority');
 const { isLimit, limitAdd, getLimit, giveLimit, kurangBalance, getBalance, isGame, gameAdd, givegame, cekGLimit } = require('./lib/limit.js');
 const githubstalk = require('./lib/githubstalk');
+let { covid } = require('./lib/covid.js');
+const { Gempa } = require("./lib/gempa.js");
 
-const spaceemojis = ["🌌", "🌠", "🚀", "🪐", "🌟"]; // List of emojis for Space CMDs.
+const spaceemojis = ["🌌", "🌠", "🚀", "🪐", "🌟"];     // list of emojis for Space CMDs.
+const os = require('os');       // for os info
 
 const gis = require("g-i-s");
 const { MessageType } = require('baileysjs');
@@ -244,7 +251,7 @@ var yye = tgel.getYear();
 //
 module.exports = A17 = async (A17, m, chatUpdate, store) => {
   try {
-    var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectReply.selectedRowId : (m.mtype == 'templateButtonReplyMessage') ? m.message.templateButtonReplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectReply.selectedRowId || m.text) : ''
+    var body = (m.mtype === 'conversation') ? m.message.conversation : (m.mtype == 'imageMessage') ? m.message.imageMessage.caption : (m.mtype == 'videoMessage') ? m.message.videoMessage.caption : (m.mtype == 'extendedTextMessage') ? m.message.extendedTextMessage.text : (m.mtype == 'buttonsResponseMessage') ? m.message.buttonsResponseMessage.selectedButtonId : (m.mtype == 'listResponseMessage') ? m.message.listResponseMessage.singleSelectreply.selectedRowId : (m.mtype == 'templateButtonreplyMessage') ? m.message.templateButtonreplyMessage.selectedId : (m.mtype === 'messageContextInfo') ? (m.message.buttonsResponseMessage?.selectedButtonId || m.message.listResponseMessage?.singleSelectreply.selectedRowId || m.text) : ''
     var budy = (typeof m.text == 'string' ? m.text : '')
     const prefix = global.prefa
     const isCmd = body.startsWith(prefix)
@@ -301,14 +308,12 @@ module.exports = A17 = async (A17, m, chatUpdate, store) => {
             A17.sendMessage(m.chat, { text: teks},{ quoted: m})
         }
         
-        const replay = (teks) => {
-            A17.sendMessage(m.chat, { text: teks}, { quoted: m})
-        }
 
-
-    /* const replay = (teks) => {
+    /* const reply = (teks) => {
       A17.sendMessage(m.chat, { text: teks }, { quoted: m }); 
     }; */
+
+
     const sender = m.isGroup ? (m.key.participant ? m.key.participant : m.participant) : m.key.remoteJid
     const senderNumber = sender.split('@')[0]
 
@@ -352,11 +357,11 @@ module.exports = A17 = async (A17, m, chatUpdate, store) => {
 // }
 
 
-    if (global.autoReadAll) {
-      if (m.chat) {
-        A17.sendReadReceipt(m.chat, m.sender, [m.key.id]);
-      }
-    }
+    // if (global.autoReadAll) {
+    //   if (m.chat) {
+    //     A17.sendReadReceipt(m.chat, m.sender, [m.key.id]);
+    //   }
+    // }
 
     if (global.autoRecord) {
       if (m.chat) {
@@ -436,7 +441,8 @@ if (!isCmd && !m.isGroup){
 
 
 
-    //----------------------------------------------------------------------------------------------------------------//
+   //-----------------------------------------------------------------------------------------------------------------------------------//
+
 
   //don't edit this part.
 const formatTime = (seconds) => {
@@ -468,7 +474,7 @@ updateStatus();
 
             
 
-  //----------------------------------------------------------------------------------------------------------------//
+ //-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 
@@ -571,12 +577,10 @@ updateStatus();
 
 
 
+//-------------------------------------------------------------- tictactoe ----------------------------------------------------------------//
 
 
-  /* ████ ✪ ███▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ [ tictactoe ] ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓███ ✪ ███ */
-
-
-
+  //
 	this.game = this.game ? this.game : {}
   let room = Object.values(this.game).find(room => room.id && room.game && room.state && room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender) && room.state == 'PLAYING')
   if (room) {
@@ -639,12 +643,7 @@ Typed *surrender* to surrender and admited defeat`
   }
 
 
-
-
-
-
-/* ████ ✪ ███▓▓▓▓▓▓▓▓▓▓▓ [ Specific reply By #FantoX001 ] ▓▓▓▓▓▓▓▓▓▓▓███ ✪ ███ */
-
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 	
 //
@@ -652,7 +651,7 @@ const pickRandom = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)]
   }
 
-	
+	/*
 let smallinput = budy.toLowerCase()
 if (smallinput.includes('hello')) {
   reply (`Hello ${pushname}, I am ${BotName}. How can i help you?`);
@@ -716,22 +715,46 @@ if (smallinput.includes('good night')) {
 if (smallinput.includes('arigato')|| smallinput.includes('arigatou') || smallinput.includes('thank')) {
   reply (`Mention not ${pushname} 😇. I am a bot afterall.`);
 }
+*/
+
+
+const responses = {
+
+  
+  hello: `Hello ${pushname}, I am ${BotName}. My current prefix is "${prefix}". How can I help you?`,
+  kai: `My Boss is lost in another Multiverse, and I lost connection with him...`,
+  runtime: `Hey ${pushname}\n${nowtime}\n\nMy runtime:${runtime(process.uptime())}\n\nPrefix is: *${prefix}*\n\nTime: ${kaitime}\n\nDate: ${kaidate}\n\nToday is ${currentDay}`,
+  konichiwa: `Konichiwa ${pushname}, I am ${BotName}. How can I help you?`,
+  sasha: 'Only you...🫶🏻',
+  ping: `Hey ${pushname}, Pong ${latensie.toFixed(4)} ms`,
+  'good morning': `Good morning to you too ${pushname} ☺️. Have a great day 😇.`,
+  ohayo: `Good morning to you too ${pushname} ☺️. Have a great day 😇.`,
+  'good afternoon': `Good afternoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`,
+  konnichiwa: `Good afternoon to you too ${pushname} ✨. Wishing you an enjoyable afternoon too 😇🤞🏻.`,
+  'good night': `Good night to you too ${pushname} 😇. Sleep well and sweet dreams.`,
+ 
+};
+
+const smallinput = budy.toLowerCase();
+
+if (responses.hasOwnProperty(smallinput)) {
+  reply(responses[smallinput]);
+}
 
 
 
-//\//\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\\
 
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 //
     switch (command) {
 
 
-
       //
       case 'sc': case 'script': case 'sourcecode': {
-        if (isBan) return reply(mess.banned)	 			
-    if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+    if (isBanChat) return reply(mess.bangc);
     A17.sendMessage(from, { react: { text: "❤" , key: m.key }})
     
     let { data } = await axios.get('https://api.github.com/repos/Kai0071/A17');
@@ -746,7 +769,7 @@ if (smallinput.includes('arigato')|| smallinput.includes('arigatou') || smallinp
    /* footer: `${BotName}`,
     buttons: buttons,
     headerType: 4, */
-    contextInfo:{externalAdReply:{
+    contextInfo:{externalAdreply:{
     title:"Powered by Kai",
     body: " ", 
     thumbnail: fs.readFileSync("Assets/pic2.jpg"),
@@ -783,7 +806,7 @@ case 'repo': case 'botrepo': {
     break;
 
 
-    case 'owner': case 'creator': case 'mod': case '🎮': case 'mods': {
+    case 'owner': case 'creator': case 'mod': case 'mods': {
       if (isBan) return reply(mess.banned); 			
       if (isBanChat) return reply(mess.bangc);
       
@@ -796,13 +819,13 @@ case 'repo': case 'botrepo': {
       case 'setbotpp': {
 
         if (!isCreator) return reply(mess.owner)
-        if (isBanChat) return reply(mess.bangc)
+        if (isBanChat) return reply(mess.bangc);
         if (!isCreator) return reply(mess.owner)
         A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
-              if (!quoted) return `*Send/Reply Image With Caption* ${prefix + command}`
-              if (!/image/.test(mime)) return `*Send/Reply Image With Caption* ${prefix + command}`
-              if (/webp/.test(mime)) return `*Send/Reply Image With Caption* ${prefix + command}`
+              if (!quoted) return `*Send/reply Image With Caption* ${prefix + command}`
+              if (!/image/.test(mime)) return `*Send/reply Image With Caption* ${prefix + command}`
+              if (/webp/.test(mime)) return `*Send/reply Image With Caption* ${prefix + command}`
               let media = await A17.downloadAndSaveMediaMessage(quoted)
               await A17.updateProfilePicture(botNumber, { url: media }).catch((err) => fs.unlinkSync(media))
               m.reply(mess.jobdone)
@@ -810,10 +833,33 @@ case 'repo': case 'botrepo': {
               break;
 
 
+        //
+       case 'changeprefix':
+          case 'setprefix':
+  
+    if (isBan) return reply(mess.banned);	 			
+    if (isBanChat) return reply(mess.bangc);
+    if (!isCreator) return reply(mess.botowner)
+      A17.sendMessage(from, { react: { text: "🛡️" , key: m.key }})
+
+    if (args.length !== 1) {
+      return m.reply(`Please provide a single character as the new prefix.`);
+    } else {
+      const newPrefix = args[0];
+      try {
+        global.prefa = [newPrefix];
+        return m.reply(`${pushname} Successfully changed Prefix to "${newPrefix}"`);
+      } catch (error) {
+        console.error('Error changing prefix:', error);
+        return m.reply(`An error occurred while changing the prefix. Please try again later.`);
+      }
+    }
+  
+
       //
       case 'restart':
         await A17.sendMessage(from, { react: { text: "⚙", key: m.key } });
-      if (!isCreator) return replay(mess.botowner)
+      if (!isCreator) return reply(mess.botowner)
     
       await A17.sendMessage(from, { text: mess.waiting });
       await A17.sendMessage(from, { react: { text: "✅", key: m.key } });
@@ -837,7 +883,7 @@ case 'repo': case 'botrepo': {
       //
       case 'shutdown': case 'sleep':
         if (!isCreator) return reply(mess.owner)
-        if (isBanChat) return reply(mess.bangc)
+        if (isBanChat) return reply(mess.bangc);
         if (!isCreator) return reply(mess.owner)
         await A17.sendMessage(from, { react: { text: "⚠️" , key: m.key }})
 
@@ -848,8 +894,8 @@ case 'repo': case 'botrepo': {
 
 
       case 'public': {
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
         if (!isCreator) return reply(mess.owner)
         A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
         
@@ -861,8 +907,8 @@ case 'repo': case 'botrepo': {
         
 
         case 'self': {
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
         if (!isCreator) return reply(mess.botowner)
         
         A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
@@ -873,59 +919,129 @@ case 'repo': case 'botrepo': {
         break;
 
 
-        //Hosted platfrom info
-		   case 'statusbot': case 'server':{
-        const used = process.memoryUsage()
-        const cpus = os.cpus().map(cpu => {
-            cpu.total = Object.keys(cpu.times).reduce((last, type) => last + cpu.times[type], 0)
-      return cpu
-        })
-        const cpu = cpus.reduce((last, cpu, _, { length }) => {
-            last.total += cpu.total
-            last.speed += cpu.speed / length
-            last.times.user += cpu.times.user
-            last.times.nice += cpu.times.nice
-            last.times.sys += cpu.times.sys
-            last.times.idle += cpu.times.idle
-            last.times.irq += cpu.times.irq
-            return last
-        }, {
-            speed: 0,
-            total: 0,
-            times: {
-          user: 0,
-          nice: 0,
-          sys: 0,
-          idle: 0,
-          irq: 0
-        }
-        })
-        let timestamp = speed()
-        let latensi = speed() - timestamp
-        neww = performance.now()
-        oldd = performance.now()
-        respon = `
-Response Speed ${latensi.toFixed(4)} _Second_ \n ${oldd - neww} _miliseconds_\n\nRuntime : ${runtime(process.uptime())}
-» A17's Server Info 
-RAM: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
-_NodeJS Memory Usaage_
-${Object.keys(used).map((key, _, arr) => `${key.padEnd(Math.max(...arr.map(v=>v.length)),' ')}: ${formatp(used[key])}`).join('\n')}
-${cpus[0] ? `_Total CPU Usage_
-${cpus[0].model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}
-_CPU Core(s) Usage (${cpus.length} Core CPU)_
-${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Object.keys(cpu.times).map(type => `- *${(type + '*').padEnd(6)}: ${(100 * cpu.times[type] / cpu.total).toFixed(2)}%`).join('\n')}`).join('\n\n')}` : ''}
-        `.trim()
-        m.reply(respon)
+case 'autotyping':
+  case 'auto-typing':
+
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isCreator) return reply(mess.botowner)
+A17.sendMessage(from, { react: { text: '❤', key: m.key }});
+
+  if (args.length === 0) {
+    if (global.autoTyping) {
+      return m.reply(`Auto typing in group chats is currently *enabled*.\n\nTo disable, use \`${global.prefa[0]}autotyping off\`.`);
+    } else {
+      return m.reply(`Auto typing in group chats is currently *disabled*.\n\nTo enable, use \`${global.prefa[0]}autotyping on\`.`);
     }
+  } else if (args.length === 1 && (args[0] === 'on' || args[0] === 'off')) {
+    const status = args[0];
+    if (status === 'on') {
+      global.autoTyping = true;
+      return m.reply(`Auto typing in group chats is now *enabled*.`);
+    } else {
+      global.autoTyping = false;
+      return m.reply(`Auto typing in group chats is now *disabled*.`);
+    }
+  } else {
+    return m.reply(`Usage: \`${global.prefa[0]}autotyping [on/off]\``);
+  }
+  break;
+
+
+case 'autorecord':
+  case 'auto-recording':
+
+    if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isCreator) return reply(mess.botowner)
+A17.sendMessage(from, { react: { text: '❤', key: m.key }});
+
+  if (args.length === 0) {
+    if (global.autoRecord) {
+      return m.reply(`Auto recording is currently *enabled*.\n\nTo disable, use \`${global.prefa[0]}autorecord off\`.`);
+    } else {
+      return m.reply(`Auto recording is currently *disabled*.\n\nTo enable, use \`${global.prefa[0]}autorecord on\`.`);
+    }
+  } else if (args.length === 1 && (args[0] === 'on' || args[0] === 'off')) {
+    const status = args[0];
+    if (status === 'on') {
+      global.autoRecord = true;
+      return m.reply(`Auto recording is now *enabled*.`);
+    } else {
+      global.autoRecord = false;
+      return m.reply(`Auto recording is now *disabled*.`);
+    }
+  } else {
+    return m.reply(`Usage: \`${global.prefa[0]}autorecord [on/off]\``);
+  }
+  break;
+
+
+ //Hosted platfrom info
+  case 'server':
+    case 'sysinfo': {
+    const used = process.memoryUsage();
+    const cpu = os.cpus()[0];
+    const totalCpuUsage = (100 * (cpu.times.user + cpu.times.nice + cpu.times.sys + cpu.times.irq) / cpu.times.idle).toFixed(2);
+    const systemName = os.platform() + ' ' + os.release();
+  
+    const respon = `
+  🤖 *A17's Server Info* 🤖
+  
+  *System*: ${systemName}
+  
+  *RAM*: ${formatp(os.totalmem() - os.freemem())} / ${formatp(os.totalmem())}
+  
+  *NodeJS Memory Usage*: ${Object.keys(used).map(key => `${key}: ${formatp(used[key])}`).join(', ')}
+  
+  *Total CPU Usage*: ${totalCpuUsage}%
+  
+  *CPU Model*: ${cpu.model.trim()} (${cpu.speed} MHz)
+  
+  *Runtime*: ${runtime(process.uptime())}
+  
+  *Response Speed*: ${latensie.toFixed(4)} seconds
+  `.trim();
+  
+    m.reply(respon);
     break;
+  }
+
+  
+  case 'autostatus':
+    case 'auto-status':
+      case 'statusevent':
+        case 'autostatusseen':
+
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isCreator) return reply(mess.botowner)
+A17.sendMessage(from, { react: { text: '❤', key: m.key }});
+
+  if (args.length === 0) {
+    // Display the current status of autostatus
+    return m.reply(`Auto-Status is currently ${global.statusseen ? 'enabled' : 'disabled'}.`);
+  } else if (args.length === 1 && (args[0] === 'on' || args[0] === 'off')) {
+    const status = args[0];
+    if (status === 'on') {
+      global.statusseen = true;
+      return m.reply('Auto-Status is now enabled.');
+    } else {
+      global.statusseen = false;
+      return m.reply('Auto-Status is now disabled.');
+    }
+  } else {
+    return m.reply(`Usage: ${global.prefa[0]}autostatus [on/off]`);
+  }
+  break;
 
 
     case 'ban': {
-      if (isBan) return reply(mess.banned)	 			
-      if (isBanChat) return reply(mess.bangc)
-      if (!isCreator) return replay(mess.botowner)
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+      if (!isCreator) return reply(mess.botowner)
       A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-      if (!args[0]) return replay(`Select add or del (add to ban, del to unban), For Example: Reply *${prefix}ban add* to the user you want to ban.`)
+      if (!args[0]) return reply(`Select add or del (add to ban, del to unban), For Example: reply *${prefix}ban add* to the user you want to ban.`)
       if (args[1]) {
       orgnye = args[1] + "@s.whatsapp.net"
       } else if (m.quoted) {
@@ -935,22 +1051,21 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
       if (args[0] === "add") {
       if (isBane) return ads('User is already banned.')
       banUser.push(orgnye)
-      replay(`Successfully Banned the user.`)
+      reply(`Successfully Banned the user.`)
       } else if (args[0] === "del") {
       if (!isBane) return ads('User is already unbanned.')
       let delbans = banUser.indexOf(orgnye)
       banUser.splice(delbans, 1)
-      replay(`Successfully Unbanned the user.`)
+      reply(`Successfully Unbanned the user.`)
       } else {
-      replay("Error")
+      reply("Error")
       }
       }
       break;
 
 
 
-       ////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////
+ //-------------------------------------------------------------------------------------------------------------------------//
 
 
 
@@ -963,7 +1078,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 
       let TicTacToe = require("./lib/tictactoe")
       this.game = this.game ? this.game : {}
-      if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return replay(`${pushname} You Are Still In The Game...`)
+      if (Object.values(this.game).find(room => room.id.startsWith('tictactoe') && [room.game.playerX, room.game.playerO].includes(m.sender))) return reply(`${pushname} You Are Still In The Game...`)
       let room = Object.values(this.game).find(room => room.state === 'WAITING' && (text ? room.name === text : true))
       if (room) {
       reply(`Hey ${pushname} Your Partner found!`)
@@ -1010,42 +1125,50 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
 
       
 
-        //report and suggest
+         // report and suggest ...
+
       case 'report': case 'suggest ': {
-        if (isBan) return reply(mess.banned)
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);
+        if (isBanChat) return reply(mess.bangc);
         if (!text) return reply(`please provide a report message you want to deliver`)
         if (text.length > 300) return reply(`Are you trying to send virus!`)
         const txtmsg = `*📮 Report Message*\n\n*Sender ➛* wa.me/${m.sender.split("@")[0]}\n\n*Group Name ➛* ${groupName}\n\n*Message ➛*  ${text}`
       for (let mod of global.Owner.map(v => v.replace(/[^0-9]/g, '') + '@s.whatsapp.net').filter(v => v != '6297175943@s.whatsapp.net'))
       await A17.sendMessage(`${mod}`, {text: `${txtmsg}`},  { quoted: m })
       await A17.sendMessage(`120363026915700516@g.us`, {text: `${txtmsg}`, mentions: groupAdmins}, { quoted: m })
-        replay(`*✅ Your Report has been submitted Successfully to Support group & Owner*\n\n*You will get response shortly ♥️*`); 
+        reply(`*✅ Your Report has been submitted Successfully to Support group & Owner*\n\n*You will get response shortly... ♥️*`); 
      }
      break;
      
-     //game
-		
-     case'daily': case'claim': case 'reward': {
+
+
+     // economy ...
+
+     case 'daily': case'claim': case 'reward':
+     
+      {
       if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
-            if (isBan) return reply(mess.banned)	 			
-            if (isBanChat) return reply(mess.bangc)
+            if (isBan) return reply(mess.banned);	 			
+            if (isBanChat) return reply(mess.bangc);
+            if (!m.isGroup) return reply(mess.grouponly)
+
           A17.sendMessage(from, { react: { text: "💰" , key: m.key }})  
             let user = m.sender
       const cara = "cara"
       const daily  = await eco.daily(user, cara, 999); //give 999 for daily, can be changed
       
-              if (daily.cd) return replay(`You already claimed daily for today, come back in ${daily.cdL}`); //cdL is already formatted cooldown Left
+              if (daily.cd) return reply(`You already claimed daily for today, come back in ${daily.cdL}`); //cdL is already formatted cooldown Left
       
-                replay(`You claimed 💎${daily.amount} for daily`);        
+                reply(`You claimed 💎${daily.amount} for daily`);        
     }
     break;
      
-    case'wallet':  case 'purse': {
+    case 'wallet':  case 'purse': {
 
-      if (isBan) return reply(mess.banned)	 			
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+      if (!m.isGroup) return reply(mess.grouponly)
 
-      if (isBanChat) return reply(mess.bangc)
   A17.sendMessage(from, { react: { text: "💳" , key: m.key }})
 
 if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
@@ -1056,32 +1179,40 @@ if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
 
   const balance = await eco.balance(user, cara); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
 
-  await replay(`👛 ${pushname}'s Purse:\n\n_💎${balance.wallet}_`);
+  await reply(`👛 ${pushname}'s Purse:\n\n_💎${balance.wallet}_`);
 
 }
 
 break;
 
 
-case'bank':  case 'levee': {
+case 'bank': case 'levee': {
 	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)	
+
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);	
+        if (!m.isGroup) return reply(mess.grouponly)
+
 A17.sendMessage(from, { react: { text: "💳" , key: m.key }})
 		
     const user = m.sender
     const cara = "cara"
     const balance = await eco.balance(user, cara); //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.
-    await replay(`🏦 ${pushname}'s Bank:\n\n_💎${balance.bank}/${balance.bankCapacity}_`); 
+    await reply(`🏦 ${pushname}'s Bank:\n\n_💎${balance.bank}/${balance.bankCapacity}_`); 
 }
 break;
 		
 		
-		case'capacity':  case 'bankupgrade': {
+		case 'capacity':  case 'bankupgrade':
+    if (isBan) return reply(mess.banned);	 			
+     if (isBanChat) return reply(mess.bangc);
+     if (!m.isGroup) return reply(mess.grouponly)
+    
+    {
 			A17.sendMessage(from, { react: { text: "💲" , key: m.key }})
 		
-	//if (!isCreator) return replay(mess.botowner)
-	if (!text) return replay(`💴 Bank-capacity 💳\n\n1 | 1000 sp = 💎100\n\n2 | 10000 sp = 💎1000\n\n3 | 100000 sp = 💎10000\n\nExample- ${prefix}capacity 1 OR ${prefix}bankupgrade 1000`)	
+	//if (!isCreator) return reply(mess.botowner)
+	if (!text) return reply(`💴 Bank-capacity 💳\n\n1 | 1000 sp = 💎100\n\n2 | 10000 sp = 💎1000\n\n3 | 100000 sp = 💎10000\n\nExample- ${prefix}capacity 1 OR ${prefix}bankupgrade 1000`)	
 	if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
         const user = m.mentionedJid[0] ? m.mentionedJid[0] : m.sender
 	const cara = "cara"
@@ -1091,70 +1222,80 @@ break;
   switch (value) {
           case '1000':
           case '1':
-          if (k > balance.wallet ) return replay(`You need to pay 💎100 to increase bank capacity ~ 1000 sp`);
+          if (k > balance.wallet ) return reply(`You need to pay 💎100 to increase bank capacity ~ 1000 sp`);
             const deduct1 = await eco.deduct(user, cara, 100);
             const add1 = eco.giveCapacity(user, cara, 1000); 
-                await replay(`1000 💎diamond storage has been added in ${pushname} bank`)
+                await reply(`1000 💎diamond storage has been added in ${pushname} bank`)
          case '10000':
           case '2':
-          if (k > balance.wallet ) return replay(`You need to pay 💎1000 to increase bank capacity ~ 10000 sp`);
+          if (k > balance.wallet ) return reply(`You need to pay 💎1000 to increase bank capacity ~ 10000 sp`);
             const deduct2 = await eco.deduct(user, cara, 1000);
             const add2 = eco.giveCapacity(user, cara, 10000); 
-                await replay(`10000 💎diamond storage has been added in ${pushname} bank`)
+                await reply(`10000 💎diamond storage has been added in ${pushname} bank`)
          case '100000':
           case '3':
-          if (k > balance.wallet ) return replay(`You need to pay 💎10000 to increase bank capacity ~ 100000 sp`);
+          if (k > balance.wallet ) return reply(`You need to pay 💎10000 to increase bank capacity ~ 100000 sp`);
             const deduct3 = await eco.deduct(user, cara, 10000);
             const add3 = eco.giveCapacity(user, cara, 100000); 
-                await replay(`100000 💎diamond storage has been added in ${pushname} bank`)
+                await reply(`100000 💎diamond storage has been added in ${pushname} bank`)
           }
             }
                 break;
 
           
-	case'deposit':  case 'pay-in': {
-    if (isBan) return reply(mess.banned)
+	case 'deposit':  case 'pay-in': {
+    if (isBan) return reply(mess.banned); 			
+     if (isBanChat) return reply(mess.bangc);
+     if (!m.isGroup) return reply(mess.grouponly)
+
 A17.sendMessage(from, { react: { text: "📥" , key: m.key }})
 
     if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
-if (!text) return replay("Provide the amount you want to deposit!");
+if (!text) return reply("Provide the amount you want to deposit!");
 const texts = text.trim();
 const user = m.sender;
 const cara = 'cara'
     const deposit = await eco.deposit(user, cara, texts);
-        if(deposit.noten) return replay('You can\'t deposit what you don\'t have.'); //if user states more than whats in his wallet
-         replay(`Successfully Deposited 💎${deposit.amount} to your bank.`)
+        if(deposit.noten) return reply('You can\'t deposit what you don\'t have.'); //if user states more than whats in his wallet
+         reply(`Successfully Deposited 💎${deposit.amount} to your bank.`)
   }
       break;
 
 
-      case'withdraw':  case 'withdrawal': {
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+      case 'withdraw':  case 'withdrawal': {
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
+        if (!m.isGroup) return reply(mess.grouponly)
+
     A17.sendMessage(from, { react: { text: "💸" , key: m.key }})
         
         if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
           const user = m.sender
-      if (!text) return replay("Provide the amount you want to withdraw!");
+      if (!text) return reply("Provide the amount you want to withdraw!");
       const query = text.trim();
           const cara = 'cara'
           const withdraw = await eco.withdraw(user, cara, query);
-          if(withdraw.noten) return replay('🏧 Insufficient fund in bank'); //if user states more than whats in his wallet
+          if(withdraw.noten) return reply('🏧 Insufficient fund in bank'); //if user states more than whats in his wallet
           const add = eco.give(user, cara, query);
-            replay(`🏧 ALERT  💎${withdraw.amount} has been added in your wallet.`)
+            reply(`🏧 ALERT  💎${withdraw.amount} has been added in your wallet.`)
           
   }
   break;
 
   
-  case'rob':  case 'attack': {
+  case 'rob':  case 'attack':
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly)
+  
+  {
 		A17.sendMessage(from, { react: { text: "🔪" , key: m.key }})
-	if (!text) return replay(`Use ${prefix}rob @user`)
+	if (!text) return reply(`Use ${prefix}rob @user`)
 	const target =
 			             m.quoted && m.mentionedJid.length === 0
 			             ? m.quoted.sender
 			             : m.mentionedJid[0] || null;    
-           if (!target || target === m.sender) return replay("what are you trying to do!")
+           if (!target || target === m.sender) return reply("what are you trying to do!")
            if (m.quoted?.sender && !m.mentionedJid.includes(m.quoted.sender)) m.mentionedJid.push(m.quoted.sender)
         while (m.mentionedJid.length < 2) m.mentionedJid.push(m.sender)
         const cara = "cara"
@@ -1165,28 +1306,29 @@ const cara = 'cara'
 	const balance2  = await eco.balance(user2, cara)
 	const typ = ['ran','rob','caught'];
     const random = typ[Math.floor(Math.random() * typ.length)];
-    if (k > balance1.wallet) return replay(`☹️ You don't have enough money to pay incase you get caught`);
-    if (k > balance2.wallet) return replay(`Sorry, your victim is too poor 🤷🏽‍♂️ let go.`);
+    if (k > balance1.wallet) return reply(`☹️ You don't have enough money to pay incase you get caught`);
+    if (k > balance2.wallet) return reply(`Sorry, your victim is too poor 🤷🏽‍♂️ let go.`);
     let tpy = random
   switch (random) {
           case 'ran':
-                await replay(`Your victim escaped, be more scaryðŸ˜¤ next time.`)
+                await reply(`Your victim escaped, be more scaryðŸ˜¤ next time.`)
   }
 	}
                 break;  
 
 
-                case'transfer':  case 'give': {
-                  if (isBan) return reply(mess.banned)	 			
-                  if (isBanChat) return reply(mess.bangc) 
+                case 'transfer':  case 'give': {
+                  if (isBan) return reply(mess.banned);	 			
+                  if (isBanChat) return reply(mess.bangc); 
+                  if (!m.isGroup) return reply(mess.grouponly)
             A17.sendMessage(from, { react: { text: "🗿" , key: m.key }})
             let value = text.trim().split(" ");
-            if (value[0] === "") return replay(`Use ${prefix}transfer 100 @user`);
+            if (value[0] === "") return reply(`Use ${prefix}transfer 100 @user`);
             const target =
                              m.quoted && m.mentionedJid.length === 0
                              ? m.quoted.sender
                              : m.mentionedJid[0] || null;    
-                     if (!target || target === m.sender) return replay("what are you trying to do!")
+                     if (!target || target === m.sender) return reply("what are you trying to do!")
                      if (m.quoted?.sender && !m.mentionedJid.includes(m.quoted.sender)) m.mentionedJid.push(m.quoted.sender)
                   while (m.mentionedJid.length < 2) m.mentionedJid.push(m.sender)
                   const cara = "cara"
@@ -1195,27 +1337,27 @@ const cara = 'cara'
                          const word = value[0];
                          const code = value[1];
               let d = parseInt(word)
-              if (!d) return replay("check your text plz u r using the command in a wrong way")
+              if (!d) return reply("check your text plz u r using the command in a wrong way")
               
               const balance = await eco.balance(user1, cara); 
                   let a = (balance.wallet) < parseInt(word)
                   //Returns wallet, bank, and bankCapacity. Also creates a USer if it doesn't exist.	
-                  if(a == true) return replay("you dont have sufficient money to transfer");
+                  if(a == true) return reply("you dont have sufficient money to transfer");
                   
                   const deduct = await eco.deduct(user1, cara, value[0]);
                   const give = await eco.give(user2, cara, value[0]);
-                  replay(`📠 Transaction successful`)
+                  reply(`📠 Transaction successful`)
           
           }
           break;  	  
               
               
              case 'wealth': case 'ritual': {
-                              if (!isCreator) return replay(mess.botowner)
+                              if (!isCreator) return reply(mess.botowner)
                               var user = m.sender
                               var cara = 'cara'
-                              const give1 = eco.give(user, cara, 10000)
-                              replay(`You are the wealthiest my *Lord*`)
+                              const give1 = eco.give(user, cara, 9999)
+                              reply(`You are the wealthiest my *Lord*`)
                       }
                       break;
 
@@ -1226,7 +1368,11 @@ const cara = 'cara'
 
 
 //
-case'gamble':  case 'lottery': {
+case 'gamble':  case 'lottery':
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc); 
+if (!m.isGroup) return reply(mess.grouponly)
+{
   //var response = await A17.groupInviteCode(from)
   //var link1 = `https://chat.whatsapp.com/${response}`
   //var link2 = `https://chat.whatsapp.com/BXQaaeg7utI29OI4RbhdIhl`
@@ -1243,31 +1389,31 @@ case'gamble':  case 'lottery': {
   const twice = gg*2
   const f = ["up", "right", "left", "down", "up", "left", "down", "right", "up", "down", "right", "left"]
   const r = f[Math.floor(Math.random () * f.length)]
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
   if (!m.isGroup) return reply(mess.grouponly)
   //if (link1 == link2){
      if (texts[0] === "")
-         return replay(
+         return reply(
              `Example:  ${prefix}gamble 100 direction(left,right,up,down)`
          );
-     if (!value) return replay("*Please, specify the amount you are gambling with!");
-     if (!opp) return replay("Specify the direction you are betting on!");
-     if (!gg) return replay("Check your text please, You are using the command in a wrong way")
+     if (!value) return reply("*Please, specify the amount you are gambling with!");
+     if (!opp) return reply("Specify the direction you are betting on!");
+     if (!gg) return reply("Check your text please, You are using the command in a wrong way")
      if (m.quoted?.sender) m.mentionedJid.push(m.quoted.sender)
-     if (g == false) return replay(`You don't have sufficient 💎 Diamond to gamble with`);
-     if (a == true) return replay(`Sorry ${pushname}, you can only gamble with more than 💎50.`);
+     if (g == false) return reply(`You don't have sufficient 💎 Diamond to gamble with`);
+     if (a == true) return reply(`Sorry ${pushname}, you can only gamble with more than 💎50.`);
      if ( r == opp){
         let give = await eco.give(user , cara, twice);
-        replay(`*📉 You won 💎${twice}*`)
+        reply(`*📉 You won 💎${twice}*`)
      }
      else{
         let deduct = await eco.deduct(user, cara, texts[0]);
-        replay(`*📈 You lost 💎${texts[0]}*`)
+        reply(`*📈 You lost 💎${texts[0]}*`)
       }
   //}
   //else{
-      //replay(`Gambling is allowed only in Casino/Gamble Group,\n\ntype ${prefix}casino to get the group link`)
+      //reply(`Gambling is allowed only in Casino/Gamble Group,\n\ntype ${prefix}casino to get the group link`)
   //}
 }
 break;
@@ -1276,13 +1422,13 @@ break;
 	//-----------------Slot----------------------
 /*
 case'slot': case 'spin': {
-       if (isBan) return replay(mess.banned);
-       if (isBanChat) return replay(mess.bangc)
-       if (!m.isGroup) return replay(mess.grouponly)
+       if (isBan) return reply(mess.banned);
+       if (isBanChat) return reply(mess.bangc);
+       if (!m.isGroup) return reply(mess.grouponly)
        var today = new Date();
    if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
-       if (text == 'help') return replay(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
-       if (text == 'money') return replay(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
+       if (text == 'help') return reply(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
+       if (text == 'money') return reply(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
        const fruit1= ["🥥", "🍎", "🍇"]
        const fruit2 = ["🍎", "🍇", "🥥"]  
        const fruit3 = ["🍇", "🥥", "🍎"]         
@@ -1297,7 +1443,7 @@ case'slot': case 'spin': {
        const k = 100
        const balance1  = await eco.balance(user, cara)
        
-       if (k > balance1.wallet) return replay(`You are going to be spinning on your wallet, you need at least 💎100`);
+       if (k > balance1.wallet) return reply(`You are going to be spinning on your wallet, you need at least 💎100`);
        const f1 = fruit1[Math.floor(Math.random() * fruit1.length)];
        const f2 = fruit2[Math.floor(Math.random() * fruit2.length)];
        const f3 = fruit3[Math.floor(Math.random() * fruit3.length)];
@@ -1310,48 +1456,48 @@ case'slot': case 'spin': {
        
        if ((f1 !== f2) && f2 !== f3){
           const deduct1 = await eco.deduct(user, cara, 50);
-                 replay(`${mess1}\n\n*Big Lose -->* _💎50_`)
+                 reply(`${mess1}\n\n*Big Lose -->* _💎50_`)
        }
        else if ((f1 == f2) && f2 == f3){
           const give1 = await eco.give(user, cara, 100); 
-                replay(`${mess2}\n*_Big Win -->* _💎100_`)
+                reply(`${mess2}\n*_Big Win -->* _💎100_`)
        }
        else if ((f1 == f2) && f2 !== f3){
           const give2 = await eco.give(user, cara, 20);
-                replay(`${mess3}\n*Small Win -->* _💎20_`)
+                reply(`${mess3}\n*Small Win -->* _💎20_`)
        }
        else if ((f1 !== f2) && f1 == f3){
           const deduct2 = await eco.deduct(user, cara, 20);
-                replay(`${mess5}\n\n*Small Lose -->* _💎20_`)
+                reply(`${mess5}\n\n*Small Lose -->* _💎20_`)
        }
        else if ((f1 !== f2) && f2 == f3){
           const give4 = eco.give(user, cara, 20); 
-                replay(`${mess3}\n\n*Small Win -->* _💎20_`)
+                reply(`${mess3}\n\n*Small Win -->* _💎20_`)
        }
        else if (((f1 == f2) && f2 == f3) && f3 == f4){
           const give5 = eco.give(user, cara, 1000);
-               replay(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
+               reply(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
        }
        else { 
-               replay(`Do you understand what you are doing?`)
+               reply(`Do you understand what you are doing?`)
        }
     }
     else{
-           replay(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
+           reply(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
     }
 }
 break;
 */	
 
 
-case'slot': case 'spin': {
-  if (isBan) return replay(mess.banned);
-  if (isBanChat) return replay(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+case 'slot': case 'spin': {
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly)
   var today = new Date();
 if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
-  if (text == 'help') return replay(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
-  if (text == 'money') return replay(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
+  if (text == 'help') return reply(`*1:* Use ${prefix}slot to play\n\n*2:* You must have 💎100 in your wallet\n\n*3:* If you don't have money in wallet then withdraw from your bank\n\n*4:* If you don't have money in your bank too then use economy features to gain money`)
+  if (text == 'money') return reply(`*1:* Small Win --> +💎20\n\n*2:* Small Lose --> -💎20\n\n*3:* Big Win --> +💎100\n\n*4:* Big Lose --> -💎50\n\n*5:* 🎉 JackPot --> +💎1000`)
   const fruit1= ["🥥", "🍎", "🍇"]
   const fruit2 = ["🍎", "🍇", "🥥"]  
   const fruit3 = ["🍇", "🥥", "🍎"]         
@@ -1366,7 +1512,7 @@ if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
   const k = 100
   const balance1  = await eco.balance(user, cara)
   
-  if (k > balance1.wallet) return replay(`You are going to be spinning on your wallet, you need at least 💎100`);
+  if (k > balance1.wallet) return reply(`You are going to be spinning on your wallet, you need at least 💎100`);
   const f1 = fruit1[Math.floor(Math.random() * fruit1.length)];
   const f2 = fruit2[Math.floor(Math.random() * fruit2.length)];
   const f3 = fruit3[Math.floor(Math.random() * fruit3.length)];
@@ -1379,34 +1525,34 @@ if (today.getDay() == 6 || today.getDay() == 5 || today.getDay() == 0){
   
   if ((f1 !== f2) && f2 !== f3){
      const deduct1 = await eco.deduct(user, cara, 50);
-            replay(`${mess1}\n\n*Big Lose -->* _💎50_`)
+            reply(`${mess1}\n\n*Big Lose -->* _💎50_`)
   }
   else if ((f1 == f2) && f2 == f3){
      const give1 = await eco.give(user, cara, 100); 
-           replay(`${mess2}\n*_Big Win -->* _💎100_`)
+           reply(`${mess2}\n*_Big Win -->* _💎100_`)
   }
   else if ((f1 == f2) && f2 !== f3){
      const give2 = await eco.give(user, cara, 20);
-           replay(`${mess3}\n*Small Win -->* _💎20_`)
+           reply(`${mess3}\n*Small Win -->* _💎20_`)
   }
   else if ((f1 !== f2) && f1 == f3){
      const deduct2 = await eco.deduct(user, cara, 20);
-           replay(`${mess5}\n\n*Small Lose -->* _💎20_`)
+           reply(`${mess5}\n\n*Small Lose -->* _💎20_`)
   }
   else if ((f1 !== f2) && f2 == f3){
      const give4 = eco.give(user, cara, 20); 
-           replay(`${mess3}\n\n*Small Win -->* _💎20_`)
+           reply(`${mess3}\n\n*Small Win -->* _💎20_`)
   }
   else if (((f1 == f2) && f2 == f3) && f3 == f4){
      const give5 = eco.give(user, cara, 1000);
-          replay(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
+          reply(`${mess4}\n\n_🎊 JackPot --> _💎1000_`)
   }
   else { 
-          replay(`Do you understand what you are doing?`)
+          reply(`Do you understand what you are doing?`)
   }
 }
 else{
-      replay(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
+      reply(`*You can only play this game during weekends*\n\n*🌿 Friday*\n*🎏 Saturday*\n*🎐 Sunday*`)
 }
 }
 break;
@@ -1418,12 +1564,12 @@ break;
     
 
 // case 'banchat': case 'bangroup':{
-//   if (isBan) return reply(mess.banned)	 			
-//   if (!isCreator) return replay(mess.botowner)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (!isCreator) return reply(mess.botowner)
 //   if (args[0] === "on") {
-//   if (isBanChat) return replay('This Group is Already Banned from using me!')
+//   if (isBanChat) return reply('This Group is Already Banned from using me!')
 //   banchat.push(from)
-//   replay('This Group has been banned from using me!')
+//   reply('This Group has been banned from using me!')
 //   var groupe = await A17.groupMetadata(from)
 //   var members = groupe['participants']
 //   var mems = []
@@ -1432,10 +1578,10 @@ break;
 //   })
 //   A17.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nThis group is banned from using bot. So, here nobody can use me anymore!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 //   } else if (args[0] === "off") {
-//   if (!isBanChat) return replay('This Group is Already Banned from using me!')
+//   if (!isBanChat) return reply('This Group is Already Banned from using me!')
 //   let off = banchat.indexOf(from)
 //   banchat.splice(off, 1)
-//   replay('This Group has been *unbanned* from using me!')
+//   reply('This Group has been *unbanned* from using me!')
 //   } else {
 //     let buttonsntnsfw = [
 //     { buttonId: `${prefix}bangroup on`, buttonText: { displayText: 'Ban' }, type: 1 },
@@ -1447,19 +1593,9 @@ break;
 //     break;
 
 
-    case 'nsfwmenu':
-    if (isBan) return reply(mess.banned)	 			
-    if (isBanChat) return reply(mess.bangc)
-    if (!AntiNsfw) return reply(mess.nonsfw)
-    A17.sendMessage(from, { react: { text: "⚠️" , key: m.key }})
-
-        reply(` *━━〈 ⚠️ NSFW Menu ⚠️  〉━━*\n\n gifs, hentaivideo, blowjobgif, hneko, masturbation, thighs, pussy, panties, orgy, ahegao, ass, bdsm, blowjob, cuckold, ero, gasm, cum, femdom, foot, gangbang, glasses, jahy, trap, blowjobgif, spank, hneko, hwaifu, gasm`)
-    break;
-
-
 case 'reaction': case 'react': case 'reactions': case 'r':
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
         A17.sendMessage(from, { react: { text: "❤️" , key: m.key }})
 
             reply(` *━━〈  ⚡ Reactions ⚡  〉━━*\n\nbonk, cry, bully, cuddle, hug, kiss, lick, pat, smug, yeet, blush, smile, wave, highfive, handhold, nom, glomp, bite, slap, kill, happy, wink, poke, dance, cringe`)
@@ -1467,8 +1603,8 @@ case 'reaction': case 'react': case 'reactions': case 'r':
 
 
 case 'limituser': case 'userlimit': case 'limit':
-            if (isBan) return reply(mess.banned)	 			
-            if (isBanChat) return reply(mess.bangc)
+            if (isBan) return reply(mess.banned);	 			
+            if (isBanChat) return reply(mess.bangc);
             {      
                let txt = `「 *All User Limit* 」\n\n`
                  for (let i of _limit){
@@ -1480,8 +1616,8 @@ case 'limituser': case 'userlimit': case 'limit':
                   
           
           case 'film': case 'movie': case 'moviesearch':
-          if (isBan) return reply(mess.banned)
-            if (isBanChat) return reply(mess.bangc)
+          if (isBan) return reply(mess.banned);
+            if (isBanChat) return reply(mess.bangc);
             reply(mess.waiting)
           if (!q) return reply(`Please enter a Movie search term...\nExample: ${prefix}movie Spiderman`)
           xfarrapi.Film(q)
@@ -1496,8 +1632,8 @@ case 'limituser': case 'userlimit': case 'limit':
           
           
           // case 'wallpaper': case 'animewallpaper': case 'animewall': {
-          // if (isBan) return reply(mess.banned)	 			
-          // if (isBanChat) return reply(mess.bangc)
+          // if (isBan) return reply(mess.banned);	 			
+          // if (isBanChat) return reply(mess.bangc);
           // if (!args.join(" ")) return reply("Please enter a term to search!")
           // const { AnimeWallpaper } =require("anime-wallpaper")
           // const wall = new AnimeWallpaper();
@@ -1634,8 +1770,8 @@ break;
   
 
           case 'wikimedia': case 'wikiimage': {
-            if (isBan) return reply(mess.banned)	 			
-          if (isBanChat) return reply(mess.bangc)
+            if (isBan) return reply(mess.banned);	 			
+          if (isBanChat) return reply(mess.bangc);
                           if (!args.join(" ")) return reply("What picture are you looking for??")
               let { wikimedia } = require('./lib/scraper')
                   anu = await wikimedia(args)
@@ -1656,8 +1792,8 @@ break;
           
           
           case 'quotesimagexxx': case 'qoutesimagexxx': case 'quoteimage':
-          if (isBan) return reply(mess.banned)	 			
-          if (isBanChat) return reply(mess.bangc)
+          if (isBan) return reply(mess.banned);	 			
+          if (isBanChat) return reply(mess.bangc);
                      let cok = await fetchJson(`http://api.lolhuman.xyz/api/random/quotesimage?apikey=${lolkey}`)
                      reply(mess.waiting)
                     A17.sendMessage(m.chat, { image: { url: cok }, caption: 'Here it is...' }, { quoted: m })
@@ -1683,8 +1819,8 @@ break;
           
           
           case 'animestory': { 
-            if (isBan) return reply(mess.banned)	 			
-          if (isBanChat) return reply(mess.bangc)
+            if (isBan) return reply(mess.banned);	 			
+          if (isBanChat) return reply(mess.bangc);
           reply(mess.waiting)
           await fetchJson(`https://api.jikan.moe/v4/anime?q=${q}`)
           .then((res) =>{
@@ -1719,8 +1855,8 @@ break;
           
             case 'grupsetting':
               case 'groupsetting':{
-                  if (isBan) return reply(mess.banned)	 			
-          if (isBanChat) return reply(mess.bangc)
+                  if (isBan) return reply(mess.banned);	 			
+          if (isBanChat) return reply(mess.bangc);
           A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
           
                       let sections = []
@@ -1774,8 +1910,8 @@ break;
 
                           
 case 'emojimix': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 if (!q) reply(`*Example :* ${prefix + command} 😊+🌹`)
@@ -1790,16 +1926,51 @@ break;
 
 
 
-            ///////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
+//
+case 'nsfw': {
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!isBotAdmins) return reply(mess.botadmin);
+  if (!isAdmins && !isCreator) return reply(mess.useradmin);
+  A17.sendMessage(from, { react: { text: "⚠️" , key: m.key }});
 
+  if (args[0] === "on") {
+    if (AntiNsfw) return reply('Already activated');
+    ntnsfw.push(from);
+    reply('Enabled NSFW Commands!');
+  } else if (args[0] === "off") {
+    if (!AntiNsfw) return reply('Already deactivated');
+    let off = ntnsfw.indexOf(from);
+    ntnsfw.splice(off, 1);
+    reply('Disabled NSFW Commands!');
+  } else {
+    reply(`NSFW(not safe for work) feature has been enabled in this group, which means anyone here can accesss Adult commands!\n\nPlease use *'${prefix}nsfw on*' to enable NSFW commands or *'${prefix}nsfw off'* to disable them.`);
+  }
+}
+break;
+
+
+case 'nsfwmenu':
+  if (isBan) return reply(mess.banned);			
+  if (isBanChat) return reply(mess.bangc);
+  if (!AntiNsfw) return reply(mess.nonsfw);
+  if (!m.isGroup) return reply(mess.grouponly);
+  A17.sendMessage(from, { react: { text: "⚠️" , key: m.key }})
+
+      reply(` *━━〈 ⚠️ NSFW Menu ⚠️  〉━━*\n\n gifs, hentaivideo, blowjobgif, hneko, masturbation, thighs, pussy, panties, orgy, ahegao, ass, bdsm, blowjob, cuckold, ero, gasm, cum, femdom, foot, gangbang, glasses, jahy, trap, blowjobgif, spank, hneko, hwaifu, gasm`)
+  break;
+
+
+//
 case 'ahegao':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/agegao.json'))
@@ -1809,10 +1980,10 @@ break;
 
 
 case 'ass':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/ass.json'))
@@ -1822,10 +1993,10 @@ break;
 
 
 case 'bdsm':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/bdsm.json'))
@@ -1835,10 +2006,10 @@ break;
 
 
 case 'blowjob':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/blowjob.json'))
@@ -1848,10 +2019,10 @@ break;
 
 
 case 'cuckold':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/cuckold.json'))
@@ -1861,10 +2032,10 @@ break;
 
 
 case 'cum':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/cum.json'))
@@ -1874,10 +2045,10 @@ break;
 
 
 case 'eba':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/eba.json'))
@@ -1887,10 +2058,10 @@ break;
 
 
 case 'ero':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/ero.json'))
@@ -1900,10 +2071,10 @@ break;
 
 
 case 'femdom':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/femdom.json'))
@@ -1913,10 +2084,10 @@ break;
 
 
 case 'foot':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/foot.json'))
@@ -1926,10 +2097,10 @@ break;
 
 
 case 'gangbang':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/gangbang.json'))
@@ -1938,17 +2109,12 @@ A17.sendMessage(m.chat, { caption: mess.success, image: { url: kairesult.url } }
 break;
 
 
-
-
-/////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-
+//
 case 'gifs':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   reply(mess.waiting)
   A17.sendMessage(from, { react: { text: "👀" , key: m.key }})
 
@@ -1964,15 +2130,12 @@ case 'gifs':
        })
 
 
-//////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////
-
-
+//
 case 'hentaivid': case 'hentaivideo': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
 reply(mess.waiting)
 A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
@@ -1984,10 +2147,10 @@ break;
 
 
 case 'glasses':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/glasses.json'))
@@ -1997,10 +2160,10 @@ break;
 
 
 case 'hentai':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/hentai.json'))
@@ -2010,10 +2173,10 @@ break;
 
 
 case 'jahy':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/pussy.json'))
@@ -2023,10 +2186,10 @@ break;
 
 
 case 'mangansfw':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/manga.json'))
@@ -2036,10 +2199,10 @@ break;
 
 
 case 'masturbation':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/masturbation.json'))
@@ -2049,10 +2212,10 @@ break;
 
 
 case 'milf':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/milf.json'))
@@ -2062,10 +2225,10 @@ break;
 
 
 case 'neko':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/neko.json'))
@@ -2076,8 +2239,8 @@ break;
 
 case 'neko2':
   if (isBan) return reply(mess.banned)			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   if (!AntiNsfw) return reply(mess.nonsfw)
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
@@ -2088,10 +2251,10 @@ break;
 
 
 case 'nsfwloli':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/nsfwloli.json'))
@@ -2102,8 +2265,8 @@ break;
 
 // case 'orgy':
 //   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 //   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
@@ -2116,7 +2279,7 @@ break;
 case 'orgy':
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
-  if (!m.isGroup) return replay(mess.grouponly);
+  if (!m.isGroup) return reply(mess.grouponly);
   if (!AntiNsfw) return reply(mess.nonsfw);
 
   // React to the command message with a specific emoji
@@ -2155,8 +2318,8 @@ case 'orgy':
 
 // case 'panties':
 //   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 //   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
@@ -2169,7 +2332,7 @@ case 'orgy':
 case 'panties':
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
-  if (!m.isGroup) return replay(mess.grouponly);
+  if (!m.isGroup) return reply(mess.grouponly);
   if (!AntiNsfw) return reply(mess.nonsfw);
 
   // React to the command message with a specific emoji
@@ -2208,8 +2371,8 @@ case 'panties':
 
 // case 'pussy':
 //   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 //   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
@@ -2222,7 +2385,7 @@ case 'panties':
 case 'pussy':
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
-  if (!m.isGroup) return replay(mess.grouponly);
+  if (!m.isGroup) return reply(mess.grouponly);
   if (!AntiNsfw) return reply(mess.nonsfw);
 
   // React to the command message with a specific emoji
@@ -2257,10 +2420,10 @@ case 'pussy':
 
 
 case 'tentacles':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/tentacles.json'))
@@ -2270,10 +2433,10 @@ break;
 
 
 case 'thighs':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!AntiNsfw) return reply(mess.nonsfw)
+  if (isBan) return reply(mess.banned); 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!AntiNsfw) return reply(mess.nonsfw);
   A17.sendMessage(from, { react: { text: "🥵" , key: m.key }})
 
 var nsfwdata = JSON.parse(fs.readFileSync('./HostMedia/nsfw/thighs.json'))
@@ -2282,31 +2445,28 @@ A17.sendMessage(m.chat, { caption: mess.success, image: { url: kairesult.url } }
 break;
 
 
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 case 'getcase':
-if (isBan) return reply(mess.banned)	
+if (isBan) return reply(mess.banned);	
 if (m.sender !='916297175943@s.whatsapp.net') {return;}
 
-if (isBanChat) return reply(mess.bangc)
+if (isBanChat) return reply(mess.bangc);
 if (m.isGroup) reply(mess.privateonly)
-if (!isCreator) return reply(mess.botowner)
+
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 const getCase = (cases) => {
 return "case"+`'${cases}'`+fs.readFileSync("Core.js").toString().split('case \''+cases+'\'')[1].split("break;")[0]+"break;"
 }
-replay(`${getCase(q)}`)
+reply(`${getCase(q)}`)
 break;
 
 
 case 'emoji': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 if (!args.join(" ")) return reply('Where is the emoji?')
@@ -2320,11 +2480,11 @@ break;
 
 /*
 case 'delete': case 'del': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!m.quoted) return
 let { chat, fromMe, id, isBaileys } = m.quoted
-if (!isBaileys) return replay('How can i delete messages of other person? Baka!')
+if (!isBaileys) return reply('How can i delete messages of other person? Baka!')
 A17.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.quoted.id, participant: m.quoted.sender } })
 }
 break;
@@ -2332,10 +2492,10 @@ break;
 
 
 case 'deleteall': case 'delall': case 'delete': case 'del': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 if (!m.quoted) return reply('Please mention a message baka!')
@@ -2362,7 +2522,7 @@ break;
 case 'ghstalk': case 'githubstalk': case'github': {
   A17.sendMessage(from, { react: { text: "🔍" , key: m.key }})
 
-  if (!q) return replay(`Give me a user name like *${prefix}github Kai0071*`)
+  if (!q) return reply(`Give me a user name like *${prefix}github Kai0071*`)
 
   gitdata = await githubstalk.githubstalk(`${q}`)
   A17.sendMessage(m.chat, { image: { url : gitdata.profile_pic }, caption: 
@@ -2395,8 +2555,8 @@ case 'ghstalk': case 'githubstalk': case'github': {
 
 
 case 'listpc': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 let anu = await store.chats.all().filter(v => v.id.endsWith('.net')).map(v => v)
@@ -2410,8 +2570,8 @@ break;
 
 
 case 'listgc': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 let anu = await store.chats.all().filter(v => v.id.endsWith('@g.us')).map(v => v.id)
@@ -2452,8 +2612,8 @@ if (stderr.trim()) m.reply(stderr)
 
 
 case 'status': case 'post': {
-  if (!isCreator) return replay(mess.owner)
-  if (!quoted) return replay(`Send/Reply Image With Caption ${prefix}status`)
+  if (!isCreator) return reply(mess.owner)
+  if (!quoted) return reply(`Send/reply Image With Caption ${prefix}status`)
   if (/video/.test(mime)) {
       if ((quoted.msg || quoted).seconds > 30) return reply('Maximum 30 seconds video is allowed!')
   }
@@ -2462,16 +2622,16 @@ case 'status': case 'post': {
       const media = await downloadMediaMessage(m,'media',{ },{ logger,reuploadRequest: sock.updateMediaMessage})
       await writeFile('./image.jpeg', media)
       await A17.sendMessage(botNumber, 'status@broadcast',  { url: './image.jpeg', media}).catch((err) => fs.unlinkSync(media))
-     replay(`*✨ ${pushname}...!! Posted On My Status ✨*`);
+     reply(`*✨ ${pushname}...!! Posted On My Status ✨*`);
   }
   else if (messageType === 'videoMessage') {
       const media = await downloadMediaMessage(m,'media',{ },{ logger,reuploadRequest: sock.updateMediaMessage})
       await writeFile('./video.mp4', media)
       await A17.sendMessage(botNumber, 'status@broadcast',  { url: 'video.mp4', media}).catch((err) => fs.unlinkSync(media))
-replay(`*✨ ${pushname}...!! Posted On My Status ✨*`);
+reply(`*✨ ${pushname}...!! Posted On My Status ✨*`);
   }
   else {
-      replay(`an error occurred`)
+      reply(`an error occurred`)
   }
 
 }
@@ -2485,49 +2645,48 @@ break;
 
 
 case 'afk': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 let user = global.db.users[m.sender]
 user.afkTime = + new Date
 user.afkReason = args.join(" ")
-replay(`${m.pushName} is now Away From Keyboard.\nAFK Reason : ${args.join(" ") ? args.join(" ") : ''}`)
+reply(`${m.pushName} is now Away From Keyboard.\nAFK Reason : ${args.join(" ") ? args.join(" ") : ''}`)
 }
 break;
 
 
 case 'fliptext': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (args.length < 1) return replay(`Example:\n${prefix}fliptext ${OwnerName}`)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (args.length < 1) return reply(`Example:\n${prefix}fliptext ${OwnerName}`)
 quere = args.join(" ")
 flipe = quere.split('').reverse().join('')
-replay(`\`\`\`「  Text Flipper Tool  」\`\`\`\n*Input text :*\n${quere}\n*Fliped text :*\n${flipe}`)
+reply(`\`\`\`「  Text Flipper Tool  」\`\`\`\n*Input text :*\n${quere}\n*Fliped text :*\n${flipe}`)
 }
 break;
 
 
 case 'toletter': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!Number(args[0])) return replay(`Example:\n${prefix}toletter 956`)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!Number(args[0])) return reply(`Example:\n${prefix}toletter 956`)
 try {
 quere = args.join(" ")
 convertes = await toHur(quere)
-replay(`\`\`\`「  Word Maker Tool  」\`\`\`\n*Input Number :*\n${quere}\n*Converted Alphabet :*\n${convertes}`)
+reply(`\`\`\`「  Word Maker Tool  」\`\`\`\n*Input Number :*\n${quere}\n*Converted Alphabet :*\n${convertes}`)
 } catch {
-replay(`Error!`)
+reply(`Error!`)
 }
 }
-
 
 
 
 case 'leveling':
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
 if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args.length < 1) return reply('Type on to *Enable*\nType off to *Disable*')
 if (args[0] === 'on'){
@@ -2552,15 +2711,15 @@ break;
 
 //
 case 'antilinkgc': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLink) return replay('Already activated')
+if (AntiLink) return reply('Already activated')
 ntilink.push(from)
-replay('Activated _Antilink_ in this group.')
+reply('Activated _Antilink_ in this group.')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2569,10 +2728,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLink) return replay('Already deactivated!')
+if (!AntiLink) return reply('Already deactivated!')
 let off = ntilink.indexOf(from)
 ntilink.splice(off, 1)
-replay('Deactivated _Antilink_ in this group!')
+reply('Deactivated _Antilink_ in this group!')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinkgc on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2585,15 +2744,15 @@ break;
 
 
 case 'antilinkyoutubevideo': case 'antilinkyoutubevid': case 'antilinkytvid': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkYoutubeVid) return replay('Already activated')
+if (AntiLinkYoutubeVid) return reply('Already activated')
 ntilinkytvid.push(from)
-replay('Activated youtube video antilink !')
+reply('Activated youtube video antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2602,10 +2761,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkYoutubeVid) return replay('Already deactivated')
+if (!AntiLinkYoutubeVid) return reply('Already deactivated')
 let off = ntilinkytvid.indexOf(from)
 ntilinkytvid.splice(off, 1)
-replay('Deactivated youtube video antilink !')
+reply('Deactivated youtube video antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinkyoutubevideo on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2618,15 +2777,15 @@ break;
 
 
 case 'antilinkyoutubech': case 'antilinkyoutubechannel': case 'antilinkytch': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkYoutubeChannel) return replay('Already activated')
+if (AntiLinkYoutubeChannel) return reply('Already activated')
 ntilinkytch.push(from)
-replay('Activated youtube channel antilink !')
+reply('Activated youtube channel antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2635,10 +2794,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkYoutubeChannel) return replay('Already deactivated')
+if (!AntiLinkYoutubeChannel) return reply('Already deactivated')
 let off = ntilinkytch.indexOf(from)
 ntilinkytch.splice(off, 1)
-replay('Deactivated youtube channel antilink !')
+reply('Deactivated youtube channel antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinkyoutubech on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2651,15 +2810,15 @@ break;
 
 
 case 'antilinkinstagram': case 'antilinkig': case 'antilinkinsta': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkInstagram) return replay('Already activated')
+if (AntiLinkInstagram) return reply('Already activated')
 ntilinkig.push(from)
-replay('Activated instagram antilink !')
+reply('Activated instagram antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2668,10 +2827,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkInstagram) return replay('Already deactivated')
+if (!AntiLinkInstagram) return reply('Already deactivated')
 let off = ntilinkig.indexOf(from)
 ntilinkig.splice(off, 1)
-replay('Deactivated instagram antilink !')
+reply('Deactivated instagram antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinkinstagram on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2684,15 +2843,15 @@ break;
 
 
 case 'antilinkfacebook': case 'antilinkfb': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkFacebook) return replay('Already activated')
+if (AntiLinkFacebook) return reply('Already activated')
 ntilinkfb.push(from)
-replay('Activated facebook antilink !')
+reply('Activated facebook antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2701,10 +2860,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkFacebook) return replay('Already deactivated')
+if (!AntiLinkFacebook) return reply('Already deactivated')
 let off = ntilinkfb.indexOf(from)
 ntilinkfb.splice(off, 1)
-replay('Deactivated facebook antilink !')
+reply('Deactivated facebook antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinkfacebook on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2717,15 +2876,15 @@ break;
 
 
 case 'antilinktelegram': case 'antilinktg': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkTelegram) return replay('Already activated')
+if (AntiLinkTelegram) return reply('Already activated')
 ntilinktg.push(from)
-replay('Activated telegram antilink !')
+reply('Activated telegram antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2734,10 +2893,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkTelegram) return replay('Already deactivated')
+if (!AntiLinkTelegram) return reply('Already deactivated')
 let off = ntilinkig.indexOf(from)
 ntilinkig.splice(off, 1)
-replay('Deactivated telegram antilink in this group')
+reply('Deactivated telegram antilink in this group')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinktelegram on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2750,15 +2909,15 @@ break;
 
 
 case 'antilinktiktok': case 'antilinktt': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkTiktok) return replay('Already activated')
+if (AntiLinkTiktok) return reply('Already activated')
 ntilinktt.push(from)
-replay('Activated tiktok antilink !')
+reply('Activated tiktok antilink !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2767,10 +2926,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkTiktok) return replay('Already deactivated')
+if (!AntiLinkTiktok) return reply('Already deactivated')
 let off = ntilinktt.indexOf(from)
 ntilinktt.splice(off, 1)
-replay('Deactivated tiktok antilink !')
+reply('Deactivated tiktok antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinktiktok on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2783,15 +2942,15 @@ break;
 
 
 case 'antilinktwt': case 'antilinktwitter': case 'antilinktwit': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (AntiLinkTwitter) return replay('Already activated')
+if (AntiLinkTwitter) return reply('Already activated')
 ntilinktwt.push(from)
-replay('Activated twitter antilink in this group !')
+reply('Activated twitter antilink in this group !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2800,10 +2959,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!AntiLinkTwitter) return replay('Already deactivated')
+if (!AntiLinkTwitter) return reply('Already deactivated')
 let off = ntilinktwt.indexOf(from)
 ntilinktwt.splice(off, 1)
-replay('Deactivated twitter antilink !')
+reply('Deactivated twitter antilink !')
 } else {
 let buttonsntilink = [
 { buttonId: `${prefix}antilinktwt on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2816,15 +2975,15 @@ break;
 
 
 // case 'antilinkall': {
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
-// if (!m.isGroup) return replay(mess.grouponly)
-// if (!isBotAdmins) return replay(mess.botadmin)
-// if (!isAdmins && !isCreator) return replay(mess.useradmin)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
+// if (!m.isGroup) return reply(mess.grouponly);
+// if (!isBotAdmins) return reply(mess.botadmin);
+// if (!isAdmins && !isCreator) return reply(mess.useradmin)
 // if (args[0] === "on") {
-// if (AntiLinkTwitter) return replay('Already activated')
+// if (AntiLinkTwitter) return reply('Already activated')
 // ntilinkall.push(from)
-// replay('Enabled all antilink !')
+// reply('Enabled all antilink !')
 // var groupe = await A17.groupMetadata(from)
 // var members = groupe['participants']
 // var mems = []
@@ -2833,10 +2992,10 @@ break;
 // })
 // A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 // } else if (args[0] === "off") {
-// if (!AntiLinkAll) return replay('Already deactivated')
+// if (!AntiLinkAll) return reply('Already deactivated')
 // let off = ntilinkall.indexOf(from)
 // ntilinkall.splice(off, 1)
-// replay('Disabled all antilink !')
+// reply('Disabled all antilink !')
 // } else {
 // let buttonsntilink = [
 // { buttonId: `${prefix}antilinkall on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2851,16 +3010,16 @@ break;
 case 'antilinkall': {
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
-  if (!m.isGroup) return replay(mess.grouponly);
-  if (!isBotAdmins) return replay(mess.botadmin);
-  if (!isAdmins && !isCreator) return replay(mess.useradmin);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!isBotAdmins) return reply(mess.botadmin);
+  if (!isAdmins && !isCreator) return reply(mess.useradmin);
   A17.sendMessage(from, { react: { text: "🫡" , key: m.key }});
 
   if (args[0] === "on") {
   
-    if (AntiLinkAll) return replay('Already activated');
+    if (AntiLinkAll) return reply('Already activated');
     ntilinkall.push(from);
-    replay('Enabled all antilink!');
+    reply('Enabled all antilink!');
     var groupe = await A17.groupMetadata(from);
     var members = groupe['participants'];
     var mems = [];
@@ -2869,27 +3028,27 @@ case 'antilinkall': {
     });
     A17.sendMessage(from, { text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid: mems } }, { quoted: m });
   } else if (args[0] === "off") {
-    if (!AntiLinkAll) return replay('Already deactivated');
+    if (!AntiLinkAll) return reply('Already deactivated');
     let off = ntilinkall.indexOf(from);
     ntilinkall.splice(off, 1);
-    replay('Disabled all antilink!');
+    reply('Disabled all antilink!');
   } else {
-    replay(`Please use '${prefix}antilinkall on' to enable the Antilink system or '${prefix}antilinkall off' to disable it.`);
+    reply(`Please use '${prefix}antilinkall on' to enable the Antilink system or '${prefix}antilinkall off' to disable it.`);
   }
 }
 break;
 
 
 case 'antiwame': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 if (args[0] === "on") {
-if (antiWame) return replay('Already activated')
+if (antiWame) return reply('Already activated')
 ntwame.push(from)
-replay('Activated antiwame !')
+reply('Activated antiwame !')
 var groupe = await A17.groupMetadata(from)
 var members = groupe['participants']
 var mems = []
@@ -2898,10 +3057,10 @@ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
 })
 A17.sendMessage(from, {text: `\`\`\`*「  Warning  」*\`\`\`\n\nAntilink is enabled!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 } else if (args[0] === "off") {
-if (!antiWame) return replay('Already deactivated')
+if (!antiWame) return reply('Already deactivated')
 let off = nttoxic.indexOf(from)
 ntwame.splice(off, 1)
-replay('Deactivated antiwame !')
+reply('Deactivated antiwame !')
 } else {
 let buttonsntwame = [
 { buttonId: `${prefix}antiwame on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2920,16 +3079,16 @@ break;
 
 
 // case 'nsfw': {
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
-// if (!m.isGroup) return replay(mess.grouponly)
-// if (!isBotAdmins) return replay(mess.botadmin)
-// if (!isAdmins && !isCreator) return replay(mess.useradmin)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
+// if (!m.isGroup) return reply(mess.grouponly);
+// if (!isBotAdmins) return reply(mess.botadmin);
+// if (!isAdmins && !isCreator) return reply(mess.useradmin)
 // A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 // if (args[0] === "on") {
-// if (AntiNsfw) return replay('Already activated')
+// if (AntiNsfw) return reply('Already activated')
 // ntnsfw.push(from)
-// replay('Enabled NSFW Commands!')
+// reply('Enabled NSFW Commands!')
 // var groupe = await A17.groupMetadata(from)
 // var members = groupe['participants']
 // var mems = []
@@ -2938,10 +3097,10 @@ break;
 // })
 // A17.sendMessage(from, {text: `\`\`\`「 Notice 」\`\`\`\n\nNSFW(not safe for work) feature has been enabled in this group, which means anyone here can accesss Adult commands!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
 // } else if (args[0] === "off") {
-// if (!AntiNsfw) return replay('Already deactivated')
+// if (!AntiNsfw) return reply('Already deactivated')
 // let off = ntnsfw.indexOf(from)
 // ntnsfw.splice(off, 1)
-// replay('Disabled NSFW Commands!')
+// reply('Disabled NSFW Commands!')
 // } else {
 // let buttonsntnsfw = [
 // { buttonId: `${prefix}nsfw on`, buttonText: { displayText: 'On' }, type: 1 },
@@ -2953,34 +3112,13 @@ break;
 // break;
 
 
-case 'nsfw': {
-  if (isBan) return reply(mess.banned);
-  if (isBanChat) return reply(mess.bangc);
-  if (!m.isGroup) return replay(mess.grouponly);
-  if (!isBotAdmins) return replay(mess.botadmin);
-  if (!isAdmins && !isCreator) return replay(mess.useradmin);
-  A17.sendMessage(from, { react: { text: "🫡" , key: m.key }});
-
-  if (args[0] === "on") {
-    if (AntiNsfw) return replay('Already activated');
-    ntnsfw.push(from);
-    replay('Enabled NSFW Commands!');
-  } else if (args[0] === "off") {
-    if (!AntiNsfw) return replay('Already deactivated');
-    let off = ntnsfw.indexOf(from);
-    ntnsfw.splice(off, 1);
-    replay('Disabled NSFW Commands!');
-  } else {
-    replay(`NSFW(not safe for work) feature has been enabled in this group, which means anyone here can accesss Adult commands!\n\nPlease use *'${prefix}nsfw on*' to enable NSFW commands or *'${prefix}nsfw off'* to disable them.`);
-  }
-}
-break;
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 case 'listonline': case 'listaktif': case 'here':{
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 let id = args && /\d+\-\d+@g.us/.test(args[0]) ? args[0] : m.chat
@@ -2990,40 +3128,15 @@ A17.sendText(m.chat, '  「 *Online Members* 」\n\n' + online.map(v => `${listo
 }
 break;
 
-case 'ban': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!isCreator) return replay(mess.botowner)
-A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
-if (!args[0]) return replay(`Select add or del (add to ban, del to unban), For Example: Reply *${prefix}ban add* to the user you want to ban.`)
-if (args[1]) {
-orgnye = args[1] + "@s.whatsapp.net"
-} else if (m.quoted) {
-orgnye = m.quoted.sender
-}
-const isBane = banUser.includes(orgnye)
-if (args[0] === "add") {
-if (isBane) return ads('User was already banned.')
-banUser.push(orgnye)
-replay(`Successfully banned the user`)
-} else if (args[0] === "del") {
-if (!isBane) return ads('User was already unbanned.')
-let delbans = banUser.indexOf(orgnye)
-banUser.splice(delbans, 1)
-replay(`Successfully unbanned the user.`)
-} else {
-replay("Error")
-}
-}
-break;
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 // case 'happymod': {
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
 // A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-// if (!args.join(" ")) return replay(`Example : ${prefix + command} Kinemaster`)
+// if (!args.join(" ")) return reply(`Example : ${prefix + command} Kinemaster`)
 //modapk.happymod(args.join(" ")).then(async(res) => {
 // teks = '```「 HappyMod Search Engine 」```'
 // for (let i of res) {
@@ -3043,7 +3156,7 @@ break;
 // }
 // break;
 
-
+//
 case 'happymod': case 'modapk':{
   if (isBan) return reply(mess.banned);
   if (isBanChat) return reply(mess.bangc);
@@ -3075,10 +3188,7 @@ break;
 
 
 
-
-              /////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 //group moderation
@@ -3114,21 +3224,21 @@ break;
 
 
 case 'setname': case 'setsubject': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (!text) return replay('Pls enter -setname <New Group Name>  to change this Group Name')
-await A17.groupUpdateSubject(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
+if (!text) return reply('Pls enter -setname <New Group Name>  to change this Group Name')
+await A17.groupUpdateSubject(m.chat, text).then((res) => reply(mess.jobdone)).catch((err) => reply(jsonformat(err)))
 }
 break;
 
 
 case 'block': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!isCreator) return reply(mess.botowner)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -3138,8 +3248,8 @@ break;
 
 
 case 'unblock': {
-      if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+      if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!isCreator) return reply(mess.botowner)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
@@ -3149,40 +3259,40 @@ break;
 
 
 case 'setdesc': case 'setdesk': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (!text) return replay('Pls enter -setname <New Group Description>  to change this Group Description.')
-await A17.groupUpdateDescription(m.chat, text).then((res) => replay(mess.jobdone)).catch((err) => replay(jsonformat(err)))
+if (!text) return reply('Pls enter -setname <New Group Description>  to change this Group Description.')
+await A17.groupUpdateDescription(m.chat, text).then((res) => reply(mess.jobdone)).catch((err) => reply(jsonformat(err)))
 }
 break;
 
 
 case 'setgrouppp': case 'setgruppp': case 'setgcpp': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (!quoted) return replay(`Send/Reply Image With Caption ${prefix + command}`)
-if (!/image/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
-if (/webp/.test(mime)) return replay(`Send/Reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
+if (!quoted) return reply(`Send/reply Image With Caption ${prefix + command}`)
+if (!/image/.test(mime)) return reply(`Send/reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
+if (/webp/.test(mime)) return reply(`Send/reply Image With Caption ${prefix + command} to change the Profile Pic of this group.`)
 let media = await A17.downloadAndSaveMediaMessage(quoted)
 await A17.updateProfilePicture(m.chat, { url: media }).catch((err) => fs.unlinkSync(media))
-replay(mess.jobdone)
+reply(mess.jobdone)
 }
 break;
 
 
 case 'tagall': case 'all':{
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isAdmins && !isCreator) return replay(mess.useradmin) 
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isAdmins && !isCreator) return reply(mess.useradmin) 
 A17.sendMessage(from, { react: { text: "😳" , key: m.key }})
 let teks = `「 Attention 」
 
@@ -3196,10 +3306,10 @@ break;
 
 
 case 'hidetag': case 'tag': case 'ping': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
 A17.sendMessage(m.chat, { text : args.join(" ") ? args.join(" ") : '' , mentions: participants.map(a => a.id)}, { quoted: m })
 }
@@ -3207,11 +3317,11 @@ break;
 
 
 case'tagadmins': case 'admins': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly) 
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly); 
 A17.sendMessage(from, { react: { text: "🗿" , key: m.key }})
-if (!text) return replay(`*Please quote or write a meaningful message to tag admins to*`)
+if (!text) return reply(`*Please quote or write a meaningful message to tag admins to*`)
 let teks = `*「 Tag Admins 」*
 
 *Message : ${text}*\n\n`
@@ -3225,11 +3335,11 @@ break;
 
 /*
 case 'purge':{
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 
   const delay = time => new Promise(res=>setTimeout(res,time));
 
@@ -3245,11 +3355,11 @@ break;
 */
 
 case 'purge':{mess
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 const delay = time => new Promise(res=>setTimeout(res,time));
 let mentioned = participants.map(v => v.jid)
 for (let member of mentioned) {     
@@ -3261,7 +3371,7 @@ break;
 
 
 case 'nowa': case 'find': case 'stalk': case 'stalknumber':{
-  if (isBan) return reply(mess.banned)
+  if (isBan) return reply(mess.banned);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
   if (!args[0]) return reply(`Use command like: ${prefix}stalk <number>xxx`)
   var inputnumber = args[0]
@@ -3324,10 +3434,10 @@ A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 
 case 'grouplink': case 'gclink': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
 A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
 let response = await A17.groupInviteCode(m.chat)
 A17.sendMessage(m.chat, {text:`*Group Name:* *${groupMetadata.subject}* \n\n*Group Link :* \nhttps://chat.whatsapp.com/${response}l`, "contextInfo": {
@@ -3336,7 +3446,7 @@ text: `${global.OwnerName}`,
 "forwardingScore": 1000000000,
 isForwarded: true,
 sendEphemeral: true,
-"externalAdReply": {
+"externalAdreply": {
 "title": `${global.BotName}`,
 "body": `${global.WaterMark}`,
 "previewType": "PHOTO",
@@ -3356,11 +3466,11 @@ case 'resetlink':
 case 'resetgrouplink':
 case 'resetgclink':
 case 'resetgruplink': {
- if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+ if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 A17.groupRevokeInvite(m.chat)
 }
@@ -3368,16 +3478,16 @@ break;
 
 
 case 'group': case 'grup': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 if (args[0] === 'close'){
-await A17.groupSettingUpdate(m.chat, 'announcement').then((res) => replay(`Group has been closed!`)).catch((err) => replay(jsonformat(err)))
+await A17.groupSettingUpdate(m.chat, 'announcement').then((res) => reply(`Group has been closed!`)).catch((err) => reply(jsonformat(err)))
 } else if (args[0] === 'open'){
-await A17.groupSettingUpdate(m.chat, 'not_announcement').then((res) => replay(`Group has been opened!`)).catch((err) => replay(jsonformat(err)))
+await A17.groupSettingUpdate(m.chat, 'not_announcement').then((res) => reply(`Group has been opened!`)).catch((err) => reply(jsonformat(err)))
 } else {
 
 let buttonMessage = {
@@ -3394,51 +3504,51 @@ break;
 
 
 case 'promote': case 'admin': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await A17.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
+await A17.groupParticipantsUpdate(m.chat, [users], 'promote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
 break;
 
 
 case 'demote': case 'unadmin': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-await A17.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => replay(jsonformat(res))).catch((err) => replay(jsonformat(err)))
+await A17.groupParticipantsUpdate(m.chat, [users], 'demote').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 }
 break;
 
 
 case 'add':{     			
-  if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isCreator) return replay(mess.botowner)
+  if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isCreator) return reply(mess.botowner)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 
 let users = m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-if (users.length == 0) return replay(`Please write the number of the person you want to add to thhis group`)
-await A17.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => replay(`User Added Successfully!`)).catch((err) => replay(`Cannot add that user to this group!`))
+if (users.length == 0) return reply(`Please write the number of the person you want to add to thhis group`)
+await A17.groupParticipantsUpdate(m.chat, [users], 'add').then((res) => reply(`User Added Successfully!`)).catch((err) => reply(`Cannot add that user to this group!`))
 }
 break;
 
 
 case 'invite': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
-  if (!isBotAdmins) return replay(mess.botadmin)
-  if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
+  if (!isBotAdmins) return reply(mess.botadmin);
+  if (!isAdmins && !isCreator) return reply(mess.useradmin)
   A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
   
 if (!text) return reply (`Enter the number you want to invite to the group...\n\nExample :\n*${prefix + command}* 916297175943`)
@@ -3453,11 +3563,11 @@ let link = 'https://chat.whatsapp.com/' + await A17.groupInviteCode(group)
 
 
 case 'remove':{
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
-if (!isBotAdmins) return replay(mess.botadmin)
-if (!isAdmins && !isCreator) return replay(mess.useradmin)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
 await A17.groupParticipantsUpdate(m.chat, [users], 'remove')
@@ -3467,17 +3577,17 @@ break;
 
 // join command  is a possible to Ban bot number.
 case 'join': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!isCreator) return replay(mess.botowner)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isCreator) return reply(mess.botowner)
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (!args[0]) return replay(`Where's the link?`)
+if (!args[0]) return reply(`Where's the link?`)
 vdd = args[0]
 let vcc = vdd.split("https://chat.whatsapp.com/")[1]
-if (!vcc) return replay("Link invalid!")
+if (!vcc) return reply("Link invalid!")
 if (isCreator) {
-await A17.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
-replay("Succes!")
+await A17.groupAcceptInvite(vcc).then(async(res) => reply(jsonformat(res))).catch(_ => _)
+reply("Succes!")
 } else {
 A17.query({
 tag: "iq",
@@ -3493,10 +3603,10 @@ if (sizny < 20) {
 teks = `Sorry, munimun 20 members are required in a group to add bot!`
 sendOrder(m.chat, teks, "667140254502463", fs.readFileSync('./Assets/pic7.jpg'), `${global.packname}`, `${global.BotName}`, "916297175943@s.whatsapp.net", "AR6NCY8euY5cbS8Ybg5Ca55R8HFSuLO3qZqrIYCT7hQp0g==", "99999999999999999999")
 } else if (sizny > 20) {
-await A17.groupAcceptInvite(vcc).then(async(res) => replay(jsonformat(res))).catch(_ => _)
-replay("Joined !")
+await A17.groupAcceptInvite(vcc).then(async(res) => reply(jsonformat(res))).catch(_ => _)
+reply("Joined !")
 } else {
-replay("Error")
+reply("Error")
 }
 }).catch(_ => _)
 }
@@ -3505,28 +3615,125 @@ break;
 
 
 // case 'leavegc': case 'leavegroup': case 'bye': {
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //       reply(mess.waiting)
-//                   if (!isCreator) return replay(`${mess.botowner}`)
+//                   if (!isCreator) return reply(`${mess.botowner}`)
 //                   A17.sendMessage(from, { react: { text: "☯️" , key: m.key }})
 //                   await A17.groupLeave(m.chat).then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
 //               }
 //               break;
 
 
+//
+case 'groupevent':
+case 'group-event':
+
+A17.sendMessage(from, { react: { text: '❤', key: m.key }});
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!isBotAdmins) return reply(mess.botadmin);
+if (!isAdmins && !isCreator) return reply(mess.useradmin)
+    
+  if (args.length === 0) {
+    if (global.groupevent) {
+      return m.reply(`Group events are currently *enabled*.\n\nYou can turn them *off* using "${global.prefa[0]}groupevent off".`);
+    } else {
+      return m.reply(`Group events are currently *disabled*.\n\nYou can turn them *on* using "${global.prefa[0]}groupevent on".`);
+    }
+  } else if (args.length === 1 && (args[0] === 'on' || args[0] === 'off')) {
+    const status = args[0];
+    if (status === 'on') {
+      if (global.groupevent) {
+        return m.reply(`Group events are already *enabled*.`);
+      } else {
+        global.groupevent = true;
+        return m.reply(`Group events are now *enabled*.`);
+      }
+    } else {
+      if (!global.groupevent) {
+        return m.reply(`Group events are already *disabled*.`);
+      } else {
+        global.groupevent = false;
+        return m.reply(`Group events are now *disabled*.`);
+      }
+    }
+  } else {
+    return m.reply(`Usage: ${global.prefa[0]}groupevent [on/off]`);
+  }
+  break;
 
 
-             ////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //
+  case 'ban': {
+    if (isBan) return reply(mess.banned);	 			
+    if (isBanChat) return reply(mess.bangc);
+    if (!isCreator) return reply(mess.botowner)
+    A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
+    
+    if (!args[0]) return reply(`Select add or del (add to ban, del to unban), For Example: reply *${prefix}ban add* to the user you want to ban.`)
+    if (args[1]) {
+    orgnye = args[1] + "@s.whatsapp.net"
+    } else if (m.quoted) {
+    orgnye = m.quoted.sender
+    }
+    const isBane = banUser.includes(orgnye)
+    if (args[0] === "add") {
+    if (isBane) return ads('User was already banned.')
+    banUser.push(orgnye)
+    reply(`Successfully banned the user`)
+    } else if (args[0] === "del") {
+    if (!isBane) return ads('User was already unbanned.')
+    let delbans = banUser.indexOf(orgnye)
+    banUser.splice(delbans, 1)
+    reply(`Successfully unbanned the user.`)
+    } else {
+    reply("Error")
+    }
+    }
+    break;
+    
+
+  case 'antilink': {
+    if (isBan) return reply(mess.banned);	 			
+ if (isBanChat) return reply(mess.bangc);
+ if (!m.isGroup) return reply(mess.grouponly);
+ if (!isBotAdmins) return reply(mess.botadmin);
+ if (!isAdmins && !isCreator) return reply(mess.useradmin)
+ if (args[0] === "on") {
+ if (AntiLinkAll) return reply('Already activated')
+ ntilinkall.push(from)
+ reply('Enabled all antilink !')
+ var groupe = await A17.groupMetadata(from)
+ var members = groupe['participants']
+ var mems = []
+ members.map(async adm => {
+ mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
+ })
+ A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
+ } else if (args[0] === "off") {
+ if (!AntiLinkAll) return reply('Already deactivated')
+ let off = ntilinkall.indexOf(from)
+ ntilinkall.splice(off, 1)
+ reply('Disabled all antilink !')
+ } else {
+   let textmsg = 'Type ' + `${prefix}${command}` + ' on to turn on antilink feature or Type ' + `${prefix + command}` + ' off to turn off antilink feature'
+   await A17.sendMessage(m.chat, { text: `${textmsg}`}, `${global.BotName}`, m)
+   }
+   }
+   break;
+
+
+
+//-----------------------------------------------------------------------------------------------------------------------------------//
 
 
 
 //
 case 'ringtone': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
           if (!args.join(" ")) return reply(`Example: ${prefix}ringtone black over`)
       let { ringtone } = require('./lib/scraper')
   let anu = await ringtone(text)
@@ -3537,8 +3744,8 @@ case 'ringtone': {
 
 
     case 'volume': {
-      if (isBan) return reply(mess.banned)	 			
-    if (isBanChat) return reply(mess.bangc)
+      if (isBan) return reply(mess.banned);	 			
+    if (isBanChat) return reply(mess.bangc);
     if (!args.join(" ")) return reply(`Example: ${prefix + command} 10`)
     media = await A17.downloadAndSaveMediaMessage(quoted, "volume")
     if (isQuotedAudio) {
@@ -3567,8 +3774,8 @@ case 'ringtone': {
 
 
 case 'tempo': {
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   if (!args.join(" ")) return reply(`Example: ${prefix + command} 10`)
   var req = args.join(' ')
   media = await A17.downloadAndSaveMediaMessage(quoted, "tempo")
@@ -3633,8 +3840,8 @@ case 'tempo': {
 
 
 case 'calculator': case 'cal': case 'calculate':{
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (args.length < 1) return reply(`*Example :*\n${prefix}calculator 2*5\n\n`)
 let qsd = args.join(" ")
 if (typeof mathjs.evaluate(qsd) !== 'number') {
@@ -3654,11 +3861,11 @@ break;
 
 //
 case 'toimage': case 'makeimg': case 'toimg': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
-if (!m.quoted) return reply('Reply Image')
-if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
+if (!m.quoted) return reply('reply Image')
+if (!/webp/.test(mime)) return reply(`reply sticker with caption *${prefix + command}*`)
 reply(mess.waiting)
 let media = await A17.downloadAndSaveMediaMessage(quoted)
 let ran = await getRandom('.png')
@@ -3674,11 +3881,11 @@ break;
 
 
 case 'tomp4': case 'makemp4': case 'makevideo': case 'tovideo': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc) 
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc); 
 A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
-if (!m.quoted) return reply('Reply Image')
-if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
+if (!m.quoted) return reply('reply Image')
+if (!/webp/.test(mime)) return reply(`reply sticker with caption *${prefix + command}*`)
 reply(mess.waiting)
 let { webp2mp4File } = require('./lib/uploader')
 let media = await A17.downloadAndSaveMediaMessage(quoted)
@@ -3690,12 +3897,12 @@ break;
 
 
 case 'toaud': case 'makeaudio': case 'toaudio': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
-if (!/video/.test(mime) && !/audio/.test(mime)) return reply(`Send/Reply Video/Audio You Want To Use As Audio With Caption ${prefix + command}`)
-if (!m.quoted) return reply(`Send/Reply Video/Audio You Want To Use As Audio With Caption ${prefix + command}`)
+if (!/video/.test(mime) && !/audio/.test(mime)) return reply(`Send/reply Video/Audio You Want To Use As Audio With Caption ${prefix + command}`)
+if (!m.quoted) return reply(`Send/reply Video/Audio You Want To Use As Audio With Caption ${prefix + command}`)
 reply(mess.waiting)
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
@@ -3706,12 +3913,12 @@ break;
 
 
 case 'tomp3': case 'makemp3': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (/document/.test(mime)) return reply(`Send/Reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
-if (!/video/.test(mime) && !/audio/.test(mime)) return reply(`Send/Reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
-if (!m.quoted) return reply(`Send/Reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
+if (/document/.test(mime)) return reply(`Send/reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
+if (!/video/.test(mime) && !/audio/.test(mime)) return reply(`Send/reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
+if (!m.quoted) return reply(`Send/reply Video/Audio You Want To Convert Into MP3 With Caption ${prefix + command}`)
 reply(mess.waiting)
 let media = await quoted.download()
 let { toAudio } = require('./lib/converter')
@@ -3722,11 +3929,11 @@ break;
 
 
 case 'togif': case 'makegif': case 'getgif':{
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
-if (!m.quoted) return reply('Reply Image')
-if (!/webp/.test(mime)) return reply(`Reply sticker with caption *${prefix + command}*`)
+if (!m.quoted) return reply('reply Image')
+if (!/webp/.test(mime)) return reply(`reply sticker with caption *${prefix + command}*`)
 reply(mess.wait)
 let { webp2mp4File } = require('./lib/uploader')
 let media = await A17.downloadAndSaveMediaMessage(quoted)
@@ -3738,8 +3945,8 @@ break;
 
 
 // case 'tourl': case 'makeurl':{
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
 // A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
 
 // // let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader');
@@ -3838,8 +4045,8 @@ case 'lava': case 'rock': case 'bloodglas': case 'hallowen': case 'darkgold': ca
 case 'firework': case 'skeleton': case 'blackpink': case 'sand': case 'glue': case '1917': case 'leaves': {
 
 if (!q) return reply(`Example : ${prefix + command} ${global.OwnerName}`)
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🪄" , key: m.key }}) 
 reply(mess.waiting)	
 
@@ -3909,8 +4116,8 @@ break;
 
 
 case 'pornhub': case 'phub' :{
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
 if(!q) return reply(`Example: ${prefix + command} Oh|No`)
 reply(mess.waiting)	
@@ -3933,21 +4140,21 @@ break;
 
 
 case 'translate': case 'ts': case 'trans': {
-if (isBan) return reply(mess.banned)
+if (isBan) return reply(mess.banned);
 A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
-if (!args.join(" ")) return replay("Pls enter any text to translate")
+if (!args.join(" ")) return reply("Pls enter any text to translate")
 tes = await fetchJson (`https://megayaa.herokuapp.com/api/translate?to=en&kata=${args.join(" ")}`)
 Infoo = tes.info
 Detek = tes.translate
-replay(`Input : ${Detek}\nTranslation Results : ${Infoo}`)
+reply(`Input : ${Detek}\nTranslation Results : ${Infoo}`)
 }
 break;
 
 
 // case 'gimage': case 'gig': case 'googleimage':{
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
 // A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
 // if (!args[0]) return reply("Enter a search term to get Google Image!")
@@ -4116,8 +4323,8 @@ break;
 
 
 case 'google': case 'search': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
 
 if (!args[0]) return reply(`Example: ${prefix + command} <query>\nUses : ${prefix + command} anything...`)
@@ -4136,8 +4343,8 @@ break;
 
 
 case "tts":  case "texttospeech":  case "say": case "speak":{
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
   if (!args[0]) return reply("Please give me a text so that i can speak it!")
@@ -4155,8 +4362,8 @@ case "tts":  case "texttospeech":  case "say": case "speak":{
 
 
 case 'wiki':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
 if (args.length < 1) return reply('What Are You Looking For?? ')
@@ -4168,8 +4375,8 @@ A17.sendMessage(from, { image : { url : res2[0].thumb }, caption : result2})
 break;
 
 case 'earthquake':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
 const tres = await Gempa()
@@ -4182,13 +4389,13 @@ break;
 
 case 'covidinfo':
 case 'covid':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
 const c = await covid()
-var { kasus, kematian, sembuh } = c[0]
-A17.sendMessage(from, {text : `Case : ${kasus}\n\nDead : ${kematian}\n\nHealed : ${sembuh}`}, m)
+var { cases, death, healed } = c[0]
+A17.sendMessage(from, {text : `\nCovid India \n\nCase : ${cases}\n\nDead : ${death}\n\nHealed : ${healed}\n`}, m)
 break;
 
 
@@ -4259,8 +4466,8 @@ break;
 
 // ///
 // case 'igdl': case 'instagramreels': case 'igreels': {
-// if (isBan) return reply(mess.banned)	 			
-// if (isBanChat) return reply(mess.bangc)
+// if (isBan) return reply(mess.banned);	 			
+// if (isBanChat) return reply(mess.bangc);
 // A17.sendMessage(from, { react: { text: "🪄" , key: m.key }})
 // if (!args[0]) return reply(`Example :\n${prefix + command} https://www.instagram.com/p/CcvJGuxh9VI/?igshid=YmMyMTA2M2Y=`)
 // try {
@@ -4299,8 +4506,8 @@ break;
 
 
 case 'ig': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (args[0] === "mp4") {
 A17.sendMessage(from, {video:{url:args[1]}, caption:'Here it is...', mimetype:'video/mp4'}, {quoted:m})
 } else if (args[0] === "jpg") {
@@ -4313,11 +4520,11 @@ break;
 
 
 case 'mp4' : {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!args[0]) return reply(`Pls provide link!`)
 try {
-A17.sendMessage(from, {video:{url:args[0]}, caption:"Succes!", contextInfo:{externalAdReply:{
+A17.sendMessage(from, {video:{url:args[0]}, caption:"Succes!", contextInfo:{externalAdreply:{
 title:`${global.BotName}`,
 body:`${global.OwnerName}`,
 thumbnail: BotLogo,
@@ -4333,8 +4540,8 @@ break;
 
 
 case 'jpeg': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!args[0]) return reply(`Please provide link!`)
 try {
 A17.sendMessage(from, {image:{url:args[0]}, caption:"Success!"}, {quoted:m})
@@ -4346,8 +4553,8 @@ break;
 
 
 case 'igtv': {	            
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
            if (!text) return reply(`Please provide link!`)
            const { instagramdl, instagramdlv2, instagramdlv3 } = require('@bochilteam/scraper')
            if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply('*Invalid link!*')
@@ -4363,8 +4570,8 @@ if (isBanChat) return reply(mess.bangc)
        
     ///  
 case 'twitter': case 'td': case 'twitterdl': {     
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)	             
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);	             
        if (!text) return reply(`Please provide link!`)
           if (!isUrl(args[0]) && !args[0].includes('twitter.com')) return reply(`*Invalid link!*`)
           xfarrapi.Twitter(`${text}`).then(async (data) => {                    
@@ -4389,8 +4596,8 @@ if (isBanChat) return reply(mess.bangc)
 
 
 case 'twittermp3': case 'twitteraudio': { 
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)	             
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);	             
        if (!text) return reply(`Please provide link!`)
           if (!isUrl(args[0]) && !args[0].includes('twitter.com')) return reply(`*Invalid link!*`)
           xfarrapi.Twitter(`${text}`).then(async (data) => {
@@ -4403,8 +4610,8 @@ if (isBanChat) return reply(mess.bangc)
 
 
 case 'twitterxx': case 'twdlxx': case 'twmp4xx': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!args[0]) return reply(`Example :\n${prefix + command} https://twitter.com/cinema21/status/1517754155644821504?t=rUnbyqwh4vAE1QXMXlsVeQ&s=19`)
 try {
 let lotwit = await aiovideodl(args[0])
@@ -4435,8 +4642,8 @@ break;
 
 
 case 'twddlxx': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 let buttons = [
 {buttonId: `${prefix}menu`, buttonText: {displayText: '✨Menu✨'}, type: 1}
 ]
@@ -4455,8 +4662,8 @@ break;
 
 ///
 case 'fbdl': case 'fb': case 'facebook': case 'fbmp4': {     	    
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
         if (!text) return reply(`Please provide the link!\n\nExample: ${prefix}facebook https://www.facebook.com/groups/599913174599515/permalink/705467384044093/`)
            if (!isUrl(args[0]) && !args[0].includes('facebook.com')) return reply(`Invalid link!`)
        let bocil = require('@bochilteam/scraper')  
@@ -4479,8 +4686,8 @@ if (isBanChat) return reply(mess.bangc)
 
 
 case 'fbmp3': case 'facebookmp3': case 'facebookaudio': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
             if (!text) return reply(`Please provide the link!\n\nExample: ${prefix + command} https://www.facebook.com/groups/599913174599515/permalink/705467384044093/`)
             if (!isUrl(args[0]) && !args[0].includes('facebook.com')) return reply(`Invalid link!`)
 let noh = require('@bochilteam/scraper')                
@@ -4494,8 +4701,8 @@ A17.sendMessage(m.chat, { audio: { url: anu.url[0].url }, mimetype: 'audio/mp4' 
 
 
 case 'facebookxx': case 'fbdlxxx': case 'fbmp4xxx': case 'fbxxx': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!args[0]) return reply(`Example :\n${prefix + command} https://fb.watch/cAX2dep-BZ/`)
 try {
 let resd = await aiovideodl(args[0])
@@ -4524,8 +4731,8 @@ break;
 
 
 case 'fbddlxx': {
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 let buttons = [
 {buttonId: `${prefix}menu`, buttonText: {displayText: '✨Menu✨'}, type: 1}
 ]
@@ -4544,8 +4751,8 @@ break;
 
 ///
 case 'tiktok':{
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+if (isBanChat) return reply(mess.bangc);
 if (!q) return reply('Please provide the link !')
 reply(mess.wait)
 if (!q.includes('tiktok')) return reply(`Invalid tiktok link!`)
@@ -4573,8 +4780,8 @@ break;
 
 
 case 'tiktoknowm': case 'ttnowm':{
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+if (isBanChat) return reply(mess.bangc);
 if (!q) return reply('Please provide the link !')
 reply(mess.wait)
 if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
@@ -4591,8 +4798,8 @@ break;
 case 'tiktokaudio':
 case 'tiktokmusic':
 case 'ttaud':{
-if (isBan) return reply(mess.banned)
-if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+if (isBanChat) return reply(mess.bangc);
 if (!q) return reply('Where is the audio?')
 if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
 const musim_rambutan = await A17Tiktok(`${q}`).catch(e => {
@@ -4607,11 +4814,11 @@ break;
 
 ///
 case 'yts': case 'ytsearch': {
-    if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
+    if (isBan) return reply(mess.banned);	 			
+ if (isBanChat) return reply(mess.bangc);
  A17.sendMessage(from, { react: { text: "📍" , key: m.key }}) 
 
- if (!args.join(" ")) return replay(`Example : -yts Heat waves`)
+ if (!args.join(" ")) return reply(`Example : -yts Heat waves`)
  let yts = require("youtube-yts")
  let search = await yts(args.join(" "))
  let teks = '```「 YouTube search Engine 」```\n\n Search Term: '+text+'\n\n'
@@ -4627,8 +4834,8 @@ case 'yts': case 'ytsearch': {
 /*
 		
 case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
-    if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
+    if (isBan) return reply(mess.banned);	 			
+ if (isBanChat) return reply(mess.bangc);
  A17.sendMessage(from, { react: { text: "🍁" , key: m.key }}) 
  const YT=require('./lib/ytdlcore')
  const { isUrl, fetchBuffer } = require('./lib/Function')
@@ -4672,8 +4879,8 @@ case 'music': case 'p': case 'play': case 'song': case 'ytplay': {
 
 /// Normal
 // case 'play': case 'song': case 'music': {
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
 //   A17.sendMessage(from, { react: { text: "🍁" , key: m.key }}) 
 //   const YT=require('./lib/ytdl-core')
 //   let yts = require("youtube-yts")
@@ -4739,8 +4946,8 @@ break;
 
       
  case 'ytvd': case 'video': case'ytvideo': case 'ytmp4': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🍃" , key: m.key }})
 const YT=require('./lib/ytdl-core')
   let yts = require("youtube-yts")
@@ -4755,8 +4962,8 @@ break;
 
 /*
 case 'ytmp3': case 'ytmusic':  case 'ytmp4': case 'ytvideo': case 'ytdl':{
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 if (!args[0]) return reply(mess.nolink)
 
 const YT=require('./lib/ytdlcore')
@@ -4792,8 +4999,8 @@ break;
 
 
 case 'ytmp3': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
   const YT=require('./lib/ytdl-core')
@@ -4805,8 +5012,8 @@ break;
 
 
 case 'ytvd2': case 'ytmp4': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
 const YT=require('./lib/ytdl-core')
   const ytmp4play2 = await YT.mp4(text)
@@ -4816,9 +5023,9 @@ break;
 
 
 case 'lyrics': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
 if (!text) return reply(`Comand usage: ${prefix}lyrics Thunder`)
 reply(mess.waiting)	
@@ -4844,8 +5051,8 @@ break;
 
 ///
 // case 'couplepp': case 'cpp': case 'ppcouple': {
-// if (isBan) return reply(mess.banned)
-// if (isBanChat) return reply(mess.bangc)
+// if (isBan) return reply(mess.banned);
+// if (isBanChat) return reply(mess.bangc);
 // A17.sendMessage(from, { react: { text: "🙀" , key: m.key }});
 
 //        reply(mess.waiting)
@@ -4883,8 +5090,8 @@ break;
 
 //
 case 'coffee': case 'kopi': {
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
      /*     let buttons = [
@@ -4905,8 +5112,8 @@ A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 //old code of A17 button 
 
 // case 'pinterest': case 'pin': {
-//   if (isBan) return reply(mess.banned)
-//   if (isBanChat) return reply(mess.bangc)
+//   if (isBan) return reply(mess.banned);
+//   if (isBanChat) return reply(mess.bangc);
 // if (!args.join(" ")) return reply("Pls providea search term!")
 // try {
 // hx.pinterest(args.join(" ")).then(async(res) => {
@@ -4935,8 +5142,8 @@ A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 ////// Hehe ////// 
 
 // case 'pinterest': case'pin' : {
-//   if (isBan) return reply(mess.banned)
-//   if (isBanChat) return reply(mess.bangc)
+//   if (isBan) return reply(mess.banned);
+//   if (isBanChat) return reply(mess.bangc);
 //   if (!args.join(" ")) return reply(`${pushname} Pls provide a search term!`)
 // let { pinterest } = require('./lib/scraper')
 // anutrest = await pinterest(text)
@@ -5008,8 +5215,8 @@ break;
 
 //
 case 'swm': case 'take': case 'stickerwm': case 'steal':{
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🫡" , key: m.key }})
 
 if (!args.join(" ")) return reply(`Like use -take A17|By: Kai`)
@@ -5036,14 +5243,14 @@ break;
 
 
 case 'smeme': case 'stickermeme': case 'stickmeme': {
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "⌛" , key: m.key }})
 
 let { TelegraPh } = require('./lib/uploader')
-if (!text) return reply(`Send/Reply Photo With Caption ${prefix + command} *text*`)
-if (text.includes('|')) return reply(`Send/Reply Photo With Caption ${prefix + command} *text*`)
-if (!/image/.test(mime)) return reply(`Send/Reply Photo With Caption ${prefix + command} *text*`)
+if (!text) return reply(`Send/reply Photo With Caption ${prefix + command} *text*`)
+if (text.includes('|')) return reply(`Send/reply Photo With Caption ${prefix + command} *text*`)
+if (!/image/.test(mime)) return reply(`Send/reply Photo With Caption ${prefix + command} *text*`)
 reply(mess.wait)
 mee = await A17.downloadAndSaveMediaMessage(quoted)
 mem = await TelegraPh(mee)
@@ -5055,8 +5262,8 @@ break;
 
 
 case 'sgif': case 'sticker': case 's': {
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
 if (/image/.test(mime)) {
 let media = await quoted.download()
@@ -5081,9 +5288,9 @@ break;
 
 
 // case 'couple': case 'ship': {
-//   if (isBan) return reply(mess.banned)
-//   if (isBanChat) return reply(mess.bangc)
-// if (!m.isGroup) return replay(`${mess.grouponly}`)
+//   if (isBan) return reply(mess.banned);
+//   if (isBanChat) return reply(mess.bangc);
+// if (!m.isGroup) return reply(`${mess.grouponly}`)
 // A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
 
 // let member = participants.map(u => u.id)
@@ -5101,9 +5308,9 @@ break;
 
 
 // case 'soulmate': {
-//   if (isBan) return reply(mess.banned)
-//   if (isBanChat) return reply(mess.bangc)
-// if (!m.isGroup) return replay(`${mess.grouponly}`)
+//   if (isBan) return reply(mess.banned);
+//   if (isBanChat) return reply(mess.bangc);
+// if (!m.isGroup) return reply(`${mess.grouponly}`)
 // A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
 // let member = participants.map(u => u.id)
 // let me = m.sender
@@ -5137,10 +5344,10 @@ break;
 
 
 case 'handsomecheck':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "😺" , key: m.key }})
-      if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Kai`)
+      if (!text) return reply(`Tag Someone, Example : ${prefix + command} @Kai`)
         const gan = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
         const teng = gan[Math.floor(Math.random() * gan.length)]
 A17.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${teng}%*` }, { quoted: m })
@@ -5148,11 +5355,11 @@ A17.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${teng}%*`
 
 
 case 'beautifulcheck':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "😺" , key: m.key }})
   
-      if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Kai`)
+      if (!text) return reply(`Tag Someone, Example : ${prefix + command} @Kai`)
         const can = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
         const tik = can[Math.floor(Math.random() * can.length)]
 A17.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${tik}%*` }, { quoted: m })
@@ -5169,11 +5376,11 @@ case 'greatcheck':
                case 'prettycheck':
                   case 'lovelycheck':
                     case 'uglycheck':
-                      if (isBan) return reply(mess.banned)
-                      if (isBanChat) return reply(mess.bangc)
+                      if (isBan) return reply(mess.banned);
+                      if (isBanChat) return reply(mess.bangc);
   A17.sendMessage(from, { react: { text: "😺" , key: m.key }})
   
-      if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Kai`)
+      if (!text) return reply(`Tag Someone, Example : ${prefix + command} @Kai`)
         const sangeh = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32','33','34','35','36','37','38','39','40','41','42','43','44','45','46','47','48','49','50','51','52','53','54','55','56','57','58','59','60','61','62','63','64','65','66','67','68','69','70','71','72','73','74','75','76','77','78','79','80','81','82','83','84','85','86','87','88','89','90','91','92','93','94','95','96','97','98','99','100']
         const sange = sangeh[Math.floor(Math.random() * sangeh.length)]
 A17.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${sange}%*` }, { quoted: m })
@@ -5181,11 +5388,11 @@ A17.sendMessage(from, { text: `*${command}*\n\nName : ${q}\nAnswer : *${sange}%*
 
 
 case 'charactercheck':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🤧" , key: m.key }})
 
-        if (!text) return replay(`Tag Someone, Example : ${prefix + command} @Kai`)
+        if (!text) return reply(`Tag Someone, Example : ${prefix + command} @Kai`)
         const A17tttt =['Compassionate','Generous','Grumpy','Forgiving','Obedient','Good','Simp','Kind-Hearted','patient','UwU','top, anyway','Helpful']
         const taky = A17tttt[Math.floor(Math.random() * A17tttt.length)]
         A17.sendMessage(from, { text: `Character Check : ${q}\nAnswer : *${taky}*` }, { quoted: m })
@@ -5194,8 +5401,8 @@ A17.sendMessage(from, { react: { text: "🤧" , key: m.key }})
 
 //
 case 'dare':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
 
                  const dare =[
@@ -5288,8 +5495,8 @@ A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
                      
 
 case 'truth':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
   
                          const truth =[
@@ -5396,16 +5603,16 @@ A17.sendMessage(from, { react: { text: "🌝" , key: m.key }})
 
 
 case 'nsfwA17':
-  if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 reply(mess.wait)
 nye = `http://api.lolhuman.xyz/api/gimage?apikey=${lolkey}&query=${command}`
 A17.sendMessage(from, {image:{url:nye}, caption:"Master..."}, {quoted:m})
 break;
 
 case 'mediafire': case 'mediafiredl': {
-if (isBan) return reply(mess.banned)
-  if (isBanChat) return reply(mess.bangc)
+if (isBan) return reply(mess.banned);
+  if (isBanChat) return reply(mess.bangc);
 if (!text) return reply(mess.linkm)
 if (!isUrl(args[0]) && !args[0].includes('mediafire.com')) return reply(`The link you provided is invalid`)
 const baby1 = await mediafireDl(text)
@@ -5425,9 +5632,9 @@ break;
 // case 'masturbation': case 'jahy': case 'hentai': case 'glasses': case 'gangbang': case 'foot': 
 // case 'femdom': case 'cum': case 'ero': case 'cuckold': case 'blowjob': case 'bdsm': 
 // case 'ahegao': case 'ass': case 'orgy': case 'panties': case 'pussy': case 'thighs': case 'yuri': case 'tentacles':
-// // if (isBan) return reply(mess.banned)	 			
-// // if (isBanChat) return reply(mess.bangc)
-// // if (!m.isGroup) return replay(mess.grouponly)
+// // if (isBan) return reply(mess.banned);	 			
+// // if (isBanChat) return reply(mess.bangc);
+// // if (!m.isGroup) return reply(mess.grouponly);
 // // if (!AntiNsfw) return reply(mess.nonsfw)
 // // try{
 // // reply(mess.waiting)
@@ -5445,9 +5652,9 @@ break;
 // // break;
 
 // case 'spank':
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 // spankd = await axios.get(`https://nekos.life/api/v2/img/spank`)                                   
@@ -5460,9 +5667,9 @@ break;
 
 
 // case 'blowjobgif': case 'bj' :
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 // bjd = await axios.get(`https://api.waifu.pics/nsfw/blowjob`)         
@@ -5475,9 +5682,9 @@ break;
 
 
 // case 'hentaivid': case 'hentaivideo': {
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 // anu = await hentai()
@@ -5488,9 +5695,9 @@ break;
 
 
 // case 'trap' :
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 // waifudd = await axios.get(`https://waifu.pics/api/nsfw/${command}`)       
@@ -5511,9 +5718,9 @@ break;
 
 // case 'hentai-neko' :
 // case 'hneko' :
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 //   waifudd = await axios.get(`https://waifu.pics/api/nsfw/neko`)
@@ -5534,9 +5741,9 @@ break;
 
 // case 'hentai-waifu' :
 // case 'hwaifu' :
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)
 //   waifudd = await axios.get(`https://waifu.pics/api/nsfw/waifu`)         
@@ -5556,9 +5763,9 @@ break;
 
 
 // case 'gasm':
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //   if (!AntiNsfw) return reply(mess.nonsfw)
 // reply(mess.waiting)						
 // waifudd = await axios.get(`https://nekos.life/api/v2/img/${command}`)
@@ -5589,8 +5796,8 @@ break;
 
 //
 case 'smug2':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
 reply(mess.waiting)						
 waifudd = await axios.get(`https://nekos.life/api/v2/img/smug`)
                   /*       var wbuttsss = [
@@ -5610,9 +5817,9 @@ break;
 
 
 case 'foxgirl':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   A17.sendMessage(from, { react: { text: "✨" , key: m.key }})     
 
 reply(mess.waiting)							
@@ -5635,9 +5842,9 @@ break;
 
 
 case 'animenom' :
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)
   waifudd = await axios.get(`https://waifu.pics/api/sfw/nom`)
 /*  let xxhnekobot = [
@@ -5656,9 +5863,9 @@ break;
 
 
 case 'waifu3':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)						
 waifudd = await axios.get(`https://nekos.life/api/v2/img/waifu`)
                  /*        var wbuttsss = [
@@ -5679,9 +5886,9 @@ break;
 
 //
 case 'crossplay': case 'crosplay': case 'cosplay':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   A17.sendMessage(from, { react: { text: "✨" , key: m.key }})  
 
            /*   const buttons = [
@@ -5704,9 +5911,9 @@ case 'crossplay': case 'crosplay': case 'cosplay':
 
 
 case 'neko2':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)					
   
  waifud = await axios.get('https://waifu.pics/api/sfw/neko')
@@ -5729,9 +5936,9 @@ reply(mess.waiting)
 case 'feed':
 case 'meow':
 case 'tickle':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)							
 waifudd = await axios.get(`https://nekos.life/api/v2/img/${command}`)
                          var wbuttsss = [
@@ -5759,9 +5966,9 @@ break;
 //
 case 'cry':  case 'handhold':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 A17.sendMessage(from, { react: { text: "❤" , key: m.key }})
 
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
@@ -5799,9 +6006,9 @@ break;
 
 case 'nom':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)	
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);	
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
   let messsender = m.sender
@@ -5837,9 +6044,9 @@ break;
 
 case 'hug':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)	
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);	
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
   let messsender = m.sender
@@ -5875,9 +6082,9 @@ break;
 
 case 'dance':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)	
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);	
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
   let messsender = m.sender
@@ -5917,9 +6124,9 @@ case 'bully': case 'bonk': case 'poke': case 'slap':
 case 'happy':
 case 'cuddle': case 'kick':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)	
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);	
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
   let messsender = m.sender
@@ -5958,9 +6165,9 @@ case 'wink': case 'smile':
 case 'wave': case 'blush': case 'smug': case 'glomp':
 case 'cringe': case 'highfive':{
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)	
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);	
 var pat = await fetchJson(`https://api.waifu.pics/sfw/${command}`)
 try {
   let messsender = m.sender
@@ -6001,9 +6208,9 @@ case 'bully': case 'bonk': case 'wink': case 'poke': case 'nom': case 'slap': ca
 case 'wave': case 'blush': case 'smug': case 'glomp': case 'happy': case 'dance':
 case 'cringe': case 'cuddle': case 'highfive': case 'handhold': case 'kick':
 
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)						
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);						
 resggh = await axios.get(`https://nekos.life/api/v2/img/${command}`)         
 let resffj = await getBuffer(resggh.data.url)
 let resmain = await GIFBufferToVideoBuffer(resffj)   
@@ -6016,9 +6223,9 @@ break;
 
 
 case 'megumin':
-if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-if (!m.isGroup) return replay(mess.grouponly)
+if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)							
 ud = await axios.get('https://waifu.pics/api/sfw/megumin')
 /*var wbutsss = [
@@ -6038,9 +6245,9 @@ break;
 
 
 case 'awoo':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   A17.sendMessage(from, { react: { text: "✨" , key: m.key }}) 
 
   reply(mess.waiting)						
@@ -6063,9 +6270,9 @@ break;
 
 
 case 'animewall2': case 'animewallpaper2':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   reply(mess.waiting)						
 const { AnimeWallpaper } =require("anime-wallpaper")
 if(!q) return reply('Please enter a seach term!')
@@ -6093,9 +6300,9 @@ break;
 
 
 // case 'anime':
-//   if (isBan) return reply(mess.banned)	 			
-//   if (isBanChat) return reply(mess.bangc)
-//   if (!m.isGroup) return replay(mess.grouponly)
+//   if (isBan) return reply(mess.banned);	 			
+//   if (isBanChat) return reply(mess.bangc);
+//   if (!m.isGroup) return reply(mess.grouponly);
 //     if(!q) return reply(`Please proide a search term!\n\n*Example:* ${prefix}anime naruto`)
 // reply(mess.waiting)							
 // const { Anime } =require("@shineiichijo/marika")
@@ -6142,9 +6349,9 @@ break;
 
 //
 case 'anime': {
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
   A17.sendMessage(from, { react: { text: "🍁" , key: m.key }});
   if(!text) return reply(`Please proide a search term!\n\n*Example:* ${prefix}anime naruto`)
 
@@ -6173,9 +6380,9 @@ case 'anime': {
 
 
 case 'manga':
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly) 
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly); 
 A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
   
 reply(mess.waiting)							
@@ -6211,9 +6418,9 @@ break;
 
 
 case 'waifu' :
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)	
   waifuddd = await axios.get('https://waifu.pics/api/sfw/waifu')
 /*var wbuttsssr = [
@@ -6233,9 +6440,9 @@ break;
 
 
 case 'neko' :
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)	
   waifuddd = await axios.get('https://waifu.pics/api/sfw/neko')
 /*var wbuttsssr = [
@@ -6255,9 +6462,9 @@ break;
 
 
 case 'loli' :
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 reply(mess.waiting)	
   waifuddd = await axios.get('https://waifu.pics/api/sfw/shinobu')
 /* var wbuttsssr = [
@@ -6277,22 +6484,22 @@ break;
 
 
 case "quotes":
-  if (isBan) return reply(mess.banned)	 			
-if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 var res = await fetch('https://animechan.vercel.app/api/random')
 teks = `\n*Anime:* ${res.anime}\n`
 teks += `\n*Quotes:*\n`
 teks += `${res.json}\n`
 
-replay(teks)
+reply(teks)
 break;
 
 
 case "darkjoke":
-  if (isBan) return reply(mess.banned)	 			
-  if (isBanChat) return reply(mess.bangc)
-  if (!m.isGroup) return replay(mess.grouponly)
+  if (isBan) return reply(mess.banned);	 			
+  if (isBanChat) return reply(mess.bangc);
+  if (!m.isGroup) return reply(mess.grouponly);
 var res = await Darkjokes()
 teks = "\nDarkjokes"
 A17.sendMessage(m.chat, { image : { url : res }, caption: teks }, { quoted : m })
@@ -6304,42 +6511,12 @@ break;
                  ////////////////////////////////////////////////////////////////////////////
 
 
-
-         case 'antilink': {
-    if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
- if (!m.isGroup) return replay(mess.grouponly)
- if (!isBotAdmins) return replay(mess.botadmin)
- if (!isAdmins && !isCreator) return replay(mess.useradmin)
- if (args[0] === "on") {
- if (AntiLinkAll) return replay('Already activated')
- ntilinkall.push(from)
- replay('Enabled all antilink !')
- var groupe = await A17.groupMetadata(from)
- var members = groupe['participants']
- var mems = []
- members.map(async adm => {
- mems.push(adm.id.replace('c.us', 's.whatsapp.net'))
- })
- A17.sendMessage(from, {text: `\`\`\`「 Warning 」\`\`\`\n\nAntilink System Activated!`, contextInfo: { mentionedJid : mems }}, {quoted:m})
- } else if (args[0] === "off") {
- if (!AntiLinkAll) return replay('Already deactivated')
- let off = ntilinkall.indexOf(from)
- ntilinkall.splice(off, 1)
- replay('Disabled all antilink !')
- } else {
-   let textmsg = 'Type ' + `${prefix}${command}` + ' on to turn on antilink feature or Type ' + `${prefix + command}` + ' off to turn off antilink feature'
-   await A17.sendMessage(m.chat, { text: `${textmsg}`}, `${global.BotName}`, m)
-   }
-   }
-   break;
-
      
       // case 'remove': {
 
-      //   if (!m.isGroup) return replay(mess.grouponly)
-      //   if (!isBotAdmins) return replay(mess.botadmin)
-      //   if (!isAdmins && !isCreator) return replay(mess.useradmin)
+      //   if (!m.isGroup) return reply(mess.grouponly);
+      //   if (!isBotAdmins) return reply(mess.botadmin);
+      //   if (!isAdmins && !isCreator) return reply(mess.useradmin)
       //   let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
       //   await A17.groupParticipantsUpdate(m.chat, [users], 'remove')
       // }
@@ -6352,21 +6529,21 @@ break;
 
 
       case 'bc': case 'broadcast': case 'bcall': {
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
-    if (!isCreator) return replay(mess.botowner)
-    if (!args.join(" ")) return replay(`Please enter some text to broadcast! \n\nExample : ${prefix + command} ${global.OwnerName}`)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
+    if (!isCreator) return reply(mess.botowner)
+    if (!args.join(" ")) return reply(`Please enter some text to broadcast! \n\nExample : ${prefix + command} ${global.OwnerName}`)
     let anu = await store.chats.all().map(v => v.id)
-    replay(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
+    reply(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
     for (let yoi of anu) {
     await sleep(1500)
     let btn = [{
-    quickReplyButton: {
+    quickreplyButton: {
     displayText: '💡 Menu 💡',
     id: '-menu'
     }  
     }, {
-    quickReplyButton: {
+    quickreplyButton: {
     displayText: 'Bot Owner',
     id: '-owner'
     }
@@ -6374,352 +6551,376 @@ break;
     let txt = `「 *${global.OwnerName}'s Broadcast* 」\n\n${text}`
     A17.send5ButImg(yoi, txt, `${global.BotName}`, BotLogo, btn, Thumb)
     }
-    replay('Broadcast Sent !')
+    reply('Broadcast Sent !')
     }
     break;    
     
     
-
-                   ///////////////////////////////////////////////////////////////////////////////////
-                  ////////////////////////////////////////////////////////////////////////////////////
-
-
+    
 
     case 'help': case 'h': case 'menu': case 'allmenu': case 'listmenu':{
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
-    A17.sendMessage(from, { react: { text: "✨" , key: m.key }})      
-    const helpmenu = `Hemlo *${pushname}* Dear...!! ${nowtime} ,
-    
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+  A17.sendMessage(from, { react: { text: "✨" , key: m.key }})      
+  const helpmenu = `Hemlo *${pushname}* Dear...!! ${nowtime} ,
+  
 Hemlo, I am "A17" a WhatsApp bot create and recode by Kai to do everything that is possible on WhatsApp based on WhatsApp Multi Device(MD) Support.
-  
-
-    ⌯    *Time* : ${kaitime}
-    ⌯    *Date* : ${kaidate}
 
 
-    〢━━━ 〄 Bot Info 〄 ━━━〢
+  ⌯    *Time* : ${kaitime}
+  ⌯    *Date* : ${kaidate}
 
 
-    ⌯    *Bot usr name :* ${pushname} 
-    ⌯    *My prefix is :*  ${prefix}
-    ⌯    *Owner name :* ${global.OwnerName} 
-    ⌯    *Bot runtime :* ${runtime(process.uptime())} 
-    ⌯    *Platform :* Linux
+  〢━━━ 〄 Bot Info 〄 ━━━〢
 
 
-    〢━━━ 〄 Core 〄 ━━━〢
+  ⌯    *Bot usr name :* ${pushname} 
+  ⌯    *My prefix is :*  ${prefix}
+  ⌯    *Owner name :* ${global.OwnerName} 
+  ⌯    *Bot runtime :* ${runtime(process.uptime())} 
+  ⌯    *Platform :* Linux
 
 
-    ⌯     ${prefix}repo
-    ⌯     ${prefix}script
-    ⌯     ${prefix}speak
-    ⌯     ${prefix}support
-    ⌯     ${prefix}stalk
-    ⌯     ${prefix}A17
-    ⌯     ${prefix}delete
-  
-
-    〢━━━ ⌬ Owner Only ⌬ ━━━〢
+  〢━━━ 〄 Core 〄 ━━━〢
 
 
-    ⌯     ${prefix}join
-    ⌯     ${prefix}self
-    ⌯     ${prefix}public
-    ⌯     ${prefix}restart
-    ⌯     ${prefix}sleep
-    ⌯     ${prefix}setbotpp
-    ⌯     ${prefix}post
-    ⌯     ${prefix}listonline
-    ⌯     ${prefix}listgc
-    ⌯     ${prefix}listpc
-    ⌯     ${prefix}getcase
-    ⌯     ${prefix}bangroup
-    ⌯     ${prefix}broadcast
-    ⌯     ${prefix}bye
-    ⌯     ${prefix}block
-    ⌯     ${prefix}unblock
-    ⌯     ${prefix}ban add
-    ⌯     ${prefix}ban del
-
-   
-    〢━━━ ❅ Group Moderation ❅ ━━━〢
+  ⌯     ${prefix}repo
+  ⌯     ${prefix}script
+  ⌯     ${prefix}speak
+  ⌯     ${prefix}support
+  ⌯     ${prefix}stalk
+  ⌯     ${prefix}setprefix
+  ⌯     ${prefix}auto-status
+  ⌯     ${prefix}auto-typing
+  ⌯     ${prefix}auto-recoding
 
 
-    ⌯     ${prefix}add
-    ⌯     ${prefix}invite
-    ⌯     ${prefix}remove
-    ⌯     ${prefix}promote
-    ⌯     ${prefix}demote
-    ⌯     ${prefix}grouplink
-    ⌯     ${prefix}groupsetting
-    ⌯     ${prefix}setname
-    ⌯     ${prefix}setgcpp
-    ⌯     ${prefix}setdesc
-    ⌯     ${prefix}revoke
-    ⌯     ${prefix}tagall
-    ⌯     ${prefix}hidetag
-    ⌯     ${prefix}nsfw
-    ⌯     ${prefix}nsnfwmenu
-  
+  〢━━━ ⌬ Owner Only ⌬ ━━━〢
 
-    〢━━━❗ *Anti Link ❗* ━━━〢
 
-    
-    ⌯     ${prefix}antilinkgc
-    ⌯     ${prefix}antilinktt
-    ⌯     ${prefix}antilinkytch
-    ⌯     ${prefix}antilinkytch
-    ⌯     ${prefix}antilinkig
-    ⌯     ${prefix}antilinkfb
-    ⌯     ${prefix}antilinktwit
-    ⌯     ${prefix}antiwame
-    ⌯     ${prefix}antilinkall
-    
+  ⌯     ${prefix}join
+  ⌯     ${prefix}self
+  ⌯     ${prefix}public
+  ⌯     ${prefix}restart
+  ⌯     ${prefix}sleep
+  ⌯     ${prefix}setbotpp
+  ⌯     ${prefix}post
+  ⌯     ${prefix}listonline
+  ⌯     ${prefix}listgc
+  ⌯     ${prefix}listpc
+  ⌯     ${prefix}getcase
+  ⌯     ${prefix}bangroup
+  ⌯     ${prefix}broadcast
+  ⌯     ${prefix}bye
+  ⌯     ${prefix}block
+  ⌯     ${prefix}unblock
+  ⌯     ${prefix}ban add
+  ⌯     ${prefix}ban del
 
-    〢━━━ 🔍 *Search* 🔎 ━━━〢
-    
-   
-    ⌯     ${prefix}play
-    ⌯     ${prefix}song
-    ⌯     ${prefix}video
-    ⌯     ${prefix}ytmp3
-    ⌯     ${prefix}ytmp4 
-    ⌯     ${prefix}yts
-    ⌯     ${prefix}lyrics
-    ⌯     ${prefix}movie
-    ⌯     ${prefix}google
-    ⌯     ${prefix}gimage
-    ⌯     ${prefix}pinterest
-    ⌯     ${prefix}wallpaper
-    ⌯     ${prefix}image
-    ⌯     ${prefix}searchgc
-    ⌯     ${prefix}wikimedia
  
+  〢━━ ❅ Group Moderation ❅ ━━〢
+
+
+  ⌯     ${prefix}add
+  ⌯     ${prefix}invite
+  ⌯     ${prefix}remove
+  ⌯     ${prefix}promote
+  ⌯     ${prefix}demote
+  ⌯     ${prefix}grouplink
+  ⌯     ${prefix}group-event
+  ⌯     ${prefix}groupsetting
+  ⌯     ${prefix}setname
+  ⌯     ${prefix}setgcpp
+  ⌯     ${prefix}setdesc
+  ⌯     ${prefix}revoke
+  ⌯     ${prefix}tagall
+  ⌯     ${prefix}hidetag
+  ⌯     ${prefix}nsfw
+  ⌯     ${prefix}nsnfwmenu
+
+
+  〢━━━❗ *Anti Link ❗* ━━━〢
+
   
-    〢━━━ 📈 *Economy* 📈 ━━━〢
+  ⌯     ${prefix}antilinkgc
+  ⌯     ${prefix}antilinktt
+  ⌯     ${prefix}antilinkytch
+  ⌯     ${prefix}antilinkytch
+  ⌯     ${prefix}antilinkig
+  ⌯     ${prefix}antilinkfb
+  ⌯     ${prefix}antilinktwit
+  ⌯     ${prefix}antiwame
+  ⌯     ${prefix}antilinkall
   
 
-    ⌯     ${prefix}daily 
-    ⌯     ${prefix}wallet
-    ⌯     ${prefix}bank
-    ⌯     ${prefix}bankupgrade
-    ⌯     ${prefix}deposit
-    ⌯     ${prefix}withdraw 
-    ⌯     ${prefix}rob / attack
-    ⌯     ${prefix}transfer / give
-    ⌯     ${prefix}wealth / ritual
+  〢━━━ 🔍 *Search* 🔎 ━━━〢
   
-
-    〢━━━ 🎮 *Games* 🎮 ━━━〢
-
-
-    ⌯     ${prefix}ttt / tictactoe
-    ⌯     ${prefix}truth
-    ⌯     ${prefix}dare
-    ⌯     ${prefix}spin / slot
-    ⌯     ${prefix}gamble / lottery
-   
-
-    〢━━━ 🛠️ *Convert* 🛠️ ━━━〢
-   
-
-    ⌯     ${prefix}sticker
-    ⌯     ${prefix}toimg
-    ⌯     ${prefix}tovideo
-    ⌯     ${prefix}togif
-    ⌯     ${prefix}tourl
-    ⌯     ${prefix}tomp3
-    ⌯     ${prefix}toaudio
-    ⌯     ${prefix}steal
-    ⌯     ${prefix}stickermeme
-    ⌯     ${prefix}emojimix
+ 
+  ⌯     ${prefix}play
+  ⌯     ${prefix}song
+  ⌯     ${prefix}video
+  ⌯     ${prefix}ytmp3
+  ⌯     ${prefix}ytmp4 
+  ⌯     ${prefix}yts
+  ⌯     ${prefix}lyrics
+  ⌯     ${prefix}movie
+  ⌯     ${prefix}google
+  ⌯     ${prefix}gimage
+  ⌯     ${prefix}pinterest
+  ⌯     ${prefix}wallpaper
+  ⌯     ${prefix}image
+  ⌯     ${prefix}searchgc
+  ⌯     ${prefix}wikimedia
 
 
-    〢━━━ ◈ Sound Edit ◈ ━━━〢
+  〢━━━ 📈 *Economy* 📈 ━━━〢
 
 
-    ⌯     ${prefix}ringtone
-    ⌯     ${prefix}bass
-    ⌯     ${prefix}tempo
-    ⌯     ${prefix}blown
-    ⌯     ${prefix}robot
-    ⌯     ${prefix}slow
-    ⌯     ${prefix}squirrel
-    ⌯     ${prefix}deep
-    ⌯     ${prefix}earrape
-    ⌯     ${prefix}fast
-    ⌯     ${prefix}fat
-    ⌯     ${prefix}nightcore
-    ⌯     ${prefix}reverse
+  ⌯     ${prefix}daily 
+  ⌯     ${prefix}wallet
+  ⌯     ${prefix}bank
+  ⌯     ${prefix}bankupgrade
+  ⌯     ${prefix}deposit
+  ⌯     ${prefix}withdraw 
+  ⌯     ${prefix}rob / attack
+  ⌯     ${prefix}transfer / give
+  ⌯     ${prefix}wealth / ritual
+
+
+  〢━━━ 🎮 *Games* 🎮 ━━━〢
+
+
+  ⌯     ${prefix}ttt / tictactoe
+  ⌯     ${prefix}truth
+  ⌯     ${prefix}dare
+  ⌯     ${prefix}spin / slot
+  ⌯     ${prefix}gamble / lottery
  
 
-    〢━━━ 📍 *Reactions* 📍 ━━━〢
-   
-
-    ⌯     ${prefix}cuddle
-    ⌯     ${prefix}hug
-    ⌯     ${prefix}kiss
-    ⌯     ${prefix}bonk
-    ⌯     ${prefix}cry
-    ⌯     ${prefix}bully
-    ⌯     ${prefix}slap
-    ⌯     ${prefix}kill
-    ⌯     ${prefix}happy
-    ⌯     ${prefix}lick
-    ⌯     ${prefix}pat
-    ⌯     ${prefix}smug
-    ⌯     ${prefix}nom
-    ⌯     ${prefix}glomp
-    ⌯     ${prefix}bite
-    ⌯     ${prefix}yeet
-    ⌯     ${prefix}blush
-    ⌯     ${prefix}smile
-    ⌯     ${prefix}wave
-    ⌯     ${prefix}highfive
-    ⌯     ${prefix}handhold
-    ⌯     ${prefix}poke
-    ⌯     ${prefix}wink
-    ⌯     ${prefix}dance
-    ⌯     ${prefix}cringe
-
-
-    〢━━━ 🌌 *Downloader* 🌌 ━━━〢
-   
-  
-    ⌯     ${prefix}ytvideo
-    ⌯     ${prefix}mediafire
-    ⌯     ${prefix}instagram
-    ⌯     ${prefix}igtv
-    ⌯     ${prefix}facebook
-    ⌯     ${prefix}fbmp3
-    ⌯     ${prefix}twitter
-    ⌯     ${prefix}twittermp3
-    ⌯     ${prefix}tiktok
-    ⌯     ${prefix}tiktokaudio
-    ⌯     ${prefix}happymod
-    ⌯     ${prefix}tiktoknowm
-  
-   
-    〢━━━ 🎐 *Fun* 🎐 ━━━〢
-    
-
-    ⌯     ${prefix}reaction
-    ⌯     ${prefix}cutecheck
-    ⌯     ${prefix}couple
-    ⌯     ${prefix}soulmate
-    ⌯     ${prefix}handsomecheck
-    ⌯     ${prefix}beautifulcheck
-    ⌯     ${prefix}awesomecheck
-    ⌯     ${prefix}greatcheck
-    ⌯     ${prefix}gaycheck
-    ⌯     ${prefix}uglycheck
-    ⌯     ${prefix}charactercheck
-    ⌯     ${prefix}lesbiancheck
-    ⌯     ${prefix}hornychec
-    ⌯     ${prefix}prettycheck
-    ⌯     ${prefix}lovelycheck
-
-
-    〢━━━ 🈴 *Weeb* 🈴 ━━━〢
-  
-    
-    ⌯     ${prefix}anime
-    ⌯     ${prefix}animestory
-    ⌯     ${prefix}awoo
-    ⌯     ${prefix}manga
-    ⌯     ${prefix}animewall
-    ⌯     ${prefix}animewallpaper2
-    ⌯     ${prefix}crosplay
-    ⌯     ${prefix}animenom
-    ⌯     ${prefix}feed
-    ⌯     ${prefix}foxgirl
-    ⌯     ${prefix}waifu
-    ⌯     ${prefix}waifu2
-    ⌯     ${prefix}waifu3
-    ⌯     ${prefix}loli
-    ⌯     ${prefix}coffee
-    ⌯     ${prefix}tickle
-    ⌯     ${prefix}meow
-    ⌯     ${prefix}neko
-    ⌯     ${prefix}neko2
-    ⌯     ${prefix}migumin
-    ⌯     ${prefix}wallpaper
-    ⌯     ${prefix}animequote
-   
- 
-    〢━━━ ♨️ *Informative* ♨️ ━━━〢
-    
-  
-    ⌯     ${prefix}quote
-    ⌯     ${prefix}weather
-    ⌯     ${prefix}covid
-    ⌯     ${prefix}earthquake
-    ⌯     ${prefix}wiki
-    ⌯     ${prefix}stalknumber
-  
-
-    〢━━━ 🪁 *Essentials* 🪁 ━━━〢
-   
-    
-    ⌯     ${prefix}qr
-    ⌯     ${prefix}say
-    ⌯     ${prefix}fliptext
-    ⌯     ${prefix}toletter
-    ⌯     ${prefix}translate, 
-    
-   
-    〢━━━ 🎗 *Others* 🎗 ━━━〢
+  〢━━━ 🛠️ *Convert* 🛠️ ━━━〢
  
 
-    ⌯     ${prefix}stickermeme
-    ⌯     ${prefix}quotes
-    ⌯     ${prefix}report
-    ⌯     ${prefix}afk
-    ⌯     ${prefix}darkjoke
-    
+  ⌯     ${prefix}sticker
+  ⌯     ${prefix}toimg
+  ⌯     ${prefix}tovideo
+  ⌯     ${prefix}togif
+  ⌯     ${prefix}tourl
+  ⌯     ${prefix}tomp3
+  ⌯     ${prefix}toaudio
+  ⌯     ${prefix}steal
+  ⌯     ${prefix}stickermeme
+  ⌯     ${prefix}emojimix
 
-    〢━━━ ⚠️ *NSFW* ⚠️ ━━━〢
+
+  〢━━━ ◈ Sound Edit ◈ ━━━〢
+
+
+  ⌯     ${prefix}ringtone
+  ⌯     ${prefix}bass
+  ⌯     ${prefix}tempo
+  ⌯     ${prefix}blown
+  ⌯     ${prefix}robot
+  ⌯     ${prefix}slow
+  ⌯     ${prefix}squirrel
+  ⌯     ${prefix}deep
+  ⌯     ${prefix}earrape
+  ⌯     ${prefix}fast
+  ⌯     ${prefix}fat
+  ⌯     ${prefix}nightcore
+  ⌯     ${prefix}reverse
+
+
+  〢━━━ 📍 *Reactions* 📍 ━━━〢
+ 
+
+  ⌯     ${prefix}cuddle
+  ⌯     ${prefix}hug
+  ⌯     ${prefix}kiss
+  ⌯     ${prefix}bonk
+  ⌯     ${prefix}cry
+  ⌯     ${prefix}bully
+  ⌯     ${prefix}slap
+  ⌯     ${prefix}kill
+  ⌯     ${prefix}happy
+  ⌯     ${prefix}lick
+  ⌯     ${prefix}pat
+  ⌯     ${prefix}smug
+  ⌯     ${prefix}nom
+  ⌯     ${prefix}glomp
+  ⌯     ${prefix}bite
+  ⌯     ${prefix}yeet
+  ⌯     ${prefix}blush
+  ⌯     ${prefix}smile
+  ⌯     ${prefix}wave
+  ⌯     ${prefix}highfive
+  ⌯     ${prefix}handhold
+  ⌯     ${prefix}poke
+  ⌯     ${prefix}wink
+  ⌯     ${prefix}dance
+  ⌯     ${prefix}cringe
+
+
+  〢━━ 🌌 *Downloader* 🌌 ━━〢
+ 
+
+  ⌯     ${prefix}ytvideo
+  ⌯     ${prefix}mediafire
+  ⌯     ${prefix}instagram
+  ⌯     ${prefix}igtv
+  ⌯     ${prefix}facebook
+  ⌯     ${prefix}fbmp3
+  ⌯     ${prefix}twitter
+  ⌯     ${prefix}twittermp3
+  ⌯     ${prefix}tiktok
+  ⌯     ${prefix}tiktokaudio
+  ⌯     ${prefix}happymod
+  ⌯     ${prefix}tiktoknowm
+
+ 
+  〢━━━ 🎐 *Fun* 🎐 ━━━〢
+  
+
+  ⌯     ${prefix}reaction
+  ⌯     ${prefix}cutecheck
+  ⌯     ${prefix}couple
+  ⌯     ${prefix}soulmate
+  ⌯     ${prefix}handsomecheck
+  ⌯     ${prefix}beautifulcheck
+  ⌯     ${prefix}awesomecheck
+  ⌯     ${prefix}greatcheck
+  ⌯     ${prefix}gaycheck
+  ⌯     ${prefix}uglycheck
+  ⌯     ${prefix}charactercheck
+  ⌯     ${prefix}lesbiancheck
+  ⌯     ${prefix}hornychec
+  ⌯     ${prefix}prettycheck
+  ⌯     ${prefix}lovelycheck
+
+
+  〢━━━ 🈴 *Weeb* 🈴 ━━━〢
+
+  
+  ⌯     ${prefix}anime
+  ⌯     ${prefix}animestory
+  ⌯     ${prefix}awoo
+  ⌯     ${prefix}manga
+  ⌯     ${prefix}animewall
+  ⌯     ${prefix}animewallpaper2
+  ⌯     ${prefix}crosplay
+  ⌯     ${prefix}animenom
+  ⌯     ${prefix}feed
+  ⌯     ${prefix}foxgirl
+  ⌯     ${prefix}waifu
+  ⌯     ${prefix}waifu2
+  ⌯     ${prefix}waifu3
+  ⌯     ${prefix}loli
+  ⌯     ${prefix}coffee
+  ⌯     ${prefix}tickle
+  ⌯     ${prefix}meow
+  ⌯     ${prefix}neko
+  ⌯     ${prefix}neko2
+  ⌯     ${prefix}migumin
+  ⌯     ${prefix}wallpaper
+  ⌯     ${prefix}animequote
+ 
+
+  〢━━━ ♨️ *Informative* ♨️ ━━━〢
+  
+
+  ⌯     ${prefix}quote
+  ⌯     ${prefix}weather
+  ⌯     ${prefix}covid
+  ⌯     ${prefix}earthquake
+  ⌯     ${prefix}wiki
+  ⌯     ${prefix}stalknumber
+
+
+  〢━━━ 🪁 *Essentials* 🪁 ━━━〢
+ 
+  
+  ⌯     ${prefix}qr
+  ⌯     ${prefix}say
+  ⌯     ${prefix}fliptext
+  ⌯     ${prefix}toletter
+  ⌯     ${prefix}translate, 
+  
+ 
+  〢━━━ 🎗 *Others* 🎗 ━━━〢
+
+
+  ⌯     ${prefix}stickermeme
+  ⌯     ${prefix}quotes
+  ⌯     ${prefix}report
+  ⌯     ${prefix}afk
+  ⌯     ${prefix}darkjoke
+  
+
+  〢━━━ ⚠️ *NSFW* ⚠️ ━━━〢
+ 
+ 
+  ⌯   🍁 Type *${prefix}nsfw* then enable 
+  ⌯       NSFW (Admin only!)
+  ⌯    
+  ⌯   🍁 Then type *${prefix}nsfwmenu* for
+  ⌯       all NSFW commands.
+  ⌯    
+  ⌯   『  *${global.BotName}*  』
+  ⌯       Developed By: *Kai*
+  ⌯    
+  ⌯   🍁 To use any of these
+  ⌯       commands type.
+  ⌯    
+  ⌯   *${prefix}<Command name>*.
+  ⌯    
+  ⌯   🍁 To get Support Group link
+  ⌯     type *${prefix}support*.
+  ⌯    
+  ⌯    
+  ⌯   🍁 Type *${prefix}help* to get
+  ⌯       full command list.
+  ┬│▸
+  ╰────────────···▸`
+          let buttonMessage = {
+                      video:fs.readFileSync('./system/A17_3.mp4'),gifPlayback:true,
+                      caption: helpmenu,
+                      
+                      headerType: 4
+                      
+                  }
+              A17.sendMessage(m.chat, buttonMessage,{ quoted:m })
+                  }
+  break;
    
-   
-    ⌯    🍁 Type "*${prefix}nsfw*" then enable 
-    ⌯       NSFW (Admin only!)
-    ⌯    
-    ⌯    🍁 Then type "*${prefix}nsfwmenu*" for
-    ⌯       all NSFW commands.
-    ⌯    
-    ⌯    『  *${global.BotName}*  』
-    ⌯       Developed By: *Kai*
-    ⌯    
-    ⌯    🍁 To use any of these
-    ⌯       commands type.
-    ⌯    
-    ⌯    "*${prefix}<Command name>*".
-    ⌯    
-    ⌯    🍁 To get Support Group link
-    ⌯     type "*${prefix}support*".
-    ⌯    
-    ⌯    
-    ⌯    🍁 Type "*${prefix}help*" to get
-    ⌯       full command list.
-    ┬│▸
-    ╰────────────···▸`
-            let buttonMessage = {
-                        video:fs.readFileSync('./system/A17_3.mp4'),gifPlayback:true,
-                        caption: helpmenu,
-                        
-                        headerType: 4
-                        
-                    }
-                A17.sendMessage(m.chat, buttonMessage,{ quoted:m })
-                    }
-    break;
-     
+  
+  case '':
+      if(isCmd){
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+      A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
+          
+   reply(`Do you need any help ${pushname} ? Type *${prefix}help* to get my full command list.`)
+      }
+      
+  break; 
+
+  
+  case '':
+      if(isCmd){
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+      A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
+          
+   reply(`Do you need any help ${pushname} ? Type *${prefix}help* to get my full command list.`)
+      }
+      
+  break; 
+
+
     
     case '':
         if(isCmd){
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
         A17.sendMessage(from, { react: { text: "✨" , key: m.key }})
             
      reply(`Do you need any help ${pushname} ? Type *${prefix}help* to get my full command list.`)
@@ -6730,9 +6931,9 @@ Hemlo, I am "A17" a WhatsApp bot create and recode by Kai to do everything that 
 
     //qr
     case 'qr': case 'scanner': case 'qrcode':
-      if (isBan) return reply(mess.banned)	 			
-      if (isBanChat) return reply(mess.bangc)
-      if (!m.isGroup) return replay(mess.grouponly)
+      if (isBan) return reply(mess.banned);	 			
+      if (isBanChat) return reply(mess.bangc);
+      if (!m.isGroup) return reply(mess.grouponly);
 A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
   
   reply(`Running repl....Please wait until repl.it responds...`)						
@@ -6755,8 +6956,8 @@ A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
 
       //////search
       case 'weather':
-        if (isBan) return reply(mess.banned)	 			
-        if (isBanChat) return reply(mess.bangc)
+        if (isBan) return reply(mess.banned);	 			
+        if (isBanChat) return reply(mess.bangc);
         A17.sendMessage(from, { react: { text: "✨", key: m.key }}) 
         if (!args[0]) return reply("Enter your location to search weather.")
         myweather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${args.join(" ")}&units=metric&appid=e409825a497a0c894d2dd975542234b0&language=tr`)
@@ -6826,8 +7027,8 @@ A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
       default:
 
       if(isCmd){
-          if (isBan) return reply(mess.banned)	 			
-          if (isBanChat) return reply(mess.bangc)
+          if (isBan) return reply(mess.banned);	 			
+          if (isBanChat) return reply(mess.bangc);
           A17.sendMessage(from, { react: { text: "❌", key: m.key }}) 
           reply (`Hey *${pushname}* senpai! this command are not programmed! Type *${prefix}help* to get my full command list!`)
   
@@ -6863,10 +7064,10 @@ A17.sendMessage(from, { react: { text: "🍁" , key: m.key }})
   
                   
   if (budy.startsWith('$')) {
-  if (!isCreator) return replay(mess.botowner)
+  if (!isCreator) return reply(mess.botowner)
   exec(budy.slice(2), (err, stdout) => {
   if(err) return A17.sendMessage(from, {image:ErrorPic, caption:String(err)}, {quoted:m})
-  if (stdout) return replayH(stdout)
+  if (stdout) return replyH(stdout)
   })
   }
   

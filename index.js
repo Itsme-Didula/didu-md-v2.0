@@ -22,6 +22,10 @@ const CFonts = require("cfonts");
 const { exec, spawn, execSync } = require("child_process");
 const moment = require("moment-timezone");
 const PhoneNumber = require("awesome-phonenumber");
+const { promisify } = require("util");
+const writeFileAsync = promisify(fs.writeFile);
+const path = require("path");
+
 const {
   imageToWebp,
   videoToWebp,
@@ -147,7 +151,7 @@ async function startA17() {
     }
   
 
-    //Group event on off
+    //... Group event on off directlly.
     
   /* 
   
@@ -221,6 +225,82 @@ async function startA17() {
 */
 
 
+//... Groupevent handling
+
+A17.ev.on('group-participants.update', async (anu) => {
+  if (global.groupevent) { // Check if group event handling is enabled ...
+    console.log(anu);
+
+    try {
+      let metadata = await A17.groupMetadata(anu.id);
+      let participants = anu.participants;
+      for (let num of participants) {
+        // ... existing logic for adding and removing participants ...
+        
+      try {
+        ppuser = await A17.profilePictureUrl(num, 'image')
+      } catch {
+        ppuser = 'https://images6.alphacoders.com/690/690121.jpg'
+      }
+
+      try {
+        ppgroup = await A17.profilePictureUrl(anu.id, 'image')
+      } catch {
+        ppgroup = 'https://telegra.ph/file/4cc2712eee93c105f6739.jpg'
+      }
+
+      let targetname = await A17.getName(num)
+      grpmembernum = metadata.participants.length
+
+
+        if (anu.action == 'add') {
+          // ... existing logic for welcoming new participants ...
+          let WAuserName = num
+          A17text = `
+Hello @${WAuserName.split("@")[0]},
+
+I am *A17 Bot*, Welcome to ${metadata.subject}.
+
+*Group Description:*
+${metadata.desc}
+`
+
+          let buttonMessage = {
+            image: await getBuffer(ppgroup),
+            mentions: [num],
+            caption: A17text,
+            footer: `${global.BotName}`,
+            headerType: 4,
+          }
+          A17.sendMessage(anu.id, buttonMessage)
+        } else if (anu.action == 'remove') {
+          // ... existing logic for saying goodbye to departing participants ...
+          let WAuserName = num
+          A17text = `
+Okay Bye 👋, @${WAuserName.split("@")[0]},
+
+You'll be a noticeable absence!
+`
+
+          let buttonMessage = {
+            image: await getBuffer(ppuser),
+            mentions: [num],
+            caption: A17text,
+            footer: `${global.BotName}`,
+            headerType: 4,
+
+          }
+          A17.sendMessage(anu.id, buttonMessage)
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
+
+
+  //
   A17.decodeJid = (jid) => {
     if (!jid) return jid;
     if (/:\d+@/gi.test(jid)) {
@@ -364,6 +444,13 @@ async function startA17() {
   });
 
   A17.ev.on("creds.update", saveCreds);
+
+
+
+  // auto status seen ...
+const _0x3991b1=_0x24be;function _0x4657(){const _0x16d819=['26697GyyGHG','27UOxump','Error\x20reading\x20messages:','participant','294wUpjBr','7732mzYwWN','push','1254371GIkUUm','readMessages','messages.upsert','873NYGddy','error','136zmOfiw','statusseen','Deleted\x20story❗','3600123DiOjsB','status@broadcast','2XPLZNn','shift','split','message','10BcDgcz','31860KZDZgJ','24KLoQUS','key','255473HAkLFI','14219007XVkPts','8196071AhMYXl','log','View\x20user\x20stories','2104260FqkWHn','2900wrgSlj','2369756iVZGFf','162369ppXChF','1512vjHAym'];_0x4657=function(){return _0x16d819;};return _0x4657();}function _0x24be(_0x5629d1,_0x2848d2){const _0x46576f=_0x4657();return _0x24be=function(_0x24beb1,_0x4a860f){_0x24beb1=_0x24beb1-0x1e1;let _0x554c0e=_0x46576f[_0x24beb1];return _0x554c0e;},_0x24be(_0x5629d1,_0x2848d2);}(function(_0x1b4b12,_0x52d1f3){const _0xc4af2d=_0x24be,_0x8844a7=_0x1b4b12();while(!![]){try{const _0x5204d7=-parseInt(_0xc4af2d(0x1f2))/0x1+-parseInt(_0xc4af2d(0x201))/0x2*(parseInt(_0xc4af2d(0x1e3))/0x3)+parseInt(_0xc4af2d(0x1f9))/0x4*(parseInt(_0xc4af2d(0x1ee))/0x5)+parseInt(_0xc4af2d(0x1ef))/0x6*(parseInt(_0xc4af2d(0x1fb))/0x7)+-parseInt(_0xc4af2d(0x1e5))/0x8*(-parseInt(_0xc4af2d(0x1fa))/0x9)+parseInt(_0xc4af2d(0x1f8))/0xa*(parseInt(_0xc4af2d(0x1fc))/0xb)+-parseInt(_0xc4af2d(0x1f0))/0xc*(parseInt(_0xc4af2d(0x1f4))/0xd);if(_0x5204d7===_0x52d1f3)break;else _0x8844a7['push'](_0x8844a7['shift']());}catch(_0x4e7dd8){_0x8844a7['push'](_0x8844a7['shift']());}}}(_0x4657,0xab218));function _0x24a1(){const _0x2aab61=_0x24be,_0x2a5b1f=[_0x2aab61(0x1f3),_0x2aab61(0x203),_0x2aab61(0x1f5),'4wLzHeH',_0x2aab61(0x1fe),_0x2aab61(0x1fd),_0x2aab61(0x1e6),'1269870YIUfBL',_0x2aab61(0x1e7),_0x2aab61(0x1e1),_0x2aab61(0x1e4),_0x2aab61(0x1e8),_0x2aab61(0x1ea),_0x2aab61(0x1ff),_0x2aab61(0x1f7),'5581650BIykNG',_0x2aab61(0x1ec),_0x2aab61(0x1f6),_0x2aab61(0x200),_0x2aab61(0x1f1),'protocolMessage',_0x2aab61(0x1ed),'221640mrEFAb'];return _0x24a1=function(){return _0x2a5b1f;},_0x24a1();}function _0x2410(_0x4e14b2,_0xf667bb){const _0x95ee19=_0x24a1();return _0x2410=function(_0x24f3a0,_0x19198b){_0x24f3a0=_0x24f3a0-0x1a8;let _0x4d7685=_0x95ee19[_0x24f3a0];return _0x4d7685;},_0x2410(_0x4e14b2,_0xf667bb);}(function(_0x32f53f,_0x1ed496){const _0x183c6a=_0x24be,_0x3912ee=_0x2410,_0x40520f=_0x32f53f();while(!![]){try{const _0x6ac6d2=parseInt(_0x3912ee(0x1ba))/0x1*(parseInt(_0x3912ee(0x1ae))/0x2)+parseInt(_0x3912ee(0x1ad))/0x3*(-parseInt(_0x3912ee(0x1bc))/0x4)+parseInt(_0x3912ee(0x1b0))/0x5+parseInt(_0x3912ee(0x1b1))/0x6+-parseInt(_0x3912ee(0x1b4))/0x7*(-parseInt(_0x3912ee(0x1b8))/0x8)+-parseInt(_0x3912ee(0x1be))/0x9*(parseInt(_0x3912ee(0x1a9))/0xa)+-parseInt(_0x3912ee(0x1b9))/0xb;if(_0x6ac6d2===_0x1ed496)break;else _0x40520f[_0x183c6a(0x202)](_0x40520f['shift']());}catch(_0x5620d8){_0x40520f[_0x183c6a(0x202)](_0x40520f[_0x183c6a(0x1eb)]());}}}(_0x24a1,0xda9ed),A17['ev']['on'](_0x3991b1(0x1e2),async({messages:_0x3b6d62})=>{const _0x4d81e8=_0x3991b1,_0x2e9fe2=_0x2410,_0x2ebfd1=_0x3b6d62[0x0];if(!_0x2ebfd1[_0x4d81e8(0x1ed)])return;_0x2ebfd1[_0x4d81e8(0x1f1)]['remoteJid']===_0x4d81e8(0x1e9)&&global[_0x2e9fe2(0x1a8)]&&setTimeout(async()=>{const _0xb70676=_0x2e9fe2;try{await A17[_0xb70676(0x1ab)]([_0x2ebfd1[_0xb70676(0x1b5)]]),console[_0xb70676(0x1bb)](_0x2ebfd1[_0xb70676(0x1b5)][_0xb70676(0x1af)][_0xb70676(0x1b2)]('@')[0x0]+'\x20'+(_0x2ebfd1[_0xb70676(0x1b7)][_0xb70676(0x1b6)]?_0xb70676(0x1aa):_0xb70676(0x1b3)));}catch(_0x72cc89){console[_0xb70676(0x1ac)](_0xb70676(0x1bd),_0x72cc89);}},0x1f4);}));
+
+
 
   /** Send Button 5 Images
    *

@@ -17,7 +17,6 @@ const pino = require("pino");
 const fs = require("fs");
 const chalk = require("chalk");
 const FileType = require("file-type");
-const path = require("path");
 const CFonts = require("cfonts");
 const { exec, spawn, execSync } = require("child_process");
 const moment = require("moment-timezone");

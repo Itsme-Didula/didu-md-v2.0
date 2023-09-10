@@ -25,8 +25,8 @@ global.BotName = "🪄ᴅɪᴅᴜ ᴍᴅ📡";
 global.packname = "🪄ᴅɪᴅᴜ ᴍᴅ📡 Bot";                             //Do not change.
 global.author = "♟️⏤͟͞ ❮ᴄʀᴇᴀᴛᴇᴅ ʙy ᴅɪᴅᴜʟᴀ ʀᴀꜱʜᴍɪᴋᴀ❯ ͟͞⏤
 ";                               //Do not change.
-global.BotSourceCode = "https://github.com/Kai0071/A17"; //Do not change.
-global.SupportGroupLink = "https://chat.whatsapp.com/GhRGdwfaMVDCoeAdzILfl"; 
+global.BotSourceCode = "https://github.com/Itsme-Didula/didu-md-v2.0"; //Do not change.
+global.SupportGroupLink = "https://chat.whatsapp.com/JNRIGTWrckF2DTwfaQ658s"; 
 
 
 //
@@ -40,11 +40,11 @@ global.openAiAPI = "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";
 
 //
 global.location = "Anuradhapura City, Sri lanka";                   
-global.reactmoji = "❤️";
-global.themeemoji = "💖";
-global.vidmenu = { url: 'https://media.tenor.com/Jdu0Ov8X2sIAAAAC/A17-Bot.mp4' };
-global.websitex = "https://github.com/Kai0071";
-global.lolhuman = "Didula & Pushpa";
+global.reactmoji = "⚡";
+global.themeemoji = "👐";
+global.vidmenu = { url: 'https://graph.org/file/87f856c9832846020870c.mp4' };
+global.websitex = "https://github.com/Itsme-Didula/didu-md-v2.0";
+global.lolhuman = "Didula & Janith";
 
 
 //
